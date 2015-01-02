@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisualLightBox>
+    <Gallery version="2.5">
+        <Settings>
+            <AppName>WOW Slider</AppName>
+            <AppUrlS>WOWSlider.com</AppUrlS>
+            <AppVersion>7.3</AppVersion>
+            <AutoPlay>true</AutoPlay>
+            <AutoPlayVideo>false</AutoPlayVideo>
+            <Captions>true</Captions>
+            <CaptionsEffect>fade</CaptionsEffect>
+            <Controls>true</Controls>
+            <FullScreen>true</FullScreen>
+            <GalleryName>Gallery</GalleryName>
+            <GallerySuffix>1</GallerySuffix>
+            <HtmlCharset>UTF-8</HtmlCharset>
+            <ImageAspectRatio>true</ImageAspectRatio>
+            <ImageEffect>stack</ImageEffect>
+            <ImageFillColor>#000000</ImageFillColor>
+            <ImageHeight>600</ImageHeight>
+            <ImageQuality>85</ImageQuality>
+            <ImageShrink2>true</ImageShrink2>
+            <ImageStretch>true</ImageStretch>
+            <ImageTemplate>C:/Projects/WOW Slider/templates/backgnd/pulse/</ImageTemplate>
+            <ImageTemplateName>Pulse</ImageTemplateName>
+            <ImageWidth>800</ImageWidth>
+            <Images>true</Images>
+            <JoomlaType>2.5</JoomlaType>
+            <OneLoop>false</OneLoop>
+            <OrderRandom>false</OrderRandom>
+            <PlayPause>false</PlayPause>
+            <Preloader>false</Preloader>
+            <PublishFileName>C:/dev/data0/wow slider.html</PublishFileName>
+            <PublishIndex>wow slider.html</PublishIndex>
+            <PublishPath>C:/dev/data0</PublishPath>
+            <PublishPreview>true</PublishPreview>
+            <PublishType>file</PublishType>
+            <RelativePath>true</RelativePath>
+            <ShowBullets>1</ShowBullets>
+            <ShowControls>true</ShowControls>
+            <ShowTooltips>1</ShowTooltips>
+            <SizeStyle>2</SizeStyle>
+            <SlideshowDelay>60</SlideshowDelay>
+            <SlideshowDuration>20</SlideshowDuration>
+            <SoundEnable>0</SoundEnable>
+            <SoundFileName></SoundFileName>
+            <StopOnHover>true</StopOnHover>
+            <SwipeSupport>2</SwipeSupport>
+            <TemplateFont>Tahoma</TemplateFont>
+            <TemplateName>pulse</TemplateName>
+            <ThumbAlign>bottom</ThumbAlign>
+            <ThumbFormat>jpg</ThumbFormat>
+            <ThumbHeight>48</ThumbHeight>
+            <ThumbQuality>90</ThumbQuality>
+            <ThumbWidth>0</ThumbWidth>
+            <Thumbnails>false</Thumbnails>
+            <TooltipPos>bottom</TooltipPos>
+            <noFrame>1</noFrame>
+        </Settings>
+        <Images RelativePath="true">
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Andrea Rinaldo__White Neon.Blush_mixed media on canvas_48_x60_.jpg</url>
+                <title>White Neon Blush</title>
+                <description>Andrea Rinaldo -  mixed media on canvas</description>
+                <userurl>http://localhost:50020/Home/Work/1</userurl>
+                <filesize>4610993</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Chris Albert__St. Lawrence Market_photograph on panel, resin overlay_30_Hx48_W.jpg</url>
+                <title>St. Lawrence Market</title>
+                <description>Chris Albert - photograph on panel, resin overlay</description>
+                <userurl>http://localhost:50020/Home/Work/2</userurl>
+                <filesize>1074025</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Chris Albert_AGO_Photographon panel,resin overlay_33_x33_.jpg</url>
+                <title>AGO</title>
+                <description>Chris Albert - photograph on panel, resin overlay</description>
+                <userurl>http://localhost:50020/Home/Work/3</userurl>
+                <filesize>1589201</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Chris Albert_Jilly's_Photograph on panel, resin overlay_33_x33_.jpg</url>
+                <title>Jilly's</title>
+                <description>Chris Albert - photograph on panel, resin overlay</description>
+                <userurl>http://localhost:50020/Home/Work/4</userurl>
+                <filesize>913953</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Eryn O'Neill_On The Highline (NYC)_oil on canvas_16_Hx32_W.JPG</url>
+                <title>On The Highline (NYC)</title>
+                <description>Eryn O'Neill - oil on canvas</description>
+                <userurl>http://localhost:50020/Home/Work/5</userurl>
+                <filesize>2885776</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Eryn O'Neill_Window Shopping_Oil on canvas_16_Hx32_W.JPG</url>
+                <title>Window Shopping</title>
+                <description>Eryn O'Neill - oil on canvas</description>
+                <userurl>http://localhost:50020/Home/Work/6</userurl>
+                <filesize>2791032</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Ian Busher installing triptych in client's home.jpg</url>
+                <title>Triptych</title>
+                <description>Ian Busher - installing in client's home</description>
+                <userurl>http://localhost:50020/Home/Work/7</userurl>
+                <filesize>2961445</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Ian Busher_Chickadee_mixed media on steel_24_Hx60_L.JPG</url>
+                <title>Chickadee</title>
+                <description>Ian Busher - mixed media on steel</description>
+                <userurl>http://localhost:50020/Home/Work/8</userurl>
+                <filesize>2009024</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Ian Busher_Herb and Dorothy_mixed media on steel_48_x48_.jpg</url>
+                <title>Herb and Dorothy</title>
+                <description>Ian Busher - mixed media on steel</description>
+                <userurl>http://localhost:50020/Home/Work/9</userurl>
+                <filesize>2030028</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Ian Busher_I've Seen It Happen_mixed media on gate_30_Hx73_L.JPG</url>
+                <title>I've Seen It Happen</title>
+                <description>Ian Busher - mixed media on gate</description>
+                <userurl>http://localhost:50020/Home/Work/10</userurl>
+                <filesize>1961919</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/image.jpeg</url>
+                <title>Super Hero</title>
+                <description>Mark Jeremy Gleberson</description>
+                <userurl>http://localhost:50020/Home/Work/11</userurl>
+                <filesize>590481</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/image1.jpeg</url>
+                <title>Dark bush in hand</title>
+                <description>Mark Jeremy Gleberson</description>
+                <userurl>http://localhost:50020/Home/Work/12</userurl>
+                <filesize>323553</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/image2.jpeg</url>
+                <title>The Delivery</title>
+                <description>Mark Jeremy Gleberson</description>
+                <userurl>http://localhost:50020/Home/Work/13</userurl>
+                <filesize>61440</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Ivano Stocco_Crossroads_mixed media painting on panel_48_Hx60_W_$4450.JPG</url>
+                <title>Crossroads</title>
+                <description>Ivano Stocco - mixed media painting on panel</description>
+                <userurl>http://localhost:50020/Home/Work/14</userurl>
+                <filesize>4309801</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Ivano Stocco_Gridiron_mixed media painting on panel_36_Hx30_W_$1475.JPG</url>
+                <title>Gridiron</title>
+                <description>Ivano Stocco - mixed media painting on panel</description>
+                <userurl>http://localhost:50020/Home/Work/15</userurl>
+                <filesize>4165367</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Ivano Stocco_Nightlife_mixed media painting on panel_36_Hx48_W_$2450.JPG</url>
+                <title>Nightlife</title>
+                <description>Ivano Stocco - mixed media painting on panel</description>
+                <userurl>http://localhost:50020/Home/Work/16</userurl>
+                <filesize>4876360</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Ivano Stocco_Solvitur Ambulando_mixed media painting on panel_60_Hx24_W_$2200.JPG</url>
+                <title>Solvitur Ambulando</title>
+                <description>Ivano Stocco - mixed media painting on panel</description>
+                <userurl>http://localhost:50020/Home/Work/17</userurl>
+                <filesize>2570119</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Marjolyn van der hart_Returning Home_mixed media_48_Hx24_W.jpg</url>
+                <title>Returning Home</title>
+                <description>Marjolyn Vander Hart - mixed media</description>
+                <userurl>http://localhost:50020/Home/Work/18</userurl>
+                <filesize>2158144</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Marjolyn van der Hart_She Wants To Know_mixed media painting on panel_40_x40__$2900.JPG</url>
+                <title>She Wants To Know</title>
+                <description>Marjolyn Vander Hart - mixed media painting on panel</description>
+                <userurl>http://localhost:50020/Home/Work/19</userurl>
+                <filesize>3668095</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Mark Gleberzon__Ladies Who'll Lunch__mixed media photograph on panel, resin overlay_30_x30_.JPG</url>
+                <title>Ladies Who'll Lunch</title>
+                <description>Mark Gleberzon - mixed media photograph on panel, resin overlay</description>
+                <userurl>http://localhost:50020/Home/Work/20</userurl>
+                <filesize>1509662</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Mark Gleberzon__Lily @ The lido_mixed media photograph on panel, resin overlay_30_x30_.jpg</url>
+                <title>Lily @ The lido</title>
+                <description>Mark Gleberzon - mixed media photograph on panel, resin overlay</description>
+                <userurl>http://localhost:50020/Home/Work/21</userurl>
+                <filesize>2575278</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Robert Shuttleworth_Pee Wee_mixed media sculpture_48_H.jpg</url>
+                <title>Pee Wee</title>
+                <description>Robert Shuttleworth - mixed media sculpture</description>
+                <userurl>http://localhost:50020/Home/Work/22</userurl>
+                <filesize>3058180</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Tommy Vohs_Rocket Launch_iPhone-graphic image on aluminum dibond_40_x40.JPG</url>
+                <title>Rocket Launch</title>
+                <description>Tommy Vohs - iPhone-graphic image on aluminum dibond</description>
+                <userurl>http://localhost:50020/Home/Work/23</userurl>
+                <usertarget>_self</usertarget>
+                <filesize>4598806</filesize>
+            </Image>
+            <Image>
+                <url>../CraftStore/CraftStore/Content/Images/Paintings/Tommy Vohs_The Window Shopper_iPhone-graphic image on aluminum dibond_40_x40_.JPG</url>
+                <title>The Window Shopper</title>
+                <description>Tommy Vohs - iPhone-graphic image on aluminum dibond</description>
+                <userurl>http://localhost:50020/Home/Work/24</userurl>
+                <filesize>3618585</filesize>
+            </Image>
+        </Images>
+    </Gallery>
+</VisualLightBox>
