@@ -76,7 +76,9 @@ namespace GalleryBlog.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            
+            ViewBag.Title = "About";
+            ViewBag.Message = "Mark's Gallery.";
 
             return View();
         }

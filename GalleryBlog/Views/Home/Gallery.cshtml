@@ -1,6 +1,15 @@
 ﻿@model  List<GalleryBlog.Models.GalleryImage>
+<style type="text/css">
+    
+    body {
+    background: #f7f7f7 url(../../Content/imagewall/pinstripe.gif) repeat top left;
+    color: #000;
+    font-family: Georgia, "Arial",sans-serif;
+    font-size: 12px;
+}
 
-<div class="col-sm-9 col-md-9 col-lg-9 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+</style>
+<div class="col-sm-9">
     <div class="iw_wrapper">
         <ul class="iw_thumbs" id="iw_thumbs">
             @{
@@ -20,302 +29,304 @@
 </div>
 @section scripts
 {
-    <script type="text/javascript">
-        $(window).load(function () {
-            var $iw_thumbs = $('#iw_thumbs'),
-                $iw_ribbon = $('#iw_ribbon'),
-                $iw_ribbon_close = $iw_ribbon.children('span.iw_close'),
-                $iw_ribbon_zoom = $iw_ribbon.children('span.iw_zoom');
 
-            ImageWall = (function () {
-                // window width and height
-                var w_dim,
-                    // index of current image
-                    current = -1,
-                    isRibbonShown = false,
-                    isFullMode = false,
-                    // ribbon / images animation settings
-                    ribbonAnim = { speed: 500, easing: 'easeOutExpo' },
-                    imgAnim = { speed: 400, easing: 'jswing' },
-                    // init function : call masonry, calculate window dimentions, initialize some events
-                    init = function () {
-                        $iw_thumbs.imagesLoaded(function () {
-                            $iw_thumbs.masonry({
-                                isAnimated: true
-                            });
-                        });
-                        getWindowsDim();
-                        initEventsHandler();
-                    },
-                    // calculate window dimentions
-                    getWindowsDim = function () {
-                        w_dim = {
-                            width: $(window).width(),
-                            height: $(window).height()
-                        };
-                    },
-                    // initialize some events
-                    initEventsHandler = function () {
+ <script type="text/javascript">
+     $(function () {
 
-                        // click on a image
-                        $iw_thumbs.delegate('li', 'click', function () {
-                            if ($iw_ribbon.is(':animated')) return false;
+         var $iw_thumbs = $('#iw_thumbs'),
+             $iw_ribbon = $('#iw_ribbon'),
+             $iw_ribbon_close = $iw_ribbon.children('span.iw_close'),
+             $iw_ribbon_zoom = $iw_ribbon.children('span.iw_zoom');
 
-                            var $el = $(this);
+         ImageWall = (function () {
+             // window width and height
+             var w_dim,
+                 // index of current image
+                 current = -1,
+                 isRibbonShown = false,
+                 isFullMode = false,
+                 // ribbon / images animation settings
+                 ribbonAnim = { speed: 500, easing: 'easeOutExpo' },
+                 imgAnim = { speed: 400, easing: 'jswing' },
+                 // init function : call masonry, calculate window dimentions, initialize some events
+                 init = function () {
+                     $iw_thumbs.imagesLoaded(function () {
+                         $iw_thumbs.masonry({
+                             isAnimated: true
+                         });
+                     });
+                     getWindowsDim();
+                     initEventsHandler();
+                 },
+                 // calculate window dimentions
+                 getWindowsDim = function () {
+                     w_dim = {
+                         width: $(window).width(),
+                         height: $(window).height()
+                     };
+                 },
+                 // initialize some events
+                 initEventsHandler = function () {
 
-                            if ($el.data('ribbon')) {
-                                showFullImage($el);
-                            }
-                            else if (!isRibbonShown) {
-                                isRibbonShown = true;
+                     // click on a image
+                     $iw_thumbs.delegate('li', 'click', function () {
+                         if ($iw_ribbon.is(':animated')) return false;
 
-                                $el.data('ribbon', true);
+                         var $el = $(this);
 
-                                // set the current
-                                current = $el.index();
+                         if ($el.data('ribbon')) {
+                             showFullImage($el);
+                         }
+                         else if (!isRibbonShown) {
+                             isRibbonShown = true;
 
-                                showRibbon($el);
-                            }
-                        });
+                             $el.data('ribbon', true);
 
-                        // click ribbon close
-                        $iw_ribbon_close.bind('click', closeRibbon);
+                             // set the current
+                             current = $el.index();
 
-                        // on window resize we need to recalculate the window dimentions
-                        $(window).bind('resize', function () {
-                            getWindowsDim();
-                            if ($iw_ribbon.is(':animated'))
-                                return false;
-                            closeRibbon();
-                        })
-                                 .bind('scroll', function () {
-                                     if ($iw_ribbon.is(':animated'))
-                                         return false;
-                                     closeRibbon();
-                                 });
+                             showRibbon($el);
+                         }
+                     });
 
-                    },
-                    showRibbon = function ($el) {
-                        var $img = $el.children('img'),
-                            $descrp = $img.next();
+                     // click ribbon close
+                     $iw_ribbon_close.bind('click', closeRibbon);
 
-                        // fadeOut all the other images
-                        $iw_thumbs.children('li').not($el).animate({ opacity: 0.2 }, imgAnim.speed);
+                     // on window resize we need to recalculate the window dimentions
+                     $(window).bind('resize', function () {
+                         getWindowsDim();
+                         if ($iw_ribbon.is(':animated'))
+                             return false;
+                         closeRibbon();
+                     })
+                              .bind('scroll', function () {
+                                  if ($iw_ribbon.is(':animated'))
+                                      return false;
+                                  closeRibbon();
+                              });
 
-                        // increase the image z-index, and set the height to 100px (default height)
-                        $img.css('z-index', 100)
-                            .data('originalHeight', $img.height())
-                            .stop()
-                            .animate({
-                                height: '100px'
-                            }, imgAnim.speed, imgAnim.easing);
+                 },
+                 showRibbon = function ($el) {
+                     var $img = $el.children('img'),
+                         $descrp = $img.next();
 
-                        // the ribbon will animate from the left or right
-                        // depending on the position of the image
-                        var ribbonCssParam = {
-                            top: $el.offset().top - $(window).scrollTop() - 6 + 'px'
-                        },
-                            descriptionCssParam,
-                            dir;
+                     // fadeOut all the other images
+                     $iw_thumbs.children('li').not($el).animate({ opacity: 0.2 }, imgAnim.speed);
 
-                        if ($el.offset().left < (w_dim.width / 2)) {
-                            dir = 'left';
-                            ribbonCssParam.left = 0;
-                            ribbonCssParam.right = 'auto';
-                        }
-                        else {
-                            dir = 'right';
-                            ribbonCssParam.right = 0;
-                            ribbonCssParam.left = 'auto';
-                        }
+                     // increase the image z-index, and set the height to 100px (default height)
+                     $img.css('z-index', 100)
+                         .data('originalHeight', $img.height())
+                         .stop()
+                         .animate({
+                             height: '100px'
+                         }, imgAnim.speed, imgAnim.easing);
 
-                        $iw_ribbon.css(ribbonCssParam)
-                                  .show()
-                                  .stop()
-                                  .animate({ width: '100%' }, ribbonAnim.speed, ribbonAnim.easing, function () {
-                                      switch (dir) {
-                                          case 'left':
-                                              descriptionCssParam = {
-                                                  'left': $img.outerWidth(true) + 'px',
-                                                  'text-align': 'left'
-                                              };
-                                              break;
-                                          case 'right':
-                                              descriptionCssParam = {
-                                                  'left': '-200px',
-                                                  'text-align': 'right'
-                                              };
-                                              break;
-                                      };
-                                      $descrp.css(descriptionCssParam).fadeIn();
-                                      // show close button and zoom
-                                      $iw_ribbon_close.show();
-                                      $iw_ribbon_zoom.show();
-                                  });
+                     // the ribbon will animate from the left or right
+                     // depending on the position of the image
+                     var ribbonCssParam = {
+                         top: $el.offset().top - $(window).scrollTop() - 6 + 'px'
+                     },
+                         descriptionCssParam,
+                         dir;
 
-                    },
-                    // close the ribbon
-                    // when in full mode slides in the middle of the page
-                    // when not slides left
-                    closeRibbon = function () {
-                        isRibbonShown = false
+                     if ($el.offset().left < (w_dim.width / 2)) {
+                         dir = 'left';
+                         ribbonCssParam.left = 0;
+                         ribbonCssParam.right = 'auto';
+                     }
+                     else {
+                         dir = 'right';
+                         ribbonCssParam.right = 0;
+                         ribbonCssParam.left = 'auto';
+                     }
 
-                        $iw_ribbon_close.hide();
-                        $iw_ribbon_zoom.hide();
+                     $iw_ribbon.css(ribbonCssParam)
+                               .show()
+                               .stop()
+                               .animate({ width: '100%' }, ribbonAnim.speed, ribbonAnim.easing, function () {
+                                   switch (dir) {
+                                       case 'left':
+                                           descriptionCssParam = {
+                                               'left': $img.outerWidth(true) + 'px',
+                                               'text-align': 'left'
+                                           };
+                                           break;
+                                       case 'right':
+                                           descriptionCssParam = {
+                                               'left': '-200px',
+                                               'text-align': 'right'
+                                           };
+                                           break;
+                                   };
+                                   $descrp.css(descriptionCssParam).fadeIn();
+                                   // show close button and zoom
+                                   $iw_ribbon_close.show();
+                                   $iw_ribbon_zoom.show();
+                               });
 
-                        if (!isFullMode) {
+                 },
+                 // close the ribbon
+                 // when in full mode slides in the middle of the page
+                 // when not slides left
+                 closeRibbon = function () {
+                     isRibbonShown = false
 
-                            // current wall image
-                            var $el = $iw_thumbs.children('li').eq(current);
+                     $iw_ribbon_close.hide();
+                     $iw_ribbon_zoom.hide();
 
-                            resetWall($el);
+                     if (!isFullMode) {
 
-                            // slide out ribbon
-                            $iw_ribbon.stop()
-                                      .animate({ width: '0%' }, ribbonAnim.speed, ribbonAnim.easing);
+                         // current wall image
+                         var $el = $iw_thumbs.children('li').eq(current);
 
-                        }
-                        else {
-                            $iw_ribbon.stop().animate({
-                                opacity: 0.8,
-                                height: '0px',
-                                marginTop: w_dim.height / 2 + 'px' // half of window height
-                            }, ribbonAnim.speed, function () {
-                                $iw_ribbon.css({
-                                    'width': '0%',
-                                    'height': '126px',
-                                    'margin-top': '0px'
-                                }).children('img').remove();
-                            });
+                         resetWall($el);
 
-                            isFullMode = false;
-                        }
-                    },
-                    resetWall = function ($el) {
-                        var $img = $el.children('img'),
-                            $descrp = $img.next();
+                         // slide out ribbon
+                         $iw_ribbon.stop()
+                                   .animate({ width: '0%' }, ribbonAnim.speed, ribbonAnim.easing);
 
-                        $el.data('ribbon', false);
+                     }
+                     else {
+                         $iw_ribbon.stop().animate({
+                             opacity: 0.8,
+                             height: '0px',
+                             marginTop: w_dim.height / 2 + 'px' // half of window height
+                         }, ribbonAnim.speed, function () {
+                             $iw_ribbon.css({
+                                 'width': '0%',
+                                 'height': '126px',
+                                 'margin-top': '0px'
+                             }).children('img').remove();
+                         });
 
-                        // reset the image z-index and height
-                        $img.css('z-index', 1).stop().animate({
-                            height: $img.data('originalHeight')
-                        }, imgAnim.speed, imgAnim.easing);
+                         isFullMode = false;
+                     }
+                 },
+                 resetWall = function ($el) {
+                     var $img = $el.children('img'),
+                         $descrp = $img.next();
 
-                        // fadeOut the description
-                        $descrp.fadeOut();
+                     $el.data('ribbon', false);
 
-                        // fadeIn all the other images
-                        $iw_thumbs.children('li').not($el).animate({ opacity: 1 }, imgAnim.speed);
-                    },
-                    showFullImage = function ($el) {
-                        isFullMode = true;
+                     // reset the image z-index and height
+                     $img.css('z-index', 1).stop().animate({
+                         height: $img.data('originalHeight')
+                     }, imgAnim.speed, imgAnim.easing);
 
-                        $iw_ribbon_close.hide();
+                     // fadeOut the description
+                     $descrp.fadeOut();
 
-                        var $img = $el.children('img'),
-                            large = $img.data('img'),
+                     // fadeIn all the other images
+                     $iw_thumbs.children('li').not($el).animate({ opacity: 1 }, imgAnim.speed);
+                 },
+                 showFullImage = function ($el) {
+                     isFullMode = true;
 
-                            // add a loading image on top of the image
-                            $loading = $('<span class="iw_loading"></span>');
+                     $iw_ribbon_close.hide();
 
-                        $el.append($loading);
+                     var $img = $el.children('img'),
+                         large = $img.data('img'),
 
-                        // preload large image
-                        $('<img />').load(function () {
-                            var $largeImage = $(this);
+                         // add a loading image on top of the image
+                         $loading = $('<span class="iw_loading"></span>');
 
-                            $loading.remove();
+                     $el.append($loading);
 
-                            $iw_ribbon_zoom.hide();
+                     // preload large image
+                     $('<img/>').load(function () {
+                         var $largeImage = $(this);
 
-                            resizeImage($largeImage);
+                         $loading.remove();
 
-                            // reset the current image in the wall
-                            resetWall($el);
+                         $iw_ribbon_zoom.hide();
 
-                            // animate ribbon in and out
-                            $iw_ribbon.stop().animate({
-                                opacity: 1,
-                                height: '0px',
-                                marginTop: '63px' // half of ribbons height
-                            }, ribbonAnim.speed, function () {
-                                // add the large image to the DOM
-                                $iw_ribbon.prepend($largeImage);
+                         resizeImage($largeImage);
 
-                                $iw_ribbon_close.show();
+                         // reset the current image in the wall
+                         resetWall($el);
 
-                                $iw_ribbon.animate({
-                                    height: '100%',
-                                    marginTop: '0px',
-                                    top: '0px'
-                                }, ribbonAnim.speed);
-                            });
-                        }).attr('src', large);
+                         // animate ribbon in and out
+                         $iw_ribbon.stop().animate({
+                             opacity: 1,
+                             height: '0px',
+                             marginTop: '63px' // half of ribbons height
+                         }, ribbonAnim.speed, function () {
+                             // add the large image to the DOM
+                             $iw_ribbon.prepend($largeImage);
 
-                    },
-                    resizeImage = function ($image) {
-                        var widthMargin = 100,
-                            heightMargin = 100,
+                             $iw_ribbon_close.show();
 
-                            windowH = w_dim.height - heightMargin,
-                            windowW = w_dim.width - widthMargin,
-                            theImage = new Image();
+                             $iw_ribbon.animate({
+                                 height: '100%',
+                                 marginTop: '0px',
+                                 top: '0px'
+                             }, ribbonAnim.speed);
+                         });
+                     }).attr('src', large);
 
-                        theImage.src = $image.attr("src");
+                 },
+                 resizeImage = function ($image) {
+                     var widthMargin = 100,
+                         heightMargin = 100,
 
-                        var imgwidth = theImage.width,
-                            imgheight = theImage.height;
+                         windowH = w_dim.height - heightMargin,
+                         windowW = w_dim.width - widthMargin,
+                         theImage = new Image();
 
-                        if ((imgwidth > windowW) || (imgheight > windowH)) {
-                            if (imgwidth > imgheight) {
-                                var newwidth = windowW,
-                                    ratio = imgwidth / windowW,
-                                    newheight = imgheight / ratio;
+                     theImage.src = $image.attr("src");
 
-                                theImage.height = newheight;
-                                theImage.width = newwidth;
+                     var imgwidth = theImage.width,
+                         imgheight = theImage.height;
 
-                                if (newheight > windowH) {
-                                    var newnewheight = windowH,
-                                        newratio = newheight / windowH,
-                                        newnewwidth = newwidth / newratio;
+                     if ((imgwidth > windowW) || (imgheight > windowH)) {
+                         if (imgwidth > imgheight) {
+                             var newwidth = windowW,
+                                 ratio = imgwidth / windowW,
+                                 newheight = imgheight / ratio;
 
-                                    theImage.width = newnewwidth;
-                                    theImage.height = newnewheight;
-                                }
-                            }
-                            else {
-                                var newheight = windowH,
-                                    ratio = imgheight / windowH,
-                                    newwidth = imgwidth / ratio;
+                             theImage.height = newheight;
+                             theImage.width = newwidth;
 
-                                theImage.height = newheight;
-                                theImage.width = newwidth;
+                             if (newheight > windowH) {
+                                 var newnewheight = windowH,
+                                     newratio = newheight / windowH,
+                                     newnewwidth = newwidth / newratio;
 
-                                if (newwidth > windowW) {
-                                    var newnewwidth = windowW,
-                                        newratio = newwidth / windowW,
-                                        newnewheight = newheight / newratio;
+                                 theImage.width = newnewwidth;
+                                 theImage.height = newnewheight;
+                             }
+                         }
+                         else {
+                             var newheight = windowH,
+                                 ratio = imgheight / windowH,
+                                 newwidth = imgwidth / ratio;
 
-                                    theImage.height = newnewheight;
-                                    theImage.width = newnewwidth;
-                                }
-                            }
-                        }
+                             theImage.height = newheight;
+                             theImage.width = newwidth;
 
-                        $image.css({
-                            'width': theImage.width + 'px',
-                            'height': theImage.height + 'px',
-                            'margin-left': -theImage.width / 2 + 'px',
-                            'margin-top': -theImage.height / 2 + 'px'
-                        });
-                    };
+                             if (newwidth > windowW) {
+                                 var newnewwidth = windowW,
+                                     newratio = newwidth / windowW,
+                                     newnewheight = newheight / newratio;
 
-                return { init: init };
-            })();
+                                 theImage.height = newnewheight;
+                                 theImage.width = newnewwidth;
+                             }
+                         }
+                     }
 
-            ImageWall.init();
-        });
-    </script>
+                     $image.css({
+                         'width': theImage.width + 'px',
+                         'height': theImage.height + 'px',
+                         'margin-left': -theImage.width / 2 + 'px',
+                         'margin-top': -theImage.height / 2 + 'px'
+                     });
+                 };
+
+             return { init: init };
+         })();
+
+         ImageWall.init();
+     });
+</script>
 }
