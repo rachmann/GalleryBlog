@@ -119,7 +119,7 @@
                                       break;
                                   case 'right':
                                       descriptionCssParam = {
-                                          'left': '-200px',
+                                          'left': '-300px',
                                           'text-align': 'right'
                                       };
                                       break;

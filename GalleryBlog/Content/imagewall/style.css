@@ -46,15 +46,15 @@ ul.iw_thumbs li{
 ul.iw_thumbs li div{
 	position:absolute;
 	top:5px;
-	width:180px;
+	width:300px;
 	padding:0px 10px;
 	display:none;
 	color:#fff;
 	z-index:100;
 }
-ul.iw_thumbs li div h2{
+ul.iw_thumbs li div h3{
 	font-family: 'Wire One', arial, serif;
-	font-size:38px;
+	font-size:26px;
 	text-transform:uppercase;
 	text-shadow:0px 0px 1px #fff;
 }

@@ -17,9 +17,10 @@ namespace GalleryBlog
 
             // "Single Responsibility" design - keep parts for any tools separate to include when you need them
             bundles.Add(new ScriptBundle("~/bundles/imagewall").Include(
+                      "~/Content/imagewall/imagesloaded.pkgd.min.js",
                       "~/Content/imagewall/masonry.pkgd.min.js",
-                      "~/Content/imagewall/jquery.easing.1.3.js"
-               //       "~/Content/imagewall/imagewall.js"
+                      "~/Content/imagewall/jquery.easing.1.3.js",
+                      "~/Content/imagewall/imagewall.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/isotope").Include(

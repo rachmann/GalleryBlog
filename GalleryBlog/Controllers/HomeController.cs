@@ -34,8 +34,14 @@ namespace GalleryBlog.Controllers
                 var id = 0;
                 foreach (var f in Directory.GetFiles(sDir))
                 {
+                    
                     var fn = f.Substring(f.LastIndexOf('\\')+1);
-                    gvm.Add(new GalleryImage { ImageAlt = "Gallery Images", ImagePath = fn, ImageDescription = "Some description from DB", Id = ++id, ImageTitle = "Art" });
+                    var parts = fn.Split('_');
+                    var artist = "By " + parts[0] + ".";
+                    var name =  parts[1];
+                    var desc = parts[2];
+
+                    gvm.Add(new GalleryImage { ImageAlt = name, ImagePath = fn, ImageDescription = artist + " " + desc, Id = ++id, ImageTitle = name });
                 }
 
             }
