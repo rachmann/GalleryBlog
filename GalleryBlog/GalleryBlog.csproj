@@ -258,6 +258,8 @@
     <Content Include="Content\Images\thumb\Robert Shuttleworth_Pee Wee_Mixed media sculpture_48x90_.jpg" />
     <Content Include="Content\Images\thumb\Tommy Vohs_Rocket Launch_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
     <Content Include="Content\Images\thumb\Tommy Vohs_The Window Shopper_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
+    <Content Include="Content\imagewall\close20.jpg" />
+    <Content Include="Content\imagewall\close50.jpg" />
     <Content Include="Content\imagewall\gray_jean.png" />
     <Content Include="Content\Images\app\instagram.jpg" />
     <Content Include="Content\Images\app\line-about.gif" />
@@ -266,13 +268,13 @@
     <Content Include="Content\Images\app\overlay-icon-02.png" />
     <Content Include="Content\Images\app\pinterest.jpg" />
     <Content Include="Content\Images\app\twitter.jpg" />
-    <Content Include="Content\imagewall\close.gif" />
     <Content Include="Content\imagewall\imagesloaded.pkgd.min.js" />
     <Content Include="Content\imagewall\imagewall.js" />
     <Content Include="Content\imagewall\jquery.easing.1.3.js" />
     <Content Include="Content\imagewall\loader.gif" />
     <Content Include="Content\imagewall\masonry.pkgd.js" />
     <Content Include="Content\imagewall\masonry.pkgd.min.js" />
+    <Content Include="Content\imagewall\ofl1.png" />
     <Content Include="Content\imagewall\pinstripe.gif" />
     <Content Include="Content\imagewall\reset.css" />
     <Content Include="Content\imagewall\style.css" />
