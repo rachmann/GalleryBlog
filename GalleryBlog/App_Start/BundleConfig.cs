@@ -23,11 +23,9 @@ namespace GalleryBlog
                       "~/Content/imagewall/imagewall.js"
             ));
 
-            bundles.Add(new ScriptBundle("~/bundles/isotope").Include(
-                      "~/Content/isotope.min.js",
-                      "~/Scripts/knob.js",
-                      "~/Scripts/jquery.cookie.js",
-                      "~/Scripts/custom.js"
+            bundles.Add(new ScriptBundle("~/bundles/artists").Include(
+                      "~/Content/isotope/isotope.pkg.min.js",
+                      "~/Content/isotope/artists.js"
             ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -46,9 +44,18 @@ namespace GalleryBlog
                       "~/Content/animate.css",
                       "~/Content/Site.css"));
 
+
+            bundles.Add(new StyleBundle("~/Content/artists").Include(
+                      "~/Content/isotope/artists.css"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/rating").Include(
+                      "~/Content/rating.css"
+                      ));
+
             // "Single Responsibility" design - keep parts for any tools separate to include when you need them
             bundles.Add(new StyleBundle("~/Content/imagewall").Include(
-                      "~/Content/imagewall/style.css"
+                      "~/Content/imagewall/imagewall.css"
             ));
 
         }

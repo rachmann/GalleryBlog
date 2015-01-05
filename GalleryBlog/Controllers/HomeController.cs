@@ -24,15 +24,20 @@ namespace GalleryBlog.Controllers
             return View(model);
         }
 
-        private List<Models.GalleryImage> GetArtList()
+        private List<Models.GalleryImage> GetArtList(int idx = 0)
         {
             var gvm = new List<Models.GalleryImage>();
-
             var sDir = Server.MapPath(Url.Content("~/Content/Images/art/"));
+            var files = Directory.GetFiles(sDir);
+            if (idx > 0 && idx > files.Count())
+            {
+                return gvm;
+            }
+
             try
             {
                 var id = 0;
-                foreach (var f in Directory.GetFiles(sDir))
+                foreach (var f in files)
                 {
                     
                     var fn = f.Substring(f.LastIndexOf('\\')+1);
@@ -40,8 +45,21 @@ namespace GalleryBlog.Controllers
                     var artist = "By " + parts[0] + ".";
                     var name =  parts[1];
                     var desc = parts[2];
-
-                    gvm.Add(new GalleryImage { ImageAlt = name, ImagePath = fn, ImageDescription = artist + " " + desc, Id = ++id, ImageTitle = name });
+                    if (idx == 0 || (idx>0 && id == idx))
+                    {
+                        gvm.Add(new GalleryImage
+                        {
+                            ImageAlt = name,
+                            ImagePath = fn,
+                            ImageDescription = artist + " " + desc,
+                            Id = ++id,
+                            ImageTitle = name
+                        });
+                    }
+                    if(id == idx)
+                    {
+                        break;
+                    }
                 }
 
             }
@@ -54,16 +72,21 @@ namespace GalleryBlog.Controllers
 
         public ActionResult Artists()
         {
-            ViewBag.Message = "Your grouping of work page.";
+            ViewBag.Message = "Your Artists page.";
 
             return View();
         }
 
-        public ActionResult Work()
+        public ActionResult Work(int id = 0)
         {
+            if (id == 0)
+                return RedirectToActionPermanent("Index");
+            
             ViewBag.Message = "Your item of work page.";
 
-            return View();
+            var model = GetArtList(id);
+
+            return View(model);
         }
 
         public ActionResult Blog()

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - MJG Gallery</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/rating")
+
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -28,7 +30,7 @@
                     </div>
                     <div class="navbar-collapse collapse sidebar-navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li class ="navbar-link">@Html.ActionLink("Home", "Index", "Home")</liclass>
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About", "About", "Home")</li>
                             <li>@Html.ActionLink("Artists", "Artists", "Home")</li>
                             <li>@Html.ActionLink("Gallery", "Gallery", "Home")</li>

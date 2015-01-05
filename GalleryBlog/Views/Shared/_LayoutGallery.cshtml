@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - MJG Gallery</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/imagewall")
+    
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/imagewall")
 
 </head>
 <body>
     <div class="row">
-        <div class="col-sm-3">
+        <div id="top" class="col-sm-3">
             <div class="sidebar-nav">
                 <div class="navbar navbar-default" role="navigation">
                     <div class="navbar-header">
@@ -28,10 +31,10 @@
                     </div>
                     <div class="navbar-collapse collapse sidebar-navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li class ="navbar-link">@Html.ActionLink("Home", "Index", "Home")</liclass>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li >@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("Artists", "Artists", "Home")</li>
-                            <li>@Html.ActionLink("Gallery", "Gallery", "Home")</li>
+                            <li>@Html.ActionLink("Work", "Work", "Home")</li>
+                            <li class="navbar-link">@Html.ActionLink("Gallery", "Gallery", "Home")</li>
                             <li>@Html.ActionLink("Blog", "Blog", "Home")</li>
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         </ul>
@@ -53,6 +56,7 @@
     <div class="row">
         <hr />
         <footer>
+            @Html.ActionLink("Go back up to top", "Gallery", "Home", null, null, "top", null, null)
             <p>&copy; @DateTime.Now.Year - MJG Gallery</p>
         </footer>        
     </div>

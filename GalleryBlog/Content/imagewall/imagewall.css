@@ -1,20 +1,18 @@
 /* @import url('reset.css'); */
 
+   body {
+    background: #f7f7f7 url(../../Content/imagewall/pinstripe.gif) repeat top left;
+}
+
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
     margin: 0;
-    padding: 0;
+    
 }
 
 ol, ul {
     list-style: none;
 }
 
-body{
-	background:#f7f7f7 url(gray_jean.png) repeat top left;
-	color:#000;
-	font-family: Georgia, "Arial",sans-serif;
-	font-size:12px;
-}
 a{
 	color:#000;
 	text-decoration:none;
@@ -116,14 +114,14 @@ ul.iw_thumbs li:nth-child(7n) img{
 	position:absolute;
 	top:15px;
 	right:15px;
-    background:#f0f0f0 url(close50.jpg) no-repeat center center;
+    background:transparent url(close50.png) no-repeat center center;
 	width:50px;
 	height:50px;
 	display:none;
 	cursor:pointer;
 }
     .iw_close:nth-child(odd) {
-    background:#f0f0f0 url(close20.jpg) no-repeat center center;
+    background: transparent url(close20.png) no-repeat center center;
     	width:20px;
 	    height:20px;
     	top:10px;
@@ -162,13 +160,11 @@ ul.iw_thumbs li:nth-child(7n) img{
 	bottom:0px;
 	left:0px;
 	width:100%;
-	font-size:13px;
 	background:#000;
 	opacity:0.9;
 	height:20px;
 	padding-bottom:5px;
-	text-transform:uppercase;
-	font-family: 'PT Sans Narrow', Arial, sans-serif;
+	
 	z-index:4;
 }
 .footer a{

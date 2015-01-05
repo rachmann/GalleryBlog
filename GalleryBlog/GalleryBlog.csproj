@@ -258,8 +258,8 @@
     <Content Include="Content\Images\thumb\Robert Shuttleworth_Pee Wee_Mixed media sculpture_48x90_.jpg" />
     <Content Include="Content\Images\thumb\Tommy Vohs_Rocket Launch_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
     <Content Include="Content\Images\thumb\Tommy Vohs_The Window Shopper_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
-    <Content Include="Content\imagewall\close20.jpg" />
-    <Content Include="Content\imagewall\close50.jpg" />
+    <Content Include="Content\imagewall\close20.png" />
+    <Content Include="Content\imagewall\close50.png" />
     <Content Include="Content\imagewall\gray_jean.png" />
     <Content Include="Content\Images\app\instagram.jpg" />
     <Content Include="Content\Images\app\line-about.gif" />
@@ -274,10 +274,12 @@
     <Content Include="Content\imagewall\loader.gif" />
     <Content Include="Content\imagewall\masonry.pkgd.js" />
     <Content Include="Content\imagewall\masonry.pkgd.min.js" />
-    <Content Include="Content\imagewall\ofl1.png" />
     <Content Include="Content\imagewall\pinstripe.gif" />
-    <Content Include="Content\imagewall\reset.css" />
-    <Content Include="Content\imagewall\style.css" />
+    <Content Include="Content\imagewall\imagewall.css" />
+    <Content Include="Content\isotope\artists.css" />
+    <Content Include="Content\isotope\artists.js" />
+    <Content Include="Content\isotope\isotope.pkg.min.js" />
+    <Content Include="Content\rating.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -296,7 +298,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.js" />
-    <Content Include="Scripts\isotope.min.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
@@ -314,6 +315,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -324,7 +328,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -353,6 +356,9 @@
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
     <Content Include="Views\Home\Gallery.cshtml" />
+    <Content Include="Views\Shared\_LayoutGallery.cshtml" />
+    <Content Include="Views\Shared\_LayoutWork.cshtml" />
+    <Content Include="Views\Shared\_LayoutArtists.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
