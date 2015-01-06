@@ -1,15 +1,20 @@
-﻿@{
+﻿@model  List<GalleryBlog.Models.GalleryImage>
+@{
     ViewBag.Title = "Work";
     Layout = "~/Views/Shared/_LayoutWork.cshtml";
+    var pathfull = @Url.Content("~/Content/Images/art/" + @Model[0].ImagePath);
+
 }
 
 <div class="col-sm-9">
-    <h2>Work</h2>
+    <h3>@Model[0].ImageTitle</h3>
+    <h4>@Model[0].ImageDescription</h4>
+    <input type="radio"  name="imgsize" value="1" title="Full size" /><label for="fullsize" title="Full size">Fit width</label>
+    <input type="radio" name="imgsize" value="2" title="Fit to window" /><label for="fitsize" title="Fit to window">Fit height</label>
 
-    <div>
-        <img alt="" src="" />
+    <div id="ImageContainer" class="ImageBox portrait">
+        <img alt="@Model[0].ImageAlt" src="@pathfull" title="@Model[0].ImageTitle" />
     </div>
-
     <fieldset class="rating">
         <legend>Public rating:</legend>
         <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Inspirational">5 stars</label>

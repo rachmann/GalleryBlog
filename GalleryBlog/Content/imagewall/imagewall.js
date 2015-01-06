@@ -1,10 +1,14 @@
-﻿$(window).load(function () {
+﻿
+//$(window).load(function () {
+
+$(function () {
+
     var $iw_thumbs = $('#iw_thumbs'),
         $iw_ribbon = $('#iw_ribbon'),
         $iw_ribbon_close = $iw_ribbon.children('span.iw_close'),
         $iw_ribbon_zoom = $iw_ribbon.children('span.iw_zoom');
 
-    ImageWall = (function () {
+    var ImageWall = (function () {
         // window width and height
         var w_dim,
             // index of current image
@@ -60,16 +64,16 @@
 
                 // on window resize we need to recalculate the window dimentions
                 $(window).bind('resize', function () {
-                    getWindowsDim();
-                    if ($iw_ribbon.is(':animated'))
-                        return false;
-                    closeRibbon();
-                })
-                         .bind('scroll', function () {
-                             if ($iw_ribbon.is(':animated'))
-                                 return false;
-                             closeRibbon();
-                         });
+                        getWindowsDim();
+                        if ($iw_ribbon.is(':animated'))
+                            return false;
+                        closeRibbon();
+                    })
+                    .bind('scroll', function () {
+                        if ($iw_ribbon.is(':animated'))
+                            return false;
+                        closeRibbon();
+                    });
 
             },
             showRibbon = function ($el) {
@@ -90,8 +94,8 @@
                 // the ribbon will animate from the left or right
                 // depending on the position of the image
                 var ribbonCssParam = {
-                    top: $el.offset().top - $(window).scrollTop() - 6 + 'px'
-                },
+                        top: $el.offset().top - $(window).scrollTop() - 6 + 'px'
+                    },
                     descriptionCssParam,
                     dir;
 
@@ -107,28 +111,28 @@
                 }
 
                 $iw_ribbon.css(ribbonCssParam)
-                          .show()
-                          .stop()
-                          .animate({ width: '100%' }, ribbonAnim.speed, ribbonAnim.easing, function () {
-                              switch (dir) {
-                                  case 'left':
-                                      descriptionCssParam = {
-                                          'left': $img.outerWidth(true) + 'px',
-                                          'text-align': 'left'
-                                      };
-                                      break;
-                                  case 'right':
-                                      descriptionCssParam = {
-                                          'left': '-300px',
-                                          'text-align': 'right'
-                                      };
-                                      break;
-                              };
-                              $descrp.css(descriptionCssParam).fadeIn();
-                              // show close button and zoom
-                              $iw_ribbon_close.show();
-                              $iw_ribbon_zoom.show();
-                          });
+                    .show()
+                    .stop()
+                    .animate({ width: '100%' }, ribbonAnim.speed, ribbonAnim.easing, function () {
+                        switch (dir) {
+                        case 'left':
+                            descriptionCssParam = {
+                                'left': $img.outerWidth(true) + 'px',
+                                'text-align': 'left'
+                            };
+                            break;
+                        case 'right':
+                            descriptionCssParam = {
+                                'left': '-300px',
+                                'text-align': 'right'
+                            };
+                            break;
+                        };
+                        $descrp.css(descriptionCssParam).fadeIn();
+                        // show close button and zoom
+                        $iw_ribbon_close.show();
+                        $iw_ribbon_zoom.show();
+                    });
 
             },
             // close the ribbon
@@ -149,7 +153,7 @@
 
                     // slide out ribbon
                     $iw_ribbon.stop()
-                              .animate({ width: '0%' }, ribbonAnim.speed, ribbonAnim.easing);
+                        .animate({ width: '0%' }, ribbonAnim.speed, ribbonAnim.easing);
 
                 }
                 else {

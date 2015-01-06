@@ -19,55 +19,9 @@ namespace GalleryBlog.Controllers
         {
             ViewBag.Message = "The Gallery View.";
             ViewBag.Title = "Gallery View";
-            var model = GetArtList();
+            var model = GetArtFromDirList();
 
             return View(model);
-        }
-
-        private List<Models.GalleryImage> GetArtList(int idx = 0)
-        {
-            var gvm = new List<Models.GalleryImage>();
-            var sDir = Server.MapPath(Url.Content("~/Content/Images/art/"));
-            var files = Directory.GetFiles(sDir);
-            if (idx > 0 && idx > files.Count())
-            {
-                return gvm;
-            }
-
-            try
-            {
-                var id = 0;
-                foreach (var f in files)
-                {
-                    
-                    var fn = f.Substring(f.LastIndexOf('\\')+1);
-                    var parts = fn.Split('_');
-                    var artist = "By " + parts[0] + ".";
-                    var name =  parts[1];
-                    var desc = parts[2];
-                    if (idx == 0 || (idx>0 && id == idx))
-                    {
-                        gvm.Add(new GalleryImage
-                        {
-                            ImageAlt = name,
-                            ImagePath = fn,
-                            ImageDescription = artist + " " + desc,
-                            Id = ++id,
-                            ImageTitle = name
-                        });
-                    }
-                    if(id == idx)
-                    {
-                        break;
-                    }
-                }
-
-            }
-            catch (System.Exception excpt)
-            {
-                Console.WriteLine(excpt.Message);
-            }
-            return gvm;
         }
 
         public ActionResult Artists()
@@ -84,7 +38,7 @@ namespace GalleryBlog.Controllers
             
             ViewBag.Message = "Your item of work page.";
 
-            var model = GetArtList(id);
+            var model = GetArtFromDirList(id);
 
             return View(model);
         }
@@ -118,5 +72,54 @@ namespace GalleryBlog.Controllers
 
             return View();
         }
+
+        private List<Models.GalleryImage> GetArtFromDirList(int idx = 0)
+        {
+            var gvm = new List<Models.GalleryImage>();
+            var sDir = Server.MapPath(Url.Content("~/Content/Images/art/"));
+            var files = Directory.GetFiles(sDir);
+            if (idx > 0 && idx > files.Count())
+            {
+                return gvm;
+            }
+
+            try
+            {
+                var id = 1;
+                foreach (var f in files)
+                {
+
+                    var fn = f.Substring(f.LastIndexOf('\\') + 1);
+                    var parts = fn.Split('_');
+                    var artist = "By " + parts[0] + ".";
+                    var name = parts[1];
+                    var desc = parts[2];
+                    if (idx == 0 || (idx > 0 && id == idx))
+                    {
+                        gvm.Add(new GalleryImage
+                        {
+                            ImageAlt = name,
+                            ImagePath = fn,
+                            ImageDescription = artist + " " + desc,
+                            Id = id,
+                            ImageTitle = name
+                        });
+                    }
+                    if (id == idx)
+                    {
+                        break;
+                    }
+                    id++;
+                }
+
+            }
+            catch (System.Exception excpt)
+            {
+                Console.WriteLine(excpt.Message);
+            }
+            return gvm;
+        }
+
+
     }
 }

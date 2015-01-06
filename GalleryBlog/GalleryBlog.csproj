@@ -279,7 +279,9 @@
     <Content Include="Content\isotope\artists.css" />
     <Content Include="Content\isotope\artists.js" />
     <Content Include="Content\isotope\isotope.pkg.min.js" />
-    <Content Include="Content\rating.css" />
+    <Content Include="Content\work\rating.css" />
+    <Content Include="Content\work\work.css" />
+    <Content Include="Content\work\work.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

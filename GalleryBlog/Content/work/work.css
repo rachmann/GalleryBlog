@@ -1,0 +1,14 @@
+﻿.ImageBox{
+    margin: 0 5% 5% 0;
+    width: 95%;
+    height: 95%;
+}
+.ImageBox img {
+    vertical-align: top;
+}
+.portrait img{
+    width: 100%;
+}
+.landscape img {
+    height: 100%;
+}
