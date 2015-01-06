@@ -190,6 +190,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ArtistListItem.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\GalleryImage.cs" />
@@ -236,6 +237,28 @@
     <Content Include="Content\Images\art\Robert Shuttleworth_Pee Wee_Mixed media sculpture_48x90_.jpg" />
     <Content Include="Content\Images\art\Tommy Vohs_Rocket Launch_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
     <Content Include="Content\Images\art\Tommy Vohs_The Window Shopper_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
+    <Content Include="Content\Images\elements\Andrea Rinaldo_White Neon Blush_mixed media on canvas_48x60__result.jpg" />
+    <Content Include="Content\Images\elements\Chris Albert_AGO_Photograph on panel with resin overlay_33x33__result.jpg" />
+    <Content Include="Content\Images\elements\Chris Albert_Jilly%27s_Photograph on panel with resin overlay_33x33__result.jpg" />
+    <Content Include="Content\Images\elements\Chris Albert_St Lawrence Market_Photograph on panel with resin overlay_30x48__result.jpg" />
+    <Content Include="Content\Images\elements\Eryn ONeill_On The Highline_Oil on canvas_16x32__result.JPG" />
+    <Content Include="Content\Images\elements\Eryn ONeill_Window Shopping_Oil on canvas_16x32__result.JPG" />
+    <Content Include="Content\Images\elements\Ian Busher_Ive Seen It Happen_mixed media on gate_30x73__result.JPG" />
+    <Content Include="Content\Images\elements\Ian Busher_Triptych_Installation in clients home___result.jpg" />
+    <Content Include="Content\Images\elements\Ivano Stocco_Crossroads_Mixed media painting on panel_48x60__result.JPG" />
+    <Content Include="Content\Images\elements\Ivano Stocco_Gridiron_Mixed media painting on panel_36x30__result.JPG" />
+    <Content Include="Content\Images\elements\Ivano Stocco_Nightlife_Mixed media painting on panel_36x48__result.JPG" />
+    <Content Include="Content\Images\elements\Ivano Stocco_Solvitur Ambulando_Mixed media painting on panel_60x24__result.JPG" />
+    <Content Include="Content\Images\elements\Marjolyn van der Hart_Returning Home_Mixed media_48x24__result.jpg" />
+    <Content Include="Content\Images\elements\Marjolyn van der Hart_She Wants To Know_Mixed media painting on panel_40x40__result.JPG" />
+    <Content Include="Content\Images\elements\Mark Gleberson_Bush In Hand_Oil___result.jpeg" />
+    <Content Include="Content\Images\elements\Mark Gleberson_Super Hero_Mixed media___result.jpeg" />
+    <Content Include="Content\Images\elements\Mark Gleberson_The Delivery_Oil___result.jpeg" />
+    <Content Include="Content\Images\elements\Mark Gleberzon_Ladies Wholl Lunch_mixed media photograph on panel with resin overlay_30x30__result.JPG" />
+    <Content Include="Content\Images\elements\Mark Gleberzon_Lily At The Lido_Mixed media photograph on panel with resin overlay_30x30_result.jpg" />
+    <Content Include="Content\Images\elements\Robert Shuttleworth_Pee Wee_Mixed media sculpture_48x90__result.jpg" />
+    <Content Include="Content\Images\elements\Tommy Vohs_Rocket Launch_iPhone-graphic image on aluminum dibond_40x40__result.JPG" />
+    <Content Include="Content\Images\elements\Tommy Vohs_The Window Shopper_iPhone-graphic image on aluminum dibond_40x40__result.JPG" />
     <Content Include="Content\Images\thumb\Andrea Rinaldo_White Neon Blush_mixed media on canvas_48x60_.jpg" />
     <Content Include="Content\Images\thumb\Chris Albert_AGO_Photograph on panel with resin overlay_33x33_.jpg" />
     <Content Include="Content\Images\thumb\Chris Albert_Jilly%27s_Photograph on panel with resin overlay_33x33_.jpg" />

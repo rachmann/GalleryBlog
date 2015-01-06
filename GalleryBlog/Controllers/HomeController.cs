@@ -28,7 +28,8 @@ namespace GalleryBlog.Controllers
         {
             ViewBag.Message = "Your Artists page.";
 
-            return View();
+            var model = GetArtistList();
+            return View(model);
         }
 
         public ActionResult Work(int id = 0)
@@ -120,6 +121,135 @@ namespace GalleryBlog.Controllers
             return gvm;
         }
 
+
+        private List<ArtistListItem> GetArtistList()
+        {
+            var list = new List<ArtistListItem>
+            {
+                new ArtistListItem
+                {
+                    ArtistName = "Mark Gleberson",
+                    Symbol = "Mg",
+                    ContainterClasses = "photo mixedmedia",
+                    ContainerDataCategory = "photo",
+                    ImageName = "Mark Gleberson_The Delivery_Oil__.jpeg",
+                    Number = "6",
+                    ImageSize = "30x40"
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Robert Shuttleworth",
+                    Symbol = "Rs",
+                    ContainterClasses = "sculpture",
+                    ContainerDataCategory = "sculpture",
+                    ImageName = "Robert Shuttleworth_Pee Wee_Mixed media sculpture_48x90_.jpg",
+                    Number = "57",
+                    ImageSize = "48x90"
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Eryn O'Neill",
+                    Symbol = "EoN",
+                    ContainterClasses = "photo",
+                    ContainerDataCategory = "photo",
+                    ImageName = "Eryn ONeill_Window Shopping_Oil on canvas_16x32_.JPG",
+                    Number = "92",
+                    ImageSize = "16x32"
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Chris Albert",
+                    Symbol = "Ca",
+                    ContainterClasses = "photo",
+                    ContainerDataCategory = "photo",
+                    ImageName = "Chris Albert_St Lawrence Market_Photograph on panel with resin overlay_30x48_.jpg",
+                    Number = "208",
+                    ImageSize = "30x48"
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Laura Culic",
+                    Symbol = "Lc",
+                    ContainterClasses = "photo",
+                    ContainerDataCategory = "photo",
+                    ImageName = "Ivano Stocco_Crossroads_Mixed media painting on panel_48x60_.JPG",
+                    Number = "42",
+                    ImageSize = "48x60"
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Carol Westcott",
+                    Symbol = "Cw",
+                    ContainterClasses = "painting",
+                    ContainerDataCategory = "painting",
+                    ImageName = "Eryn ONeill_On The Highline_Oil on canvas_16x32_.JPG",
+                    Number = "113",
+                    ImageSize = "16x32"
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Ian Busher",
+                    Symbol = "Ib",
+                    ContainterClasses = "mixedmedia",
+                    ContainerDataCategory = "mixedmedia",
+                    ImageName = "Ian Busher_Ive Seen It Happen_mixed media on gate_30x73_.JPG",
+                    Number = "12",
+                    ImageSize = "30x73"
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Andrea Rinaldo",
+                    Symbol = "Ar",
+                    ContainterClasses = "painting",
+                    ContainerDataCategory = "painting",
+                    ImageName = "Andrea Rinaldo_White Neon Blush_mixed media on canvas_48x60_.jpg",
+                    Number = "79",
+                    ImageSize = "48x60"
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Marjolyn van der Hart",
+                    Symbol = "MvdH",
+                    ContainterClasses = "painting",
+                    ContainerDataCategory = "painting",
+                    ImageName = "Marjolyn van der Hart_She Wants To Know_Mixed media painting on panel_40x40_.JPG",
+                    Number = "19",
+                    ImageSize = "40x40"
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Beverly Jenkins",
+                    Symbol = "Bj",
+                    ContainterClasses = "painting",
+                    ContainerDataCategory = "painting",
+                    ImageName = "Ivano Stocco_Gridiron_Mixed media painting on panel_36x30_.JPG",
+                    Number = "4",
+                    ImageSize = ""
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Ivano Stocco",
+                    Symbol = "Is",
+                    ContainterClasses = "sculpture mixedmedia",
+                    ContainerDataCategory = "sculpture",
+                    ImageName = "Ivano Stocco_Nightlife_Mixed media painting on panel_36x48_.JPG",
+                    Number = "81",
+                    ImageSize = "36x48"
+                },
+                new ArtistListItem
+                {
+                    ArtistName = "Tommy Vohs",
+                    Symbol = "Tv",
+                    ContainterClasses = "mixedmedia",
+                    ContainerDataCategory = "mixedmedia",
+                    ImageName = "Tommy Vohs_Rocket Launch_iPhone-graphic image on aluminum dibond_40x40_.JPG",
+                    Number = "48",
+                    ImageSize = "40x40"
+                }
+            };
+
+            return list;
+        }
 
     }
 }
