@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{133B64C9-D580-4783-B045-F8B922F1295A}</ProjectGuid>
+    <ProjectGuid>{3534D018-6D42-4B7D-9663-0DC9696126AD}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -20,7 +20,6 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,27 +52,23 @@
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Mvc.RazorTools">
-      <HintPath>..\packages\Mvc.RazorTools.Base.1.0.5\lib\net45\Mvc.RazorTools.dll</HintPath>
-    </Reference>
-    <Reference Include="Mvc.RazorTools.FontAwesome">
-      <HintPath>..\packages\Mvc.RazorTools.FontAwesome.4.1.0.0\lib\net45\Mvc.RazorTools.FontAwesome.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -114,26 +109,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -178,17 +159,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
-    <Compile Include="App_Start\Razor Tools\FontAwesome.cs" />
+    <Compile Include="App_Start\Razor Tools\NavHelper.cs" />
+    <Compile Include="App_Start\Razor Tools\ScriptBundleManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="App_Start\Razor Tools\StyleBundleManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ArtistListItem.cs" />
     <Compile Include="Models\CartItem.cs" />
@@ -205,24 +188,44 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\animate.css" />
+    <Content Include="Content\artists\artists.css" />
+    <Content Include="Content\artists\artists.js" />
+    <Content Include="Content\artists\isotope.pkg.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\gallery\close20.png" />
+    <Content Include="Content\gallery\close50.png" />
+    <Content Include="Content\gallery\gray_jean.png" />
+    <Content Include="Content\gallery\imagesloaded.pkgd.min.js" />
+    <Content Include="Content\gallery\imagewall.css" />
+    <Content Include="Content\gallery\imagewall.js" />
+    <Content Include="Content\gallery\jquery.easing.1.3.js" />
+    <Content Include="Content\gallery\loader.gif" />
+    <Content Include="Content\gallery\masonry.pkgd.js" />
+    <Content Include="Content\gallery\masonry.pkgd.min.js" />
+    <Content Include="Content\gallery\pinstripe.gif" />
     <Content Include="Content\Images\app\cream_dust.png" />
     <Content Include="Content\Images\app\facebook.jpg" />
     <Content Include="Content\Images\app\googleplus.jpg" />
+    <Content Include="Content\Images\app\instagram.jpg" />
+    <Content Include="Content\Images\app\line-about.gif" />
+    <Content Include="Content\Images\app\line-grey.gif" />
+    <Content Include="Content\Images\app\overlay-icon-01.png" />
+    <Content Include="Content\Images\app\overlay-icon-02.png" />
+    <Content Include="Content\Images\app\pinterest.jpg" />
+    <Content Include="Content\Images\app\twitter.jpg" />
     <Content Include="Content\Images\art\Andrea Rinaldo_White Neon Blush_mixed media on canvas_48x60_.jpg" />
     <Content Include="Content\Images\art\Chris Albert_AGO_Photograph on panel with resin overlay_33x33_.jpg" />
     <Content Include="Content\Images\art\Chris Albert_Jilly%27s_Photograph on panel with resin overlay_33x33_.jpg" />
     <Content Include="Content\Images\art\Chris Albert_St Lawrence Market_Photograph on panel with resin overlay_30x48_.jpg" />
     <Content Include="Content\Images\art\Eryn ONeill_On The Highline_Oil on canvas_16x32_.JPG" />
     <Content Include="Content\Images\art\Eryn ONeill_Window Shopping_Oil on canvas_16x32_.JPG" />
-    <Content Include="Content\Images\art\Ian Busher_Triptych_Installation in clients home__.jpg" />
     <Content Include="Content\Images\art\Ian Busher_Ive Seen It Happen_mixed media on gate_30x73_.JPG" />
+    <Content Include="Content\Images\art\Ian Busher_Triptych_Installation in clients home__.jpg" />
     <Content Include="Content\Images\art\Ivano Stocco_Crossroads_Mixed media painting on panel_48x60_.JPG" />
     <Content Include="Content\Images\art\Ivano Stocco_Gridiron_Mixed media painting on panel_36x30_.JPG" />
     <Content Include="Content\Images\art\Ivano Stocco_Nightlife_Mixed media painting on panel_36x48_.JPG" />
@@ -265,8 +268,8 @@
     <Content Include="Content\Images\thumb\Chris Albert_St Lawrence Market_Photograph on panel with resin overlay_30x48_.jpg" />
     <Content Include="Content\Images\thumb\Eryn ONeill_On The Highline_Oil on canvas_16x32_.JPG" />
     <Content Include="Content\Images\thumb\Eryn ONeill_Window Shopping_Oil on canvas_16x32_.JPG" />
-    <Content Include="Content\Images\thumb\Ian Busher_Triptych_Installation in clients home__.jpg" />
     <Content Include="Content\Images\thumb\Ian Busher_Ive Seen It Happen_mixed media on gate_30x73_.JPG" />
+    <Content Include="Content\Images\thumb\Ian Busher_Triptych_Installation in clients home__.jpg" />
     <Content Include="Content\Images\thumb\Ivano Stocco_Crossroads_Mixed media painting on panel_48x60_.JPG" />
     <Content Include="Content\Images\thumb\Ivano Stocco_Gridiron_Mixed media painting on panel_36x30_.JPG" />
     <Content Include="Content\Images\thumb\Ivano Stocco_Nightlife_Mixed media painting on panel_36x48_.JPG" />
@@ -281,27 +284,8 @@
     <Content Include="Content\Images\thumb\Robert Shuttleworth_Pee Wee_Mixed media sculpture_48x90_.jpg" />
     <Content Include="Content\Images\thumb\Tommy Vohs_Rocket Launch_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
     <Content Include="Content\Images\thumb\Tommy Vohs_The Window Shopper_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
-    <Content Include="Content\imagewall\close20.png" />
-    <Content Include="Content\imagewall\close50.png" />
-    <Content Include="Content\imagewall\gray_jean.png" />
-    <Content Include="Content\Images\app\instagram.jpg" />
-    <Content Include="Content\Images\app\line-about.gif" />
-    <Content Include="Content\Images\app\line-grey.gif" />
-    <Content Include="Content\Images\app\overlay-icon-01.png" />
-    <Content Include="Content\Images\app\overlay-icon-02.png" />
-    <Content Include="Content\Images\app\pinterest.jpg" />
-    <Content Include="Content\Images\app\twitter.jpg" />
-    <Content Include="Content\imagewall\imagesloaded.pkgd.min.js" />
-    <Content Include="Content\imagewall\imagewall.js" />
-    <Content Include="Content\imagewall\jquery.easing.1.3.js" />
-    <Content Include="Content\imagewall\loader.gif" />
-    <Content Include="Content\imagewall\masonry.pkgd.js" />
-    <Content Include="Content\imagewall\masonry.pkgd.min.js" />
-    <Content Include="Content\imagewall\pinstripe.gif" />
-    <Content Include="Content\imagewall\imagewall.css" />
-    <Content Include="Content\artists\artists.css" />
-    <Content Include="Content\artists\artists.js" />
-    <Content Include="Content\artists\isotope.pkg.min.js" />
+    <Content Include="Content\Video\mjg.mp4" />
+    <Content Include="Content\Video\placeholder.png" />
     <Content Include="Content\work\rating.css" />
     <Content Include="Content\work\work.css" />
     <Content Include="Content\work\work.js" />
@@ -319,30 +303,25 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Content\Video\mjg.webm" />
+    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <None Include="Scripts\jquery-2.1.3-vsdoc.js" />
-    <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knob.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Shared\_Layout.cshtml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -353,6 +332,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -376,15 +356,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Artists.cshtml" />
-    <Content Include="Views\Home\Work.cshtml" />
-    <Content Include="Views\Home\Blog.cshtml" />
-    <Content Include="Views\Home\Post.cshtml" />
-    <Content Include="Views\Home\Gallery.cshtml" />
-    <Content Include="Views\Shared\_LayoutGallery.cshtml" />
-    <Content Include="Views\Shared\_LayoutWork.cshtml" />
-    <Content Include="Views\Shared\_LayoutArtists.cshtml" />
     <Content Include="Views\Home\Artist.cshtml" />
+    <Content Include="Views\Home\Artists.cshtml" />
+    <Content Include="Views\Home\Blog.cshtml" />
+    <Content Include="Views\Home\Gallery.cshtml" />
+    <Content Include="Views\Home\Post.cshtml" />
+    <Content Include="Views\Home\Work.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -410,7 +387,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>51604</DevelopmentServerPort>
+          <DevelopmentServerPort>65113</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:50020/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

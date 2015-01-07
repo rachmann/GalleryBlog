@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -30,7 +29,6 @@ namespace GalleryBlog.Models
         {
             return new ApplicationDbContext();
         }
-
         DbSet<CartItem> CartItems { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Item> Items { get; set; }
@@ -39,9 +37,5 @@ namespace GalleryBlog.Models
         DbSet<PostTag> PostTags { get; set; }
         DbSet<GalleryImage> GalleryImages { get; set; } 
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        }
     }
 }

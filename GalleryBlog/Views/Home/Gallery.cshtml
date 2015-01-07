@@ -1,6 +1,8 @@
-﻿@model  List<GalleryBlog.Models.GalleryImage>
+﻿@using GalleryBlog.Extensions
+@model  List<GalleryBlog.Models.GalleryImage>
 @{
-    Layout = "~/Views/Shared/_LayoutGallery.cshtml";
+    Html.RegisterStyles("~/Content/gallery/imagewall.css");
+    Html.Register("~/bundles/gallery");
 }
 <div class="col-sm-9">
     <div class="iw_wrapper">

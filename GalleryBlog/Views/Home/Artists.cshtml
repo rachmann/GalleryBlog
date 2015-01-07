@@ -1,9 +1,13 @@
-﻿@model List<GalleryBlog.Models.ArtistListItem>
+﻿@using GalleryBlog.Extensions
+@model List<GalleryBlog.Models.ArtistListItem>
 @{
-    ViewBag.Title = "Artists";
-    Layout = "~/Views/Shared/_LayoutArtists.cshtml";
+    Html.RegisterStyles("~/Content/artists/artists.css");
+    Html.Register("~/bundles/artists");
 
+    ViewBag.Title = "Artists";
 }
+
+
 <div class="col-sm-8">
 
     <h2>Artists</h2>

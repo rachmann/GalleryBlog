@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -14,7 +15,6 @@ namespace GalleryBlog.Controllers
         {
             return View();
         }
-
         public ActionResult Gallery()
         {
             ViewBag.Message = "The Gallery View.";
@@ -39,7 +39,7 @@ namespace GalleryBlog.Controllers
 
             ViewBag.Message = "Artist page";
 
-            var model = GetArtistList().Select( l=>l.Number.Equals(id.ToString())).ToList().FirstOrDefault();
+            var model = GetArtistList().Select(l => l.Number.Equals(id.ToString(CultureInfo.InvariantCulture))).ToList().FirstOrDefault();
 
             return View(model);
         }
@@ -48,11 +48,11 @@ namespace GalleryBlog.Controllers
         {
             if (id == 0)
                 return RedirectToActionPermanent("Index");
-            
+
             ViewBag.Message = "Your item of work page.";
 
             var model = GetArtFromDirList(id);
-            
+
             return View(model);
         }
 
@@ -72,7 +72,7 @@ namespace GalleryBlog.Controllers
 
         public ActionResult About()
         {
-            
+
             ViewBag.Title = "About";
             ViewBag.Message = "Mark's Gallery.";
 

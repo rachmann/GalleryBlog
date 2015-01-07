@@ -1,9 +1,14 @@
-﻿@model GalleryBlog.Models.ArtistListItem
+﻿@using GalleryBlog.Extensions
+@model GalleryBlog.Models.ArtistListItem
 
 @{
     ViewBag.Title = "Artist";
-}
 
+    Html.RegisterStyles("~/Content/artists/artists.css");
+
+    Html.Register("~/bundles/js_artists");
+
+}
 <h2>Artist</h2>
 
 <div>
@@ -19,7 +24,17 @@
             @Html.DisplayFor(model => model.ArtistName)
         </dd>
 
-        // Now add Slider for 
+        <!-- Now add Slider for -->
 
     </dl>
 </div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function() {
+
+            alert("blick!");
+        });
+    </script>
+}
