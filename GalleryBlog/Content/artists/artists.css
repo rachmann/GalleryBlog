@@ -109,8 +109,9 @@ body {
         top: 60px;
         text-transform: none;
         letter-spacing: 0;
-        font-size: 12px;
-        font-weight: normal;
+        font-size: 22px;
+        font-weight: bold;
+        color: wheat;
     }
 
     .element-item .symbol {
@@ -126,13 +127,17 @@ body {
         position: absolute;
         right: 8px;
         top: 5px;
+        font-size: 22px;
+        font-weight: bold;
+        color: transparent;
     }
 
     .element-item .size {
         position: absolute;
         left: 10px;
-        top: 76px;
-        font-size: 12px;
+        top: 96px;
+        font-size: 22px;
+        font-weight: bold;
     }
 
 /*.element-item.photo          { background: #F00; background: hsl(   0, 100%, 50%); }

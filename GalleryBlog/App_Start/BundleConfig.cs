@@ -25,8 +25,8 @@ namespace GalleryBlog
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/artists").Include(
-                      "~/Content/isotope/isotope.pkg.min.js",
-                      "~/Content/isotope/artists.js"
+                      "~/Content/artists/isotope.pkg.min.js",
+                      "~/Content/artists/artists.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/work").Include(
@@ -52,7 +52,7 @@ namespace GalleryBlog
                       ));
 
             bundles.Add(new StyleBundle("~/Content/artists").Include(
-                      "~/Content/isotope/artists.css"
+                      "~/Content/artists/artists.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/work").Include(

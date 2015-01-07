@@ -32,6 +32,18 @@ namespace GalleryBlog.Controllers
             return View(model);
         }
 
+        public ActionResult Artist(int id = 0)
+        {
+            if (id == 0)
+                return RedirectToActionPermanent("Index");
+
+            ViewBag.Message = "Artist page";
+
+            var model = GetArtistList().Select( l=>l.Number.Equals(id.ToString())).ToList().FirstOrDefault();
+
+            return View(model);
+        }
+
         public ActionResult Work(int id = 0)
         {
             if (id == 0)
@@ -40,7 +52,7 @@ namespace GalleryBlog.Controllers
             ViewBag.Message = "Your item of work page.";
 
             var model = GetArtFromDirList(id);
-
+            
             return View(model);
         }
 
@@ -124,6 +136,7 @@ namespace GalleryBlog.Controllers
 
         private List<ArtistListItem> GetArtistList()
         {
+
             var list = new List<ArtistListItem>
             {
                 new ArtistListItem
