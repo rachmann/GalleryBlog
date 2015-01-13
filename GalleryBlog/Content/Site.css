@@ -5,10 +5,19 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
+.container{
+    width: 100%;
+}
+
+.social{
+    padding-top:15px;
+    padding-left:15px;
+    text-align: left;
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -23,6 +32,11 @@ textarea {
     max-width: 280px;
 }
 
+@media (max-width: 767px) {
+     .social{
+      display: none;
+  }
+}
 
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
@@ -44,6 +58,9 @@ textarea {
   .sidebar-nav .navbar li a {
     padding-top: 12px;
     padding-bottom: 12px;
+  }
+  .social-sm{
+      display: none;
   }
 }
 
@@ -71,7 +88,7 @@ textarea {
   -webkit-box-shadow: none;
           box-shadow: none;
     font-weight: bolder;
-    font-size-adjust: 1.8;
+    font-size: 16px;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     background-color: transparent;

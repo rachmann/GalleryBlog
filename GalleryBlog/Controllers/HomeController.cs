@@ -39,7 +39,7 @@ namespace GalleryBlog.Controllers
 
             ViewBag.Message = "Artist page";
 
-            var model = GetArtistList().Select(l => l.Number.Equals(id.ToString(CultureInfo.InvariantCulture))).ToList().FirstOrDefault();
+            var model = GetArtistList().FirstOrDefault(l => l.Number.Equals(id.ToString(CultureInfo.InvariantCulture)));
 
             return View(model);
         }
@@ -86,9 +86,9 @@ namespace GalleryBlog.Controllers
             return View();
         }
 
-        private List<Models.GalleryImage> GetArtFromDirList(int idx = 0)
+        private List<Models.Artwork> GetArtFromDirList(int idx = 0)
         {
-            var gvm = new List<Models.GalleryImage>();
+            var gvm = new List<Models.Artwork>();
             var sDir = Server.MapPath(Url.Content("~/Content/Images/art/"));
             var files = Directory.GetFiles(sDir);
             if (idx > 0 && idx > files.Count())
@@ -109,10 +109,10 @@ namespace GalleryBlog.Controllers
                     var desc = parts[2];
                     if (idx == 0 || (idx > 0 && id == idx))
                     {
-                        gvm.Add(new GalleryImage
+                        gvm.Add(new Artwork
                         {
                             ImageAlt = name,
-                            ImagePath = fn,
+                            ImageName = fn,
                             ImageDescription = artist + " " + desc,
                             Id = id,
                             ImageTitle = name

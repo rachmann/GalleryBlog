@@ -10,13 +10,12 @@
 
     @Html.RenderStyles()
 
-
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="container body-content">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <div class="sidebar-nav">
                     <div class="navbar navbar-default" role="navigation">
                         <div class="navbar-header">
@@ -27,8 +26,18 @@
                                 <span class="icon-bar"></span>
                             </button>
                             <span class="visible-xs navbar-brand">Menu</span>
+                            <div class="social-sm" style="margin-top: 17px;">
+                                <a href="https://www.facebook.com/pages/MJG-Gallery-by-Mark-Jeremy-Gleberzon/238062092892271"><i class="fa fa-facebook"></i></a>
+                                <a href="https://twitter.com/mjggallery"><i class="fa fa-twitter"></i></a>
+                                <a href="http://instagram.com/mjggallery/"><i class="fa fa-instagram"></i></a>
+                                <a href="https://www.pinterest.com/markaloo/"><i class="fa fa-pinterest"></i></a>
+                            </div>
+
                         </div>
                         <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                            <div style="width: 100%">
+                                <img alt="" src="~/Content/Images/app/mjglogo.png" style="width: 100%" />
+                            </div>
                             <ul class="nav navbar-nav">
                                 <li class="@Html.IsSelected(action: "Index")">@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li class="@Html.IsSelected(action: "About")">@Html.ActionLink("About", "About", "Home")</li>
@@ -39,10 +48,10 @@
                             </ul>
                         </div><!--/.nav-collapse -->
                         <div class="social">
-                            <a href="https://www.facebook.com/pages/MJG-Gallery-by-Mark-Jeremy-Gleberzon/238062092892271"><i class="icon-facebook"></i></a>
-                            <a href="https://twitter.com/mjggallery"><i class="icon-twitter"></i></a>
-                            <a href="http://instagram.com/mjggallery/"><i class="icon-camera-retro"></i></a>
-                            <a href="https://www.pinterest.com/markaloo/"><i class="icon-pinterest-sign"></i></a>
+                            <a href="https://www.facebook.com/pages/MJG-Gallery-by-Mark-Jeremy-Gleberzon/238062092892271"><i class="fa fa-facebook"></i></a>
+                            <a href="https://twitter.com/mjggallery"><i class="fa fa-twitter"></i></a>
+                            <a href="http://instagram.com/mjggallery/"><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.pinterest.com/markaloo/"><i class="fa fa-pinterest"></i></a>
                         </div>
 
                     </div>

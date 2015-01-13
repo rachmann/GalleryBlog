@@ -2,8 +2,8 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="col-sm-9">
-    <video autoplay="autoplay" style="width:100%; height: auto;"  id="bgVideo" poster="@Url.Content("~/Content/Video/placeholder.png")" loop="loop" controls>
+<div class="col-sm-10">
+    <video autoplay="autoplay" style="width:100%; height: auto;" id="bgVideo" poster="@Url.Content("~/Content/Video/placeholder.png")" loop="loop" controls>
 
         <source class="myMediaElement" type="video/mp4" src='@Url.Content("~/Content/Video/mjg.mp4")'>
         <source class="myMediaElement" type="video/webm" src='@Url.Content("~/Content/Video/mjg.webm")'>
@@ -11,15 +11,9 @@
             <img style="width:100%; height:auto" src='@Url.Content("~/Content/Video/placeholder.png")?sfvrsn=2' displaymode="Original" alt="" />
         </span>
     </video>
-    <h1>The Site</h1>
-    <p class="lead">A cool gallery site.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-
-    <h2>Gallery</h2>
-    <p>
-        Lots of pictures to enjoy.
-    </p>
-    <p><a class="btn btn-default" href="@Url.Action("Gallery", "Home")">Gallery &raquo;</a></p>
-
-
+    <h1>MJG Gallery</h1>
+    <p class="lead">A Cabagetown gallery. A site to showcase our events and related news, and a way to catch my thoughts through my blog.</p>
+    <p>MJG Gallery focuses on original work including oil, acrylic, encaustic painting, photography and sculpture as well as mixed-media. Mark has personally known many of the gallery artists over the years and prides himself on "carrying artwork he honestly likes by people he honestly likes."</p>
+    <p>Explore the site through the menu at the left.</p>
+    <p>Find the gallery on the various social media sites as well.</p>
 </div>
