@@ -1,12 +1,12 @@
 ﻿@using GalleryBlog.Extensions
-@model  List<GalleryBlog.Models.GalleryImage>
+@model  List<GalleryBlog.Models.Artwork>
 @{
     Html.RegisterStyles("~/Content/work/work.css");
     Html.RegisterStyles("~/Content/work/rating.css");
     Html.Register("~/bundles/work");
 
     ViewBag.Title = "Work";
-    var pathfull = @Url.Content("~/Content/Images/art/" + @Model[0].ImagePath);
+    var pathfull = @Url.Content("~/Content/Images/art/" + @Model[0].ImageName);
 }
 
 <div class="col-sm-10">

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GalleryBlog.Models;
+using System.Configuration;
 
 namespace GalleryBlog.Controllers
 {
@@ -84,6 +85,16 @@ namespace GalleryBlog.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Contact(string messageName, string messageEmail, string messageBody)
+        {
+            var sender = new SendMailerController();
+
+            sender.SendAdminContactPageEmail(messageName, messageEmail, messageBody, ConfigurationManager.AppSettings["AdminEmailCC"], Request.Url.Scheme, Request.Url.Authority);
+
+            return RedirectToActionPermanent("Index","Home"); 
         }
 
         private List<Models.Artwork> GetArtFromDirList(int idx = 0)

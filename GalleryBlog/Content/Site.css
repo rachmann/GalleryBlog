@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url("Images/app/MJGBgLogo.png");
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,15 +10,38 @@
     padding-right: 5px;
 }
 
-.container{
+.container {
     width: 100%;
 }
 
-.social{
-    padding-top:15px;
-    padding-left:15px;
+.social {
+    padding-top: 15px;
+    padding-left: 15px;
     text-align: left;
 }
+
+.isLessFaded{
+     opacity: 0.9;
+}
+#fadedTextBg {
+    position: absolute;
+    display: inline-block;
+    z-index: 32;
+    top: 45px;
+    left: 3%;
+    color: white;
+    width: 90%;
+    height: 140px;
+    background-color: rgb(20, 20, 20);
+    opacity: 0.5; /* css standard */
+    filter: alpha(opacity=60); /* internet explorer */
+}
+
+    #fadedTextBg:hover {
+        opacity: 0.9; /* css standard */
+        filter: alpha(opacity=90); /* internet explorer */
+    }
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -27,41 +51,44 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
-    max-width: 280px;
+select {
+    max-width: 350px;
 }
 
 @media (max-width: 767px) {
-     .social{
-      display: none;
-  }
+    .social {
+        display: none;
+    }
 }
 
-/* make sidebar nav vertical */ 
+/* make sidebar nav vertical */
 @media (min-width: 768px) {
-  .sidebar-nav .navbar .navbar-collapse {
-    padding: 0;
-    max-height: none;
-  }
-  .sidebar-nav .navbar ul {
-    float: none;
-  }
+    .sidebar-nav .navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
 
-  .sidebar-nav .navbar ul:not(.dropdown-menu) { 
-    display: block;
-  }
-  .sidebar-nav .navbar li {
-    float: none;
-    display: block;
-  }
-  .sidebar-nav .navbar li a {
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-  .social-sm{
-      display: none;
-  }
+    .sidebar-nav .navbar ul {
+        float: none;
+    }
+
+        .sidebar-nav .navbar ul:not(.dropdown-menu) {
+            display: block;
+        }
+
+    .sidebar-nav .navbar li {
+        float: none;
+        display: block;
+    }
+
+        .sidebar-nav .navbar li a {
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+
+    .social-sm {
+        display: none;
+    }
 }
 
 /* override bootstrap */
@@ -77,19 +104,20 @@ textarea {
     border-color: transparent;
 }
 
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-    border-color: transparent;
-}
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        border-color: transparent;
+    }
 
-.navbar-default .navbar-nav > .active > a {
-  background-image: none;
-  filter: none;
-  background-repeat: repeat-x;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-    font-weight: bolder;
-    font-size: 16px;
-}
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    background-color: transparent;
-}
+    .navbar-default .navbar-nav > .active > a {
+        background-image: none;
+        filter: none;
+        background-repeat: repeat-x;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        font-weight: bolder;
+        font-size: 16px;
+    }
+
+        .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+            background-color: transparent;
+        }

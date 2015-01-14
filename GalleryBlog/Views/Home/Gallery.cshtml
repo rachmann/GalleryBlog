@@ -1,5 +1,5 @@
 ﻿@using GalleryBlog.Extensions
-@model  List<GalleryBlog.Models.GalleryImage>
+@model  List<GalleryBlog.Models.Artwork>
 @{
     Html.RegisterStyles("~/Content/gallery/imagewall.css");
     Html.Register("~/bundles/gallery");
@@ -10,8 +10,8 @@
             @{
                 foreach (var item in Model)
                 {
-                    var pathfull = @Url.Content("~/Content/Images/art/" + @item.ImagePath);
-                    var paththumb = @Url.Content("~/Content/Images/thumb/" + @item.ImagePath);
+                    var pathfull = @Url.Content("~/Content/Images/art/" + @item.ImageName);
+                    var paththumb = @Url.Content("~/Content/Images/thumb/" + @item.ImageName);
                     <li><img src="@paththumb" data-img="@pathfull" alt="@item.ImageAlt" /><div><a href="@Url.Action("Work", "Home", new {id = @item.Id})"><h3>@item.ImageTitle</h3></a><p>@item.ImageDescription</p></div></li>
                 }
             }
