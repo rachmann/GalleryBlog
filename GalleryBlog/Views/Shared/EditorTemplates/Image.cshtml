@@ -1,0 +1,19 @@
+﻿@model string 
+
+ <div style="width:100%">
+    <div class="section">
+        @Html.TextBoxFor(model => model, new {@class="k-textbox", style="width: 100%;font-size: 10pt" })
+        @(Html.Kendo().Upload()
+        .Name("files")
+        .Events(events=>events.Success("OnUploadSuccess"))
+        .Multiple(false)
+        .Async(a => a
+            .Save("SaveImage", "ArtWorks")
+            .Remove("RemoveImage", "ArtWorks")
+            .AutoUpload(true)
+        )
+        )
+    </div>
+</div>
+
+

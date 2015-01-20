@@ -15,7 +15,8 @@ namespace GalleryBlog.Models
         public string ArtistName { get; set; }
         public string Symbol { get; set; }
         public string ImageName { get; set; }
-        public string Number { get; set; }
-        public string ImageSize { get; set; }
+        public String Number { get; set; }
+        public Artwork Art { get; set; } // just the first piece of art you find
+        
     }
 }

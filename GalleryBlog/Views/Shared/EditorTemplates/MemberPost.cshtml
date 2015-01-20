@@ -1,0 +1,62 @@
+﻿@model CraftStore.Models.MemberPost
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using Microsoft.Owin.Security;
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="post-view k-widget bg-azure">
+        <div class="edit-buttons">
+            <a class="k-button k-button-icontext k-update-button" href="\\#"><span class="k-icon k-update"></span></a>
+            <a class="k-button k-button-icontext k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span></a>
+        </div>
+@{
+
+    if (Model.Name.IsEmpty() && Model.CommentDate == DateTime.MinValue)
+    {
+        // add in name to post
+        using (CraftStore.Controllers.AccountController acct = new CraftStore.Controllers.AccountController())
+        {
+            var user = acct.GetUserById(User.Identity.GetUserId(), Guid.NewGuid().ToString());
+            Model.Name = string.Format("{0} {1}", user.FirstName, user.LastName);
+            Model.UserEmail = user.Email;
+        }
+
+    }
+    // for new admin notes - auto approve
+    if (User.IsInRole("Administrators") && Model.CommentDate == DateTime.MinValue)
+    {
+        Model.Approved = true;
+    }else
+    { 
+        if( Model.Approved == false)
+        {
+        <h3 class="warnMsg">Your Post must be approved before it will be displayed to everyone.</h3>
+        }
+    }
+    
+    if (Model.CommentDate == DateTime.MinValue)
+    {
+        Model.CommentDate = DateTime.Now;
+    }
+}
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.DisplayFor(m => m.CommentDate, new { @class = "k-label" })
+            @Html.DisplayFor(m => m.Name, new { @class = "k-label" })
+        </p>
+        <div style="width: 90%">
+            @(Html.Kendo().EditorFor(m => m.Comment)
+         .ImageBrowser(imageBrowser => imageBrowser
+            .Image("~/Content/UserFiles/Images/{0}")
+                .Read("Read", "ImageBrowser")
+                .Create("Create", "ImageBrowser")
+                .Destroy("Destroy", "ImageBrowser")
+                .Upload("Upload", "ImageBrowser")
+                .Thumbnail("Thumbnail", "ImageBrowser"))
+            )
+        </div>
+    </div>
+
+}

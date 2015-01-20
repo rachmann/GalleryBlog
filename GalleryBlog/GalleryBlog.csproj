@@ -52,6 +52,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\..\CYarns\CraftStore\CraftStore\bin\Kendo.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -168,6 +171,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
+    <Compile Include="Controllers\ArtworksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SendMailerController.cs" />
@@ -178,7 +182,9 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\ArtistListItem.cs" />
+    <Compile Include="Models\ArtistViewModel.cs" />
     <Compile Include="Models\Artwork.cs" />
+    <Compile Include="Models\ArtworkViewModel.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -266,6 +272,7 @@
     <Content Include="Content\Images\elements\Mark Gleberson_The Delivery_Oil__.jpeg" />
     <Content Include="Content\Images\elements\Mark Gleberzon_Ladies Wholl Lunch_mixed media photograph on panel with resin overlay_30x30_.JPG" />
     <Content Include="Content\Images\elements\Mark Gleberzon_Lily At The Lido_Mixed media photograph on panel with resin overlay_30x30.jpg" />
+    <Content Include="Content\Images\elements\mjglogo.png" />
     <Content Include="Content\Images\elements\Robert Shuttleworth_Pee Wee_Mixed media sculpture_48x90_.jpg" />
     <Content Include="Content\Images\elements\Tommy Vohs_Rocket Launch_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
     <Content Include="Content\Images\elements\Tommy Vohs_The Window Shopper_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
@@ -329,6 +336,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="TestQTips.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -373,6 +381,38 @@
     <Content Include="Views\Artists\Delete.cshtml" />
     <Content Include="Views\Artists\Edit.cshtml" />
     <Content Include="Views\Artists\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ArtWork.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CurrencyPlain.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PageItem.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Percent.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Price.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CurrencyPlain.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Image.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ImagePost.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\IntegerNotWide.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MemberPost.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StringDescrip.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StringQuantity.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\Artists\_ArtWorks.cshtml" />
+    <Content Include="Views\Artworks\Create.cshtml" />
+    <Content Include="Views\Artworks\Delete.cshtml" />
+    <Content Include="Views\Artworks\Details.cshtml" />
+    <Content Include="Views\Artworks\Edit.cshtml" />
+    <Content Include="Views\Artworks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

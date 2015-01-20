@@ -1,0 +1,9 @@
+@model decimal?
+
+@(Html.Kendo().CurrencyTextBoxFor(m => m)  
+      .Spinners(false)
+          .HtmlAttributes(new { style = "width:100%;", @class = "k-textbox single-line" })
+      .Min(0)
+)
+
+

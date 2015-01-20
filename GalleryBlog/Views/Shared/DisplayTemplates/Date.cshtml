@@ -1,0 +1,3 @@
+﻿@model DateTime?
+
+@Html.Label(string.Empty, (Model.HasValue ? Model.Value.ToShortDateString() : string.Empty))

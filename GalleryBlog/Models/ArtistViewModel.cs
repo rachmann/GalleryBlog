@@ -6,7 +6,7 @@ using System.Web;
 
 namespace GalleryBlog.Models
 {
-    public class Artist
+    public class ArtistViewModel
     {
         public int Id { get; set; }
         public bool Active { get; set; }
@@ -14,11 +14,18 @@ namespace GalleryBlog.Models
         public bool ShowOnGallery { get; set; }
         [Display(Name = "On Artists")]
         public bool ShowOnArtists { get; set; }
-        
+
         public String Name { get; set; }
-        [Display(Name="Quick Description")]
+        [Display(Name = "Quick Description")]
         public String ShortDescription { get; set; }
         public String Bio { get; set; }
+        public String ShortBio
+        {
+            get
+            {
+                return (Bio == null ? string.Empty : Bio.Substring(0, 20)) + "...";
+            }
+        }
         [Display(Name = "Artist Page Symbol")]
         public String Symbol { get; set; }
         [Display(Name = "All Categories")]

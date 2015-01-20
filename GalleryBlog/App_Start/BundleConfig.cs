@@ -29,24 +29,28 @@ namespace GalleryBlog
             bundles.Add(new ScriptBundle("~/bundles/work").Include(
                       "~/Content/work/work.js"
                       ));
-            
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                        "~/Scripts/kendo/kendo.all.min.js",
+                        "~/Scripts/kendo/endo.aspnetmvc.min.js",
+                        "~/Scripts/kendo/kendo.web.min.js",
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/kendo/kendo.common-bootstrap.min.css",
+                      "~/Content/kendo/kendo.bootstrap.min.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
                       "~/Content/font-awesome.css"));
 
-            
             bundles.Add(new StyleBundle("~/Content/css_artists").Include(
                       "~/Content/artists/artists.css"
                       ));

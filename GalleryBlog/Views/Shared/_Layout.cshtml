@@ -11,6 +11,14 @@
     @Html.RenderStyles()
 
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Html.RenderScripts()
+
+    @RenderSection("scripts", required: false)
+
+
 </head>
 <body>
     <div class="container body-content">
@@ -37,7 +45,7 @@
                         <div class="navbar-collapse collapse sidebar-navbar-collapse">
                             <div style="width: 100%">
                                 <a href="@Url.Action("Index","Home")">
-                                    <img alt="" src="~/Content/Images/app/mjglogo.png" style="width: 100%" />
+                                    <img alt="MJG Gallery" src="~/Content/Images/app/mjglogo.png" style="width: 100%" />
                                 </a>
                             </div>
                             <ul class="nav navbar-nav">
@@ -70,12 +78,6 @@
             </footer>
         </div>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-
-    @Html.RenderScripts()
-
-    @RenderSection("scripts", required: false)
 
 </body>
 </html>

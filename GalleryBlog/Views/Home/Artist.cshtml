@@ -1,5 +1,5 @@
 ﻿@using GalleryBlog.Extensions
-@model GalleryBlog.Models.ArtistListItem
+@model GalleryBlog.Models.Artist
 
 @{
     ViewBag.Title = "Artist";
@@ -17,14 +17,17 @@
     <dl class="dl-horizontal">
 
         <dt>
-            @Html.DisplayNameFor(model => model.ArtistName)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ArtistName)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ArtistName)
+            @Html.DisplayNameFor(model => model.ArtWorks)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.ArtWorks)
         </dt>
         <!-- Now add Slider for artist images-->
 

@@ -1,0 +1,5 @@
+﻿@model GalleryBlog.Models.Artwork
+<div>
+    @{var title = @Model.ImageTitle + @Model.Price;}
+    <img alt="@Model.ImageAlt" src="~/Content/Images/thumb/@Model.ImageName" title="@title" />
+</div>

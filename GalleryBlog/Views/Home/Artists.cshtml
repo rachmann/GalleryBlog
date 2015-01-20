@@ -36,7 +36,9 @@
         @foreach (var item in Model)
         {
             var divClass = "element-item " + @item.ContainterClasses;
-            var pathImage = @Url.Content("~/Content/Images/elements/" + @item.ImageName);
+            var imgName = (@item.Art == null) ? "mjglogo.png" : @item.Art.ImageName;
+            var imgSize = (@item.Art == null) ? " " : @item.Art.Size;
+            var pathImage = @Url.Content("~/Content/Images/elements/" + imgName);    
             
             <div class="@divClass" data-category="@item.ContainerDataCategory">
                 <a href="@Url.Action("Artist", "Home", new {id = @item.Number})">
@@ -44,7 +46,7 @@
                     <p class="symbol">@item.Symbol</p>
                     <img alt="" src="@pathImage" />
                     <p class="number">@item.Number</p>
-                    <p class="size">@item.ImageSize</p>
+                    <p class="size">@imgSize</p>
                 </a>
             </div>
         }
