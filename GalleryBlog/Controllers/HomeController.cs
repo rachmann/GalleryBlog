@@ -16,6 +16,11 @@ namespace GalleryBlog.Controllers
 
         public ActionResult Index()
         {
+            if (TempData["ConfirmReminder"] != null)
+            {
+                TempData.Remove("ConfirmReminder");
+                ViewBag.ConfirmReminder = 1;
+            }
             return View();
         }
         public ActionResult Gallery()

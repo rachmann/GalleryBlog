@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using GalleryBlog;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -18,8 +23,41 @@ namespace GalleryBlog
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var svc = new EmailService();
+            return Task.Factory.StartNew(() => sendMail(message));
+        }
+        
+        void sendMail(IdentityMessage message)
+        {
+            if (string.IsNullOrWhiteSpace(message.Subject))
+            {
+                message.Subject = ConfigurationManager.AppSettings["EmailRecoverySubject"];
+            }
+
+            #region formatter
+            
+            #endregion
+
+            // send email here
+
+            var msg = new MailMessage
+            {
+                IsBodyHtml = true, 
+                BodyEncoding = Encoding.UTF8, 
+                From = new MailAddress(ConfigurationManager.AppSettings["SystemEmailFrom"], ConfigurationManager.AppSettings["SystemEmailFromDisplayName"]),
+                Body= message.Body,
+                Subject = message.Subject
+            };
+            msg.To.Add(new MailAddress(message.Destination));
+            msg.CC.Add(ConfigurationManager.AppSettings["AdminEmailCC"]);
+            
+            var smtpClient = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["SystemEmailFrom"], ConfigurationManager.AppSettings["SystemEmailPassword"]),
+                EnableSsl = true
+            };
+
+            smtpClient.Send(msg);
         }
     }
 
@@ -38,6 +76,7 @@ namespace GalleryBlog
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
+            EmailService = new GalleryBlog.EmailService();
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
@@ -86,6 +125,8 @@ namespace GalleryBlog
             }
             return manager;
         }
+
+       
     }
 
     // Configure the application sign-in manager which is used in this application.
