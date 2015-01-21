@@ -18,7 +18,6 @@
 
     @RenderSection("scripts", required: false)
 
-
 </head>
 <body>
     <div class="container body-content">
@@ -55,6 +54,8 @@
                                 <li class="@Html.IsSelected(action: "Gallery")">@Html.ActionLink("Gallery", "Gallery", "Home")</li>
                                 <li class="@Html.IsSelected(action: "Blog")">@Html.ActionLink("Blog", "Blog", "Home")</li>
                                 <li class="@Html.IsSelected(action: "Contact")">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                <li class="@Html.IsSelected(action: "Maintenance")">@Html.ActionLink("Maintenance", "Index", "Maintenance").If(User.IsInRole("Administrators"))</li>
+                                <li class="@Html.IsSelected(action: "Login")">@Html.Partial("_LoginPartialNoList")</li>
                             </ul>
                         </div><!--/.nav-collapse -->
                         <div class="social">

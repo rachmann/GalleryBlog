@@ -8,6 +8,11 @@ namespace GalleryBlog.Extensions
 {
     public static class NavHelper
     {
+        public static MvcHtmlString If(this MvcHtmlString value, bool evaluation)
+        {
+            return evaluation ? value : MvcHtmlString.Empty;
+        }
+
         public static string IsSelected(this HtmlHelper html, string controller = null, string action = null)
         {
             var cssClass = "active";

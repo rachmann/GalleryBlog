@@ -18,7 +18,7 @@ namespace GalleryBlog.Controllers
             try
             {
                 // send email here
-        
+
                 var mailMsg = new SendMailMessage()
                 {
                     From = ConfigurationManager.AppSettings["SystemEmailFrom"],
@@ -29,7 +29,7 @@ namespace GalleryBlog.Controllers
                     Subject = ConfigurationManager.AppSettings["EmailContactPageSubject"],
 
 
-                    Body = string.Format("<br /><br />A person named <b>{0}</b> with email {1} has sent a message from the contact page:<br /><br /><br />{2}", messageName, messageEmail, messageBody)
+                    BodyHtml = string.Format("<br /><br />A person named <b>{0}</b> with email {1} has sent a message from the contact page:<br /><br /><br />{2}", messageName, messageEmail, messageBody)
                 };
                 var result = Index(mailMsg);
                 return result.Model != null;
@@ -55,7 +55,7 @@ namespace GalleryBlog.Controllers
                     To = toEmail,
                     Subject = ConfigurationManager.AppSettings["EmailRecoverySubject"],
 
-                    Body = "<br /><br />Recovery for your Country Yarns Account:<br /><br />Please click <a href='" + recoveryUrlHost + "/Account/RecoverAccount/?message=2&m=" + RecoveryHash + "' >here</a> to continue recovering your account.<br /><br />"
+                    BodyHtml = "<br /><br />Recovery for your Country Yarns Account:<br /><br />Please click <a href='" + recoveryUrlHost + "/Account/RecoverAccount/?message=2&m=" + RecoveryHash + "' >here</a> to continue recovering your account.<br /><br />"
                 };
                 var result = Index(mailMsg);
                 return result.Model != null;
@@ -84,7 +84,7 @@ namespace GalleryBlog.Controllers
                     Subject = ConfigurationManager.AppSettings["EmailOrderAddedSubject"],
 
 
-                    Body = string.Format("<br /><br />The user {0} has submitted an order for {1:C}<br /><br />You can view it <a href='{2}'>with this link</a>.", orderUser, orderTotal, serverPath)
+                    BodyHtml = string.Format("<br /><br />The user {0} has submitted an order for {1:C}<br /><br />You can view it <a href='{2}'>with this link</a>.", orderUser, orderTotal, serverPath)
                 };
                 var result = Index(mailMsg);
                 return result.Model != null;
@@ -113,7 +113,7 @@ namespace GalleryBlog.Controllers
                     Subject = ConfigurationManager.AppSettings["EmailOrderPreppedSubject"],
 
 
-                    Body = string.Format("<br /><br />The user {0} has prepared their order and it's ready for shipping calculation.<br /><br />You can view it <a href='{2}'>with this link</a>.", orderUser, orderTotal, serverPath)
+                    BodyHtml = string.Format("<br /><br />The user {0} has prepared their order and it's ready for shipping calculation.<br /><br />You can view it <a href='{2}'>with this link</a>.", orderUser, orderTotal, serverPath)
                 };
                 var result = Index(mailMsg);
                 return result.Model != null;
@@ -141,7 +141,7 @@ namespace GalleryBlog.Controllers
                     Cc = ccEmail,
                     Subject = ConfigurationManager.AppSettings["EmailOrderUpdatedSubject"],
 
-                    Body = string.Format("<br /><br />The user {0} has updated their order. You may see a few of these emails, for the same customer and order, if they save the order more than once.<br /><br />You can view it <a href='{2}'>with this link</a>.", orderUser, orderTotal, serverPath)
+                    BodyHtml = string.Format("<br /><br />The user {0} has updated their order. You may see a few of these emails, for the same customer and order, if they save the order more than once.<br /><br />You can view it <a href='{2}'>with this link</a>.", orderUser, orderTotal, serverPath)
                 };
                 var result = Index(mailMsg);
                 return result.Model != null;
@@ -167,7 +167,7 @@ namespace GalleryBlog.Controllers
                     To = toEmail,
                     Subject = ConfigurationManager.AppSettings["EmailUpdatedOrderSubject"],
 
-                    Body = string.Format("<br />Hello {0}!<br /><br />Your order has been updated. If you have any questions, please call Country Yarns.<br /><br />You can view your order  <a href='{1}'>with this link</a>.<br /><br /><br />Thank you!<br /><br />Jeanne<br />Country Yarns<br />519-882-8740", orderUser, serverPath)
+                    BodyHtml = string.Format("<br />Hello {0}!<br /><br />Your order has been updated. If you have any questions, please call Country Yarns.<br /><br />You can view your order  <a href='{1}'>with this link</a>.<br /><br /><br />Thank you!<br /><br />Jeanne<br />Country Yarns<br />519-882-8740", orderUser, serverPath)
                 };
                 var result = Index(mailMsg);
                 return result.Model != null;
@@ -193,7 +193,7 @@ namespace GalleryBlog.Controllers
                     To = toEmail,
                     Subject = ConfigurationManager.AppSettings["EmailReadyForPaymentSubject"],
 
-                    Body = string.Format("<br />Hello {0}!<br /><br />Your order has been shipped! If you have any questions, please call Country Yarns.<br /><br />You can view your order  <a href='{1}'>with this link</a>.<br /><br /><br />Thank you!<br /><br />Jeanne<br />Country Yarns<br />519-882-8740", orderUser, serverPath)
+                    BodyHtml = string.Format("<br />Hello {0}!<br /><br />Your order has been shipped! If you have any questions, please call Country Yarns.<br /><br />You can view your order  <a href='{1}'>with this link</a>.<br /><br /><br />Thank you!<br /><br />Jeanne<br />Country Yarns<br />519-882-8740", orderUser, serverPath)
                 };
                 var result = Index(mailMsg);
                 return result.Model != null;
@@ -219,7 +219,7 @@ namespace GalleryBlog.Controllers
                     To = toEmail,
                     Subject = ConfigurationManager.AppSettings["EmailReadyForPaymentSubject"],
 
-                    Body = string.Format("<br />Hello {0}!<br /><br />Your order is now ready for payment.<br /><br />You can view it, and arrange for payment, <a href='{1}'>with this link</a>.<br /><br /><br />Thank you!<br /><br />Jeanne<br />Country Yarns", orderUser, serverPath)
+                    BodyHtml = string.Format("<br />Hello {0}!<br /><br />Your order is now ready for payment.<br /><br />You can view it, and arrange for payment, <a href='{1}'>with this link</a>.<br /><br /><br />Thank you!<br /><br />Jeanne<br />Country Yarns", orderUser, serverPath)
                 };
                 var result = Index(mailMsg);
                 return result.Model != null;
@@ -245,7 +245,7 @@ namespace GalleryBlog.Controllers
                     To = toEmail,
                     Subject = ConfigurationManager.AppSettings["EmailCustomerJustPaid"],
 
-                    Body = string.Format("<br />Customer : {0}<br /><br />The order was paid.<br /><br />You can view it, and arrange for shipping, <a href='{1}'>with this link</a>.<br /><br /><br /><br />Craft Store System<br />Country Yarns", orderUser, serverPath)
+                    BodyHtml = string.Format("<br />Customer : {0}<br /><br />The order was paid.<br /><br />You can view it, and arrange for shipping, <a href='{1}'>with this link</a>.<br /><br /><br /><br />Craft Store System<br />Country Yarns", orderUser, serverPath)
                 };
                 var result = Index(mailMsg);
                 return result.Model != null;
@@ -256,6 +256,53 @@ namespace GalleryBlog.Controllers
             }
         }
 
+
+        //public bool SendCustomerCustoemrRegistrationEmail(string To, String CCemaile)
+        //{
+        //    try
+        //    {
+        //        if (string.IsNullOrWhiteSpace(message.From.Address))
+        //        {
+        //            message.From = new .Address = ConfigurationManager.AppSettings["SystemEmailFrom"];
+        //        }
+        //        if (string.IsNullOrWhiteSpace(message.Sender.DisplayName))
+        //        {
+        //            message.Sender.DisplayName = ConfigurationManager.AppSettings["SystemEmailFromDisplayName"];
+        //        }
+        //        if (string.IsNullOrWhiteSpace(message.Subject))
+        //        {
+        //            message.Subject = ConfigurationManager.AppSettings["EmailRecoverySubject"];
+        //        }
+
+
+        //        var mailMsg = new SendMailMessage()
+        //        {
+
+        //            From = message.From,
+        //            FromDisplayName = message.Sender.DisplayName,
+        //            FromPassword = ConfigurationManager.AppSettings["SystemEmailPassword"],
+        //            To = toEmail,
+        //            Subject = message.Subject,
+        //        };
+
+        //        #region formatter
+        //        string text = string.Format("Please click on this link to {0}: {1}", mailMsg.Subject, mailMsg.Body);
+        //        string html = "Please confirm your account by clicking this link: <a href=\"" + mailMsg.Body + "\">link</a><br/>";
+
+        //        html += HttpUtility.HtmlEncode(@"Or click on the copy the following link on the browser:" + mailMsg.Body);
+        //        #endregion
+        //        mailMsg.BodyHtml = html;
+        //        mailMsg.BodyText = text;
+        //        // send email here
+
+        //        var result = Index(mailMsg);
+        //        return result.Model != null;
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //}
         [HttpPost]
         public ViewResult Index(SendMailMessage objModelMail)
         {
@@ -265,7 +312,7 @@ namespace GalleryBlog.Controllers
                 mail.To.Add(objModelMail.To);
                 mail.From = new MailAddress(objModelMail.From, objModelMail.FromDisplayName);
                 mail.Subject = objModelMail.Subject;
-                mail.Body = objModelMail.Body; ;
+                mail.Body = objModelMail.BodyHtml; ;
                 mail.IsBodyHtml = true;
                 mail.BodyEncoding = System.Text.Encoding.UTF8;
                 mail.Priority = MailPriority.Normal;

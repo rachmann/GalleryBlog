@@ -133,13 +133,11 @@ namespace GalleryBlog.Controllers
         {
             var model = GetArtistArtwork(id);
             return Json(model, JsonRequestBehavior.AllowGet);
-
         }
 
         public ActionResult AddArtWork(int id = 0)
         {
             var model = GetArtistArtwork(id);
-
 
             var newArt = new Artwork
             {
