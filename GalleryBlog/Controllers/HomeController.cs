@@ -159,7 +159,7 @@ namespace GalleryBlog.Controllers
 
         private List<ArtistListItem> GetArtistList()
         {
-            int i=0;
+            //int i=0;
             var items = db.Artists.ToList()
                 .Select(a => new ArtistListItem
                 {

@@ -7,6 +7,13 @@ namespace GalleryBlog.Models
 {
     public class IndexViewModel
     {
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }

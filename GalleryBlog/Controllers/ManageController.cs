@@ -64,8 +64,12 @@ namespace GalleryBlog.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = UserManager.FindById(userId);
             var model = new IndexViewModel
             {
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
@@ -73,6 +77,22 @@ namespace GalleryBlog.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "FirstName,LastName")] IndexViewModel userupdated)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.Identity.GetUserId();
+                var user = UserManager.FindById(userId);
+                user.FirstName = userupdated.FirstName;
+                user.LastName = userupdated.LastName;
+                UserManager.Update(user);
+
+                return RedirectToAction("Index");
+            }
+            return View(userupdated);
         }
 
         //

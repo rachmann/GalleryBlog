@@ -6,10 +6,42 @@
     <h2>@ViewBag.Title.</h2>
 
     <p class="text-success">@ViewBag.StatusMessage</p>
-    <div>
+    
         <h4>Change your account settings</h4>
         <hr />
+    @using (Html.BeginForm("Index", "Manage", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        
         <dl class="dl-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            
+
+            <dt>
+                @Html.LabelFor(model => model.UserName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+                
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.FirstName)
+            </dt>
+            <dd>
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.LastName)
+            </dt>
+            <dd>
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </dd>
+
             <dt>Password:</dt>
             <dd>
                 [
@@ -53,33 +85,38 @@
                     ]
                 </dd>
             *@
-            <dt>Two-Factor Authentication:</dt>
-            <dd>
-                <p>
-                    There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                    for details on setting up this ASP.NET application to support two-factor authentication.
-                </p>
-                @*@if (Model.TwoFactor)
-                    {
-                        using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @*
+                <dt>Two-Factor Authentication:</dt>
+                <dd>
+                    <p>
+                        There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                        for details on setting up this ASP.NET application to support two-factor authentication.
+                    </p>
+                    @if (Model.TwoFactor)
                         {
-                            @Html.AntiForgeryToken()
-                            <text>Enabled
-                            <input type="submit" value="Disable" class="btn btn-link" />
-                            </text>
+                            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <text>Enabled
+                                <input type="submit" value="Disable" class="btn btn-link" />
+                                </text>
+                            }
                         }
-                    }
-                    else
-                    {
-                        using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        else
                         {
-                            @Html.AntiForgeryToken()
-                            <text>Disabled
-                            <input type="submit" value="Enable" class="btn btn-link" />
-                            </text>
+                            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <text>Disabled
+                                <input type="submit" value="Enable" class="btn btn-link" />
+                                </text>
+                            }
                         }
-                    }*@
-            </dd>
+                </dd>
+            *@
+            <dt></dt>
+            <dd><input type="submit" value="Save" class="btn btn-default btn-sm" /></dd>
         </dl>
-    </div>
+        
+    }
 </div>

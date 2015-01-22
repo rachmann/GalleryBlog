@@ -277,6 +277,7 @@
     <Content Include="Content\Images\elements\Robert Shuttleworth_Pee Wee_Mixed media sculpture_48x90_.jpg" />
     <Content Include="Content\Images\elements\Tommy Vohs_Rocket Launch_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
     <Content Include="Content\Images\elements\Tommy Vohs_The Window Shopper_iPhone-graphic image on aluminum dibond_40x40_.JPG" />
+    <Content Include="Content\Images\profile\achmann%40outlook.com.jpg" />
     <Content Include="Content\Images\thumb\Andrea Rinaldo_White Neon Blush_mixed media on canvas_48x60_.jpg" />
     <Content Include="Content\Images\thumb\Chris Albert_AGO_Photograph on panel with resin overlay_33x33_.jpg" />
     <Content Include="Content\Images\thumb\Chris Albert_Jilly%27s_Photograph on panel with resin overlay_33x33_.jpg" />
@@ -442,7 +443,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>65113</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50020/</IISUrl>
+          <IISUrl>http://localhost:51234/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
