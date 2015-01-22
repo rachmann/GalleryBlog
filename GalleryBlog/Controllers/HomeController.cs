@@ -27,7 +27,7 @@ namespace GalleryBlog.Controllers
         {
             ViewBag.Message = "The Gallery View.";
             ViewBag.Title = "Gallery View";
-            var model = GetArtFromDirList();
+            var model = GetArtFromDb();
 
             return View(model);
         }
@@ -59,7 +59,7 @@ namespace GalleryBlog.Controllers
 
             ViewBag.Message = "Your item of work page.";
 
-            var model = GetArtFromDirList(id);
+            var model = GetArtFromDb(id);
 
             return View(model);
         }
@@ -101,12 +101,66 @@ namespace GalleryBlog.Controllers
 
             sender.SendAdminContactPageEmail(messageName, messageEmail, messageBody, ConfigurationManager.AppSettings["AdminEmailCC"], Request.Url.Scheme, Request.Url.Authority);
 
-            return RedirectToActionPermanent("Index","Home"); 
+            return RedirectToActionPermanent("Index", "Home");
+        }
+
+        private List<Models.Artwork> GetArtFromDb(int idx = 0)
+        {
+            var oneway = false;
+            List<Models.Artwork> artworks;
+            if (oneway)
+            {
+                artworks =
+                    db.Artists.Where(a => a.Active && a.ShowOnGallery)
+                        .ToList()
+                        .SelectMany(artist => artist.ArtWorks.Where(artwork => artwork.Active),
+                            (artist, artwork) => new Artwork
+                            {
+                                Name = artist.Name,
+                                ArtistId = artwork.ArtistId,
+                                Active = artwork.Active,
+                                CreatedDate = artwork.CreatedDate,
+                                Id = artwork.Id,
+                                ImageAlt = artwork.ImageAlt,
+                                ImageDescription = artwork.ImageDescription,
+                                ImageName = artwork.ImageName,
+                                ImageTitle = artwork.ImageTitle,
+                                Media = artwork.Media,
+                                Price = artwork.Price,
+                                Size = artwork.Size,
+                                Sold = artwork.Sold
+                            }).ToList();
+            }
+            else
+            {
+
+                artworks =
+                    db.Artists.Where(a => a.Active && a.ShowOnGallery)
+                        .SelectMany(artist => artist.ArtWorks.Where(aw=> (idx == 0 || aw.Id == idx))).ToList()
+                        .Select(w => new Artwork()
+                        {
+                            Name = w.Artist.Name,
+                            ArtistId = w.ArtistId,
+                            Active = w.Active,
+                            CreatedDate = w.CreatedDate,
+                            Id = w.Id,
+                            ImageAlt = w.ImageAlt,
+                            ImageDescription = w.ImageDescription,
+                            ImageName = w.ImageName,
+                            ImageTitle = w.ImageTitle,
+                            Media = w.Media,
+                            Price = w.Price,
+                            Size = w.Size,
+                            Sold = w.Sold
+                        }).ToList();
+            }
+            return artworks;
         }
 
         private List<Models.Artwork> GetArtFromDirList(int idx = 0)
         {
-            var gvm = new List<Models.Artwork>();
+
+            var gvm = new List<Artwork>();
             var sDir = Server.MapPath(Url.Content("~/Content/Images/art/"));
             var files = Directory.GetFiles(sDir);
             if (idx > 0 && idx > files.Count())
@@ -116,15 +170,17 @@ namespace GalleryBlog.Controllers
 
             try
             {
-                var id = 1;
+                var id = 59;
                 foreach (var f in files)
                 {
-                    
+
                     var fn = f.Substring(f.LastIndexOf('\\') + 1);
                     var parts = fn.Split('_');
 
-                   // var artistRec = db.Artists.ToList().FirstOrDefault(a => a.Name == parts[0]);
-             
+                    var artistRec = db.Artists.ToList().FirstOrDefault(a => a.Name == parts[0]);
+                    if (artistRec != null)
+                        id = artistRec.Id;
+
                     var artist = "By " + parts[0] + ".";
                     var name = parts[1];
                     var desc = parts[2];
@@ -153,6 +209,7 @@ namespace GalleryBlog.Controllers
             {
                 Console.WriteLine(excpt.Message);
             }
+
             return gvm;
         }
 
@@ -160,7 +217,7 @@ namespace GalleryBlog.Controllers
         private List<ArtistListItem> GetArtistList()
         {
             //int i=0;
-            var items = db.Artists.ToList()
+            var items = db.Artists.Where(a => a.Active && a.ShowOnArtists)
                 .Select(a => new ArtistListItem
                 {
                     ArtistName = a.Name,
@@ -170,8 +227,8 @@ namespace GalleryBlog.Controllers
                     Number = a.Number,
                     Art = a.ArtWorks.FirstOrDefault()
                 }).ToList();
-    
-        return items;
+
+            return items;
             //var list = new List<ArtistListItem>
             //{
             //    new ArtistListItem

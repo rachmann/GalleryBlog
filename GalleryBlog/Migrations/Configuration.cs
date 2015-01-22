@@ -21,49 +21,32 @@ namespace GalleryBlog.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            var aw = GetArtFromDirList(0);
-            foreach (var item in aw)
-            {
-                var aName = item.Name;
-                var artist = context.Artists.ToList().FirstOrDefault(a=>a.Name == aName);
-                var aId = (artist == null) ? 1 : artist.Id;
-                context.Artworks.AddOrUpdate(
-                  p => p.Name,
-                  new Models.Artwork
-                  {
-                      Name = item.ImageTitle,
-                      ArtistId = aId,
-                      Media = item.Media,
-                      Size = item.Size,
-                      ImageName = item.ImageName,
-                      ImageAlt = item.ImageAlt,
-                      ImageTitle = item.ImageTitle,
-                      ImageDescription = item.ImageDescription,
-                      CreatedDate = new DateTime(2000, 1, 1),
-                      Price = item.Price,
-                      Active = item.Active,
-                      Sold = new DateTime(1800, 1, 1)
-                  }
+            //var aw = GetArtFromDirList(0);
+            //foreach (var item in aw)
+            //{
+            //    var aName = item.Name;
+            //    var artist = context.Artists.ToList().FirstOrDefault(a=>a.Name == aName);
+            //    var aId = (artist == null) ? 59 : artist.Id;
+            //    context.Artworks.AddOrUpdate(
+            //      p => p.Name,
+            //      new Models.Artwork
+            //      {
+            //          Name = item.ImageTitle,
+            //          ArtistId = aId,
+            //          Media = item.Media,
+            //          Size = item.Size,
+            //          ImageName = item.ImageName,
+            //          ImageAlt = item.ImageAlt,
+            //          ImageTitle = item.ImageTitle,
+            //          ImageDescription = item.ImageDescription,
+            //          CreatedDate = new DateTime(2000, 1, 1),
+            //          Price = item.Price,
+            //          Active = item.Active,
+            //          Sold = new DateTime(1800, 1, 1)
+            //      }
 
-                );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
+            //    );
+            //}
         }
 
         private List<Models.Artwork> GetArtFromDirList(int idx = 0)
