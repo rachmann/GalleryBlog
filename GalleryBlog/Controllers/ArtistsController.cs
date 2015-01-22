@@ -10,6 +10,7 @@ using GalleryBlog.Models;
 
 namespace GalleryBlog.Controllers
 {
+    [Authorize (Roles="Administrator")]
     public class ArtistsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

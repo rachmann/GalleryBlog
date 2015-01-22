@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -41,5 +43,7 @@ namespace GalleryBlog.Models
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostCategory> PostCategories { get; set; }
         public DbSet<PostTag> PostTags { get; set; }
+
+
     }
 }

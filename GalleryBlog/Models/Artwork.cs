@@ -10,10 +10,11 @@ namespace GalleryBlog.Models
     {
         public int Id { get; set; }
         [Display(Name = "Artist")]
-        public int          ArtistId            { get; set; }
-        public String       Name                { get; set; }
-        public String       Media               { get; set; }
-        public String       Size                { get; set; }
+        public int ArtistId { get; set; }
+        public virtual Artist Artist { get; set; }
+        public String Name { get; set; }
+        public String Media { get; set; }
+        public String Size { get; set; }
         [Display(Name = "Image Filename")]
         public String ImageName { get; set; }
         [Display(Name = "Not Visible")]
@@ -24,8 +25,8 @@ namespace GalleryBlog.Models
         public string ImageDescription { get; set; }
         [Display(Name = "Created")]
         public DateTime CreatedDate { get; set; }
-        public double       Price               { get; set; }
-        public bool         Active              { get; set; }
-        public DateTime     Sold                { get; set; }
+        public double Price { get; set; }
+        public bool Active { get; set; }
+        public DateTime Sold { get; set; }
     }
 }
