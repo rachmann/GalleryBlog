@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,40 @@ namespace GalleryBlog.Models
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
-        #region Post Tag Logic
+        public DbSet<Artist> Artists
+        {
+            get { return _db.Artists; }
+        }
+        public DbSet<Artwork> Artworks
+        {
+            get { return _db.Artworks; }
+        }
+        public DbSet<CartItem> CartItems
+        {
+            get { return _db.CartItems; }
+        }
+        public DbSet<Category> Categories
+        {
+            get { return _db.Categories; }
+        }
+        public DbSet<Item> Items
+        {
+            get { return _db.Items; }
+        }
+        public DbSet<Post> Posts
+        {
+            get { return _db.Posts; }
+        }
+        public DbSet<PostCategory> PostCategories
+        {
+            get { return _db.PostCategories; }
+        }
+        public DbSet<PostTag> PostTags
+        {
+            get { return _db.PostTags; }
+        }
+
+        #region Post and Tag Logic
 
         /// <summary>
         /// Return collection of posts based on pagination parameters.
@@ -18,14 +52,14 @@ namespace GalleryBlog.Models
         /// <param name="pageNo">Page index</param>
         /// <param name="pageSize">Page size</param>
         /// <returns></returns>
-        public IList<Post> GetPosts(int pageNo, int pageSize)
+        public List<Post> GetPosts(int pageNo, int pageSize)
         {
 
             var posts = _db.Posts.Where(p => p.Published.HasValue)
                                   .OrderByDescending(p => p.PostedOn)
                                   .Skip(pageNo * pageSize)
                                   .Take(pageSize).ToList();
-
+            return posts;
         }
 
         /// <summary>
@@ -35,7 +69,7 @@ namespace GalleryBlog.Models
         /// <param name="pageNo">Page index</param>
         /// <param name="pageSize">Page size</param>
         /// <returns></returns>
-        public IList<Post> GetPostsForTag(string tagSlug, int pageNo, int pageSize)
+        public List<Post> GetPostsForTag(string tagSlug, int pageNo, int pageSize)
         {
             var posts = _db.Posts
                             .Where(p => p.Published.HasValue && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
@@ -43,20 +77,20 @@ namespace GalleryBlog.Models
                             .Skip(pageNo * pageSize)
                             .Take(pageSize)
                             .ToList();
-
+            return posts;
         }
 
         /// <summary>
-        /// Return collection of posts belongs to a particular category.
+        /// Return collection of posts belongs to a particular PostCategory.
         /// </summary>
-        /// <param name="categorySlug">Category's url slug</param>
+        /// <param name="categorySlug">PostCategory's url slug</param>
         /// <param name="pageNo">Page index</param>
         /// <param name="pageSize">Page size</param>
         /// <returns></returns>
-        public IList<Post> GetPostsForCategory(string categorySlug, int pageNo, int pageSize)
+        public List<Post> GetPostsForCategory(string categorySlug, int pageNo, int pageSize)
         {
             var posts = _db.Posts
-                            .Where(p => p.Published.HasValue && p.Categories.Select(c=>c.UrlSlug).Contains(categorySlug))
+                            .Where(p => p.Published.HasValue && p.Categories.Select(c => c.UrlSlug).Contains(categorySlug))
                             .OrderByDescending(p => p.PostedOn)
                             .Skip(pageNo * pageSize)
                             .Take(pageSize)
@@ -72,10 +106,10 @@ namespace GalleryBlog.Models
         /// <param name="pageNo">Page index</param>
         /// <param name="pageSize">Page size</param>
         /// <returns></returns>
-        public IList<Post> GetPostsForSearch(string search, int pageNo, int pageSize)
+        public List<Post> GetPostsForSearch(string search, int pageNo, int pageSize)
         {
             var posts = _db.Posts
-                .Where(p => p.Published.HasValue && (  p.Title.Contains(search) || p.Categories.Select(c => c.Name).Contains(search) || p.Tags.Select(c => c.Name).Contains(search)))
+                .Where(p => p.Published.HasValue && (p.Title.Contains(search) || p.Categories.Select(c => c.Name).Contains(search) || p.Tags.Select(c => c.Name).Contains(search)))
                 .OrderByDescending(p => p.PostedOn)
                 .Skip(pageNo * pageSize)
                 .Take(pageSize)
@@ -97,7 +131,7 @@ namespace GalleryBlog.Models
         /// <summary>
         /// Return total no. of posts belongs to a particular category.
         /// </summary>
-        /// <param name="categorySlug">Category's url slug</param>
+        /// <param name="categorySlug">PostCategory's url slug</param>
         /// <returns></returns>
         public int TotalPostsForCategory(string categorySlug)
         {
@@ -111,9 +145,9 @@ namespace GalleryBlog.Models
         /// <returns></returns>
         public int TotalPostsForTag(string tagSlug)
         {
-            return _session.Query<Post>()
-                           .Where(p => p.Published && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
-                           .Count();
+            return _db.Posts
+                      .Where(p => p.Published.HasValue && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
+                      .Count();
         }
 
         /// <summary>
@@ -123,9 +157,9 @@ namespace GalleryBlog.Models
         /// <returns></returns>
         public int TotalPostsForSearch(string search)
         {
-            return _session.Query<Post>()
-                           .Where(p => p.Published && (p.Title.Contains(search) || p.Category.Name.Equals(search) || p.Tags.Any(t => t.Name.Equals(search))))
-                           .Count();
+            return _db.Posts
+                    .Where(p => p.Published.HasValue && (p.Title.Contains(search) || p.Categories.Any(c => c.Name.Equals(search)) || p.Tags.Any(t => t.Name.Equals(search))))
+                    .Count();
         }
 
         /// <summary>
@@ -136,208 +170,118 @@ namespace GalleryBlog.Models
         /// <param name="sortColumn">Sort column name</param>
         /// <param name="sortByAscending">True to sort by ascending</param>
         /// <returns></returns>
-        public IList<Post> GetPosts(int pageNo, int pageSize, string sortColumn, bool sortByAscending)
+        public List<Post> GetPosts(int pageNo, int pageSize, string sortColumn, bool sortByAscending)
         {
-            IList<Post> posts;
-            IList<int> postIds;
+            List<Post> posts;
+            List<int> postIds;
 
             switch (sortColumn)
             {
                 case "Title":
                     if (sortByAscending)
                     {
-                        posts = _session.Query<Post>()
-                                        .OrderBy(p => p.Title)
-                                        .Skip(pageNo * pageSize)
-                                        .Take(pageSize)
-                                        .Fetch(p => p.Category)
-                                        .ToList();
+                        posts = _db.Posts
+                            .OrderBy(p => p.Title)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .ToList();
 
-                        postIds = posts.Select(p => p.Id).ToList();
-
-                        posts = _session.Query<Post>()
-                                         .Where(p => postIds.Contains(p.Id))
-                                         .OrderBy(p => p.Title)
-                                         .FetchMany(p => p.Tags)
-                                         .ToList();
                     }
                     else
                     {
-                        posts = _session.Query<Post>()
-                                        .OrderByDescending(p => p.Title)
-                                        .Skip(pageNo * pageSize)
-                                        .Take(pageSize)
-                                        .Fetch(p => p.Category)
-                                        .ToList();
+                        posts = _db.Posts
+                            .OrderByDescending(p => p.Title)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .ToList();
 
-                        postIds = posts.Select(p => p.Id).ToList();
-
-                        posts = _session.Query<Post>()
-                                         .Where(p => postIds.Contains(p.Id))
-                                         .OrderByDescending(p => p.Title)
-                                         .FetchMany(p => p.Tags)
-                                         .ToList();
                     }
                     break;
                 case "Published":
                     if (sortByAscending)
                     {
-                        posts = _session.Query<Post>()
-                                        .OrderBy(p => p.Published)
-                                        .Skip(pageNo * pageSize)
-                                        .Take(pageSize)
-                                        .Fetch(p => p.Category)
-                                        .ToList();
+                        posts = _db.Posts
+                            .OrderBy(p => p.Published)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .ToList();
 
-                        postIds = posts.Select(p => p.Id).ToList();
-
-                        posts = _session.Query<Post>()
-                                         .Where(p => postIds.Contains(p.Id))
-                                         .OrderBy(p => p.Published)
-                                         .FetchMany(p => p.Tags)
-                                         .ToList();
                     }
                     else
                     {
-                        posts = _session.Query<Post>()
-                                        .OrderByDescending(p => p.Published)
-                                        .Skip(pageNo * pageSize)
-                                        .Take(pageSize)
-                                        .Fetch(p => p.Category)
-                                        .ToList();
+                        posts = _db.Posts
+                            .OrderByDescending(p => p.Published)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .ToList();
 
-                        postIds = posts.Select(p => p.Id).ToList();
-
-                        posts = _session.Query<Post>()
-                                         .Where(p => postIds.Contains(p.Id))
-                                         .OrderByDescending(p => p.Published)
-                                         .FetchMany(p => p.Tags)
-                                         .ToList();
                     }
                     break;
                 case "PostedOn":
                     if (sortByAscending)
                     {
-                        posts = _session.Query<Post>()
-                                        .OrderBy(p => p.PostedOn)
-                                        .Skip(pageNo * pageSize)
-                                        .Take(pageSize)
-                                        .Fetch(p => p.Category)
-                                        .ToList();
-
-                        postIds = posts.Select(p => p.Id).ToList();
-
-                        posts = _session.Query<Post>()
-                                         .Where(p => postIds.Contains(p.Id))
-                                         .OrderBy(p => p.PostedOn)
-                                         .FetchMany(p => p.Tags)
-                                         .ToList();
+                        posts = _db.Posts
+                            .OrderBy(p => p.PostedOn)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .ToList();
                     }
                     else
                     {
-                        posts = _session.Query<Post>()
-                                        .OrderByDescending(p => p.PostedOn)
-                                        .Skip(pageNo * pageSize)
-                                        .Take(pageSize)
-                                        .Fetch(p => p.Category)
-                                        .ToList();
+                        posts = _db.Posts
+                            .OrderByDescending(p => p.PostedOn)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .ToList();
 
-                        postIds = posts.Select(p => p.Id).ToList();
-
-                        posts = _session.Query<Post>()
-                                        .Where(p => postIds.Contains(p.Id))
-                                        .OrderByDescending(p => p.PostedOn)
-                                        .FetchMany(p => p.Tags)
-                                        .ToList();
                     }
                     break;
                 case "Modified":
                     if (sortByAscending)
                     {
-                        posts = _session.Query<Post>()
-                                        .OrderBy(p => p.Modified)
-                                        .Skip(pageNo * pageSize)
-                                        .Take(pageSize)
-                                        .Fetch(p => p.Category)
-                                        .ToList();
+                        posts = _db.Posts
+                            .OrderBy(p => p.Modified)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .ToList();
 
-                        postIds = posts.Select(p => p.Id).ToList();
-
-                        posts = _session.Query<Post>()
-                                         .Where(p => postIds.Contains(p.Id))
-                                         .OrderBy(p => p.Modified)
-                                         .FetchMany(p => p.Tags)
-                                         .ToList();
                     }
                     else
                     {
-                        posts = _session.Query<Post>()
-                                        .OrderByDescending(p => p.Modified)
-                                        .Skip(pageNo * pageSize)
-                                        .Take(pageSize)
-                                        .Fetch(p => p.Category)
-                                        .ToList();
+                        posts = _db.Posts
+                            .OrderByDescending(p => p.Modified)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .ToList();
 
-                        postIds = posts.Select(p => p.Id).ToList();
-
-                        posts = _session.Query<Post>()
-                                         .Where(p => postIds.Contains(p.Id))
-                                         .OrderByDescending(p => p.Modified)
-                                         .FetchMany(p => p.Tags)
-                                         .ToList();
                     }
                     break;
                 case "Category":
                     if (sortByAscending)
                     {
-                        posts = _session.Query<Post>()
-                                        .OrderBy(p => p.Category.Name)
-                                        .Skip(pageNo * pageSize)
-                                        .Take(pageSize)
-                                        .Fetch(p => p.Category)
-                                        .ToList();
+                        posts = _db.Posts
+                            .OrderBy(p => p.Categories.FirstOrDefault().Name)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .ToList();
 
-                        postIds = posts.Select(p => p.Id).ToList();
-
-                        posts = _session.Query<Post>()
-                                         .Where(p => postIds.Contains(p.Id))
-                                         .OrderBy(p => p.Category.Name)
-                                         .FetchMany(p => p.Tags)
-                                         .ToList();
                     }
                     else
                     {
-                        posts = _session.Query<Post>()
-                                        .OrderByDescending(p => p.Category.Name)
-                                        .Skip(pageNo * pageSize)
-                                        .Take(pageSize)
-                                        .Fetch(p => p.Category)
-                                        .ToList();
-
-                        postIds = posts.Select(p => p.Id).ToList();
-
-                        posts = _session.Query<Post>()
-                                         .Where(p => postIds.Contains(p.Id))
-                                         .OrderByDescending(p => p.Category.Name)
-                                         .FetchMany(p => p.Tags)
-                                         .ToList();
+                        posts = _db.Posts
+                            .OrderByDescending(p => p.Categories.FirstOrDefault().Name)
+                            .Skip(pageNo * pageSize)
+                            .Take(pageSize)
+                            .ToList();
                     }
                     break;
                 default:
-                    posts = _session.Query<Post>()
-                                    .OrderByDescending(p => p.PostedOn)
-                                    .Skip(pageNo * pageSize)
-                                    .Take(pageSize)
-                                    .Fetch(p => p.Category)
-                                    .ToList();
+                    posts = _db.Posts
+                        .OrderByDescending(p => p.PostedOn)
+                        .Skip(pageNo * pageSize)
+                        .Take(pageSize)
+                        .ToList();
 
-                    postIds = posts.Select(p => p.Id).ToList();
-
-                    posts = _session.Query<Post>()
-                                     .Where(p => postIds.Contains(p.Id))
-                                     .OrderByDescending(p => p.PostedOn)
-                                     .FetchMany(p => p.Tags)
-                                     .ToList();
                     break;
             }
 
@@ -353,7 +297,7 @@ namespace GalleryBlog.Models
         /// <returns></returns>
         public Post GetPost(int year, int month, string titleSlug)
         {
-            /*return _session.Query<Post>()
+            /*return _db.Query<Post>()
                            .Where(p => p.PostedOn.Year == year && p.PostedOn.Month == month && p.UrlSlug.Equals(titleSlug))
                            .Fetch(p => p.Category)
                            .FetchMany(p => p.Tags)
@@ -365,13 +309,24 @@ namespace GalleryBlog.Models
         }
 
         /// <summary>
+        /// Return post based on unique id, and the number of records after it for a total of 'count' records.
+        /// </summary>
+        /// <param name="id">Post unique id</param>
+        /// <returns></returns>
+        public List<Post> GetPostsFromId(int id, int count)
+        {
+
+            return _db.Posts.OrderBy(p1 => p1.Id).Where(p2 => p2.Id >= id).Take(10).ToList();
+        }
+
+        /// <summary>
         /// Return post based on unique id.
         /// </summary>
         /// <param name="id">Post unique id</param>
         /// <returns></returns>
-        public Post GetPost(int id)
+        public Post GetPost(int? id)
         {
-            return _session.Get<Post>(id);
+            return _db.Posts.Find(id);
         }
 
         /// <summary>
@@ -381,25 +336,33 @@ namespace GalleryBlog.Models
         /// <returns>Newly added post id</returns>
         public int AddPost(Post post)
         {
-            using (var tran = _session.BeginTransaction())
-            {
-                _session.Save(post);
-                tran.Commit();
-                return post.Id;
-            }
+            _db.Posts.Add(post);
+            _db.SaveChanges();
+            return post.Id;
         }
 
         /// <summary>
         /// Update an existing post.
         /// </summary>
         /// <param name="post"></param>
-        public void EditPost(Post post)
+        public void UpdatePost(Post post)
         {
-            using (var tran = _session.BeginTransaction())
-            {
-                _session.SaveOrUpdate(post);
-                tran.Commit();
-            }
+            Post item = _db.Posts.Find(post.Id);
+            item.Approved = post.Approved;
+            item.Body = post.Body;
+            item.Categories = post.Categories;
+            item.Meta = post.Meta;
+            item.Approved = post.Approved;
+            item.Modified = post.Modified;
+            item.PostedOn = post.PostedOn;
+            item.Published = post.Published;
+            item.Subject = post.Subject;
+            item.Tags = post.Tags;
+            item.Title = post.Title;
+            item.UrlSlug = post.UrlSlug;
+
+            _db.Entry(item).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
         /// <summary>
@@ -408,21 +371,18 @@ namespace GalleryBlog.Models
         /// <param name="id"></param>
         public void DeletePost(int id)
         {
-            using (var tran = _session.BeginTransaction())
-            {
-                var post = _session.Get<Post>(id);
-                if (post != null) _session.Delete(post);
-                tran.Commit();
-            }
+            Post item = _db.Posts.Find(id);
+            _db.Posts.Remove(item);
+            _db.SaveChanges();
         }
 
         /// <summary>
         /// Return all the categories.
         /// </summary>
         /// <returns></returns>
-        public IList<Category> GetCategories()
+        public List<PostCategory> GetCategories()
         {
-            return _session.Query<Category>().OrderBy(p => p.Name).ToList();
+            return _db.PostCategories.OrderBy(p => p.Name).ToList();
         }
 
         /// <summary>
@@ -431,7 +391,7 @@ namespace GalleryBlog.Models
         /// <returns></returns>
         public int TotalCategories()
         {
-            return _session.Query<Category>().Count();
+            return _db.PostCategories.Count();
         }
 
         /// <summary>
@@ -439,9 +399,9 @@ namespace GalleryBlog.Models
         /// </summary>
         /// <param name="categorySlug">Category's url slug</param>
         /// <returns></returns>
-        public Category GetCategory(string categorySlug)
+        public PostCategory GetCategory(string categorySlug)
         {
-            return _session.Query<Category>().FirstOrDefault(t => t.UrlSlug.Equals(categorySlug));
+            return _db.PostCategories.FirstOrDefault(t => t.UrlSlug.Equals(categorySlug));
         }
 
         /// <summary>
@@ -449,9 +409,9 @@ namespace GalleryBlog.Models
         /// </summary>
         /// <param name="id">Category id</param>
         /// <returns></returns>
-        public Category GetCategory(int id)
+        public PostCategory GetCategory(int id)
         {
-            return _session.Query<Category>().FirstOrDefault(t => t.Id == id);
+            return _db.PostCategories.FirstOrDefault(t => t.Id == id);
         }
 
         /// <summary>
@@ -459,27 +419,27 @@ namespace GalleryBlog.Models
         /// </summary>
         /// <param name="category"></param>
         /// <returns></returns>
-        public int AddCategory(Category category)
+        public int AddCategory(PostCategory category)
         {
-            using (var tran = _session.BeginTransaction())
-            {
-                _session.Save(category);
-                tran.Commit();
-                return category.Id;
-            }
+            _db.PostCategories.Add(category);
+            _db.SaveChanges();
+            return category.Id;
         }
 
         /// <summary>
         /// Update an existing category.
         /// </summary>
         /// <param name="category"></param>
-        public void EditCategory(Category category)
+        public void UpdateCategory(PostCategory category)
         {
-            using (var tran = _session.BeginTransaction())
-            {
-                _session.SaveOrUpdate(category);
-                tran.Commit();
-            }
+            PostCategory item = _db.PostCategories.Find(category.Id);
+            item.Description = category.Description;
+            item.Name = category.Name;
+            item.Posts = category.Posts;
+            item.UrlSlug = category.UrlSlug;
+
+            _db.Entry(item).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
         /// <summary>
@@ -488,21 +448,18 @@ namespace GalleryBlog.Models
         /// <param name="id"></param>
         public void DeleteCategory(int id)
         {
-            using (var tran = _session.BeginTransaction())
-            {
-                var category = _session.Get<Category>(id);
-                _session.Delete(category);
-                tran.Commit();
-            }
+            PostCategory item = _db.PostCategories.Find(id);
+            _db.PostCategories.Remove(item);
+            _db.SaveChanges();
         }
 
         /// <summary>
         /// Return all the tags.
         /// </summary>
         /// <returns></returns>
-        public IList<Tag> GetTags()
+        public List<PostTag> GetTags()
         {
-            return _session.Query<Tag>().OrderBy(p => p.Name).ToList();
+            return _db.PostTags.OrderBy(p => p.Name).ToList();
         }
 
         /// <summary>
@@ -511,7 +468,7 @@ namespace GalleryBlog.Models
         /// <returns></returns>
         public int TotalTags()
         {
-            return _session.Query<Tag>().Count();
+            return _db.PostTags.Count();
         }
 
         /// <summary>
@@ -519,9 +476,9 @@ namespace GalleryBlog.Models
         /// </summary>
         /// <param name="tagSlug"></param>
         /// <returns></returns>
-        public Tag GetTag(string tagSlug)
+        public PostTag GetTag(string tagSlug)
         {
-            return _session.Query<Tag>().FirstOrDefault(t => t.UrlSlug.Equals(tagSlug));
+            return _db.PostTags.FirstOrDefault(t => t.UrlSlug.Equals(tagSlug));
         }
 
         /// <summary>
@@ -529,9 +486,9 @@ namespace GalleryBlog.Models
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Tag GetTag(int id)
+        public PostTag GetTag(int id)
         {
-            return _session.Query<Tag>().FirstOrDefault(t => t.Id == id);
+            return _db.PostTags.FirstOrDefault(t => t.Id == id);
         }
 
         /// <summary>
@@ -539,27 +496,27 @@ namespace GalleryBlog.Models
         /// </summary>
         /// <param name="tag"></param>
         /// <returns></returns>
-        public int AddTag(Tag tag)
+        public int AddTag(PostTag tag)
         {
-            using (var tran = _session.BeginTransaction())
-            {
-                _session.Save(tag);
-                tran.Commit();
-                return tag.Id;
-            }
+            _db.PostTags.Add(tag);
+            _db.SaveChanges();
+            return tag.Id;
         }
 
         /// <summary>
-        /// Edit an existing tag.
+        /// Update an existing tag.
         /// </summary>
         /// <param name="tag"></param>
-        public void EditTag(Tag tag)
+        public void UpdateTag(PostTag tag)
         {
-            using (var tran = _session.BeginTransaction())
-            {
-                _session.SaveOrUpdate(tag);
-                tran.Commit();
-            }
+            PostTag item = _db.PostTags.Find(tag.Id);
+            item.Description = tag.Description;
+            item.Name = tag.Name;
+            item.Posts = tag.Posts;
+            item.UrlSlug = tag.UrlSlug;
+
+            _db.Entry(item).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
         /// <summary>
@@ -568,14 +525,12 @@ namespace GalleryBlog.Models
         /// <param name="id"></param>
         public void DeleteTag(int id)
         {
-            using (var tran = _session.BeginTransaction())
-            {
-                var tag = _session.Get<Tag>(id);
-                _session.Delete(tag);
-                tran.Commit();
-            }
+            PostTag item = _db.PostTags.Find(id);
+            _db.PostTags.Remove(item);
+            _db.SaveChanges();
         }
         #endregion
+
 
     }
 }

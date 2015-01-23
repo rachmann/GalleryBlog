@@ -35,14 +35,14 @@ namespace GalleryBlog.Models
         {
             return new ApplicationDbContext();
         }
-        public DbSet<Artist> Artists { get; set; }
-        public DbSet<Artwork> Artworks { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Item> Items { get; set; }
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<PostCategory> PostCategories { get; set; }
-        public DbSet<PostTag> PostTags { get; set; }
+        public DbSet<Artist>        Artists { get; set; }
+        public DbSet<Artwork>       Artworks { get; set; }
+        public DbSet<CartItem>      CartItems { get; set; }
+        public DbSet<Category>      Categories { get; set; }
+        public DbSet<Item>          Items { get; set; }
+        public DbSet<Post>          Posts { get; set; }
+        public DbSet<PostCategory>  PostCategories { get; set; }
+        public DbSet<PostTag>       PostTags { get; set; }
 
 
     }

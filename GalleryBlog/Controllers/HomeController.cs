@@ -23,6 +23,7 @@ namespace GalleryBlog.Controllers
             }
             return View();
         }
+
         public ActionResult Gallery()
         {
             ViewBag.Message = "The Gallery View.";

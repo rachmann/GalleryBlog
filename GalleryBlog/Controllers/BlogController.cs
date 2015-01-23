@@ -12,7 +12,7 @@ namespace GalleryBlog.Controllers
 {
     public class BlogController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private DataAccess db = new DataAccess();
 
         // GET: Blog
         public ActionResult Index()
@@ -27,7 +27,7 @@ namespace GalleryBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = db.GetPost(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -50,8 +50,7 @@ namespace GalleryBlog.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Posts.Add(post);
-                db.SaveChanges();
+                db.AddPost(post);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +64,7 @@ namespace GalleryBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = db.GetPost(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -82,8 +81,7 @@ namespace GalleryBlog.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(post).State = EntityState.Modified;
-                db.SaveChanges();
+                db.UpdatePost(post);
                 return RedirectToAction("Index");
             }
             return View(post);
@@ -96,7 +94,7 @@ namespace GalleryBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+            Post post = db.GetPost(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -109,9 +107,7 @@ namespace GalleryBlog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Post post = db.Posts.Find(id);
-            db.Posts.Remove(post);
-            db.SaveChanges();
+            db.DeletePost(id);
             return RedirectToAction("Index");
         }
 
@@ -124,7 +120,7 @@ namespace GalleryBlog.Controllers
         /// <returns></returns>
         public ViewResult Category(string category, int p = 1)
         {
-            var viewModel = new ListViewModel(_blogRepository, category, "Category", p);
+            var viewModel = new ListViewModel(db, category, "Category", p);
 
             if (viewModel.Category == null)
                 throw new HttpException(404, "Category not found");
@@ -141,7 +137,7 @@ namespace GalleryBlog.Controllers
         /// <returns></returns>
         public ViewResult Tag(string tag, int p = 1)
         {
-            var viewModel = new ListViewModel(_blogRepository, tag, "Tag", p);
+            var viewModel = new ListViewModel(db, tag, "Tag", p);
 
             if (viewModel.Tag == null)
                 throw new HttpException(404, "Tag not found");
@@ -149,9 +145,6 @@ namespace GalleryBlog.Controllers
             ViewBag.Title = String.Format(@"Latest posts tagged on ""{0}""", viewModel.Tag.Name);
             return View("List", viewModel);
         }
-
-        // Public access:
-
 
         /// <summary>
         /// Return a particular post based on the puslished year, month and url slug.
@@ -162,7 +155,7 @@ namespace GalleryBlog.Controllers
         /// <returns></returns>
         public ViewResult Post(int year, int month, string title)
         {
-            var post = GetPost(year, month, title);
+            var post = db.GetPost(year, month, title);
 
             if (post == null)
                 throw new HttpException(404, "Post not found");
@@ -173,13 +166,11 @@ namespace GalleryBlog.Controllers
             return View(post);
         }
 
-
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                //db.Dispose();
             }
             base.Dispose(disposing);
         }
