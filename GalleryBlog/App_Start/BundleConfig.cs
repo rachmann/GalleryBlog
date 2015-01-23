@@ -42,17 +42,34 @@ namespace GalleryBlog
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/froala").Include(
+                "~/Scripts/froala/froala_editor.min.js",
+                "~/Scripts/froala/plugins/tables.min.js",
+                "~/Scripts/froala/plugins/lists.min.js",
+                "~/Scripts/froala/plugins/colors.min.js",
+                "~/Scripts/froala/plugins/media_manager.min.js",
+                "~/Scripts/froala/plugins/font_family.min.js",
+                "~/Scripts/froala/plugins/font_size.min.js",
+                "~/Scripts/froala/plugins/file_upload.min.js",
+                "~/Scripts/froala/plugins/block_styles.min.js",
+                "~/Scripts/froala/plugins/video.min.js"
+            ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/kendo/kendo.common-bootstrap.min.css",
                       "~/Content/kendo/kendo.bootstrap.min.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/fontawesome").Include(
+            bundles.Add(new StyleBundle("~/Content/css_fontawesome").Include(
                       "~/Content/font-awesome.css"));
 
             bundles.Add(new StyleBundle("~/Content/css_artists").Include(
                       "~/Content/artists/artists.css"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/css_froala").Include(
+                      "~/Content/froala/froala_editor.min.css"
                       ));
 
         }
