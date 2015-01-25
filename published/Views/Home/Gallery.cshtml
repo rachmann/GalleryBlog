@@ -1,0 +1,28 @@
+﻿@using GalleryBlog.Extensions
+@model  List<GalleryBlog.Models.Artwork>
+@{
+    Html.RegisterStyles("~/Content/gallery/imagewall.css");
+    Html.Register("~/bundles/gallery");
+}
+<div class="col-sm-10">
+    <div class="iw_wrapper">
+        <ul class="iw_thumbs" id="iw_thumbs">
+            @{
+                foreach (var item in Model)
+                {
+                    var pathfull = @Url.Content("~/Content/Images/art/" + @item.ImageName);
+                    var paththumb = @Url.Content("~/Content/Images/thumb/" + @item.ImageName);
+                    <li><img src="@paththumb" data-img="@pathfull" alt="@item.ImageAlt" /><div><a href="@Url.Action("Work", "Home", new {id = @item.Id})"><h3>@item.ImageTitle</h3></a><p>@item.ImageDescription</p></div></li>
+                }
+            }
+        </ul>
+    </div>
+    <div id="iw_ribbon" class="iw_ribbon">
+        <span class="iw_close"></span>
+        <span class="iw_zoom">Click thumb to zoom</span>
+    </div>
+</div>
+@section scripts
+{
+ 
+}

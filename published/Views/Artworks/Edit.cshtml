@@ -1,0 +1,169 @@
+﻿@model GalleryBlog.Models.ArtworkViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="col-sm-10">
+    <h2>Edit</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div style="width: 50%; float: left;">
+            <div class="form-horizontal">
+                <h4>Artwork</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Active)
+                            @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ArtistId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.ArtistId, Model.Artists, new { @class = "btn-sm" })
+                        @Html.ValidationMessageFor(model => model.ArtistId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", style = "width: 100%;" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Media, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Media, new { @class = "form-control", style = "width: 100%;" })
+                        @Html.ValidationMessageFor(model => model.Media, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Size, new { @class = "form-control", style = "width: 100%;" })
+                        @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    @Html.LabelFor(model => model.ImageName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ImageName, "Image", new { htmlAttributes = new { @class = "form-control", style = "width: 100%;" } })
+                        @Html.ValidationMessageFor(model => model.ImageName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImageAlt, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ImageAlt, new { @class = "form-control", style = "width: 100%;" })
+                        @Html.ValidationMessageFor(model => model.ImageAlt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImageTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ImageTitle, new { @class = "form-control", style = "width: 100%;" })
+                        @Html.ValidationMessageFor(model => model.ImageTitle, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImageDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.ImageDescription, new { @class = "form-control", style = "width: 100%;" })
+                        @Html.ValidationMessageFor(model => model.ImageDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CreatedDate, "Date", new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", style = "width: 100%;" })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Sold, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Sold, "Date", new { htmlAttributes = new { @class = "form-control", } })
+                        @Html.ValidationMessageFor(model => model.Sold, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default btn-sm" />
+                        @Html.ActionLink("Back to Artist", "Edit", "Artists", new { id = Model.ArtistId }, new { @class = "btn btn-warning btn-sm" })
+                        @Html.ActionLink("See Full Artwork List", "Index", null, new { @class = "btn btn-warning btn-sm" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div style="width: 50%; float: left;">
+            <div class="form-horizontal" style="width: 90%;">
+                <h4>Image</h4>
+                <hr />
+                <img id="imgDisplayArt" alt="@Model.ImageAlt" title="@Model.ImageTitle" style="width: 100%;" src="@Url.Content("~/Content/Images/art/" + Model.ImageName)" />
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $(function () {
+
+        });
+
+        function getFileName(e) {
+            return $.map(e.files, function (file) {
+
+                return file.name;
+            }).join(", ");
+        };
+
+        function OnUploadSuccess(e) {
+            var fn = getFileName(e);
+            $('#ImageName').val(fn)
+            var currentImg = $('#imgDisplayArt').attr("src");
+            var path = currentImg.substr(0, currentImg.lastIndexOf('/')+1);
+            $('#imgDisplayArt').attr("src", path + fn);
+            $('#ImageName').trigger("change");
+            $('#imgDisplayArt').trigger("change");
+        };
+
+    </script>
+}

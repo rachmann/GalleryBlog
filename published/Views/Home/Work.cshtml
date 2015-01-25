@@ -1,0 +1,32 @@
+﻿@using GalleryBlog.Extensions
+@model  List<GalleryBlog.Models.Artwork>
+@{
+    Html.RegisterStyles("~/Content/work/work.css");
+    Html.RegisterStyles("~/Content/work/rating.css");
+    Html.Register("~/bundles/work");
+
+    ViewBag.Title = "Work";
+    var pathfull = @Url.Content("~/Content/Images/art/" + @Model[0].ImageName);
+}
+
+<div class="col-sm-10">
+    <h3>@Model[0].ImageTitle</h3>
+    <h4>@Model[0].ImageDescription</h4>
+    <input type="radio"  name="imgsize" value="1" title="Full size" /><label for="fullsize" title="Full size">Fit width</label>
+    <input type="radio" name="imgsize" value="2" title="Fit to window" /><label for="fitsize" title="Fit to window">Fit height</label>
+
+    <div id="ImageContainer" class="ImageBox portrait">
+        <img alt="@Model[0].ImageAlt" src="@pathfull" title="@Model[0].ImageTitle" />
+    </div>
+    <fieldset class="rating">
+        <legend>Public rating:</legend>
+        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Inspirational">5 stars</label>
+        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Not my cup of tea">2 stars</label>
+        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="I don't understrand">1 star</label>
+    </fieldset>
+
+
+
+</div>

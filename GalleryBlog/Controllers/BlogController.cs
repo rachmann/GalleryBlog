@@ -11,9 +11,10 @@ using GalleryBlog.Models;
 
 namespace GalleryBlog.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles="Administrator")]
     public class BlogController : Controller
     {
+        private DateTime EmptyDate = new DateTime(1800, 1, 1);
         private DataAccess db = new DataAccess();
 
         // GET: Blog
@@ -32,9 +33,15 @@ namespace GalleryBlog.Controllers
                 Body = string.Empty,
                 Subject = string.Empty,
                 Title = string.Empty,
-                UrlSlug = string.Empty
+                UrlSlug = string.Empty,
+                Approved = EmptyDate,
+                Meta = string.Empty,
+                Modified = EmptyDate,
+                PostedOn = EmptyDate,
+                Published = EmptyDate
+                
             };
-            db.AddPost(post);
+            var recId = db.AddPost(post);
             return View(post);
         }
 
@@ -47,7 +54,7 @@ namespace GalleryBlog.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AddPost(post);
+                db.UpdatePost(post);
                 return RedirectToAction("Index");
             }
 
@@ -86,27 +93,23 @@ namespace GalleryBlog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditorSave(string body, int? id)
+        public ActionResult FroalaAutoSave(string body, int? id) // Do not change the parameter name from name 'body'
         {
-            return View("Edit");
+            Post post = db.GetPost(id);
+            post.Body = body;
+            db.UpdatePost(post);
+            return new EmptyResult();
         }
 
         [HttpPost]
-        public ActionResult FroalaUploadImage(HttpPostedFileBase file, int? postId) // Do not change the parameter name from 'file' // نام پارامتر فايل را تغيير ندهيد
+        public ActionResult FroalaUploadImage(HttpPostedFileBase file, int? postId) // Do not change the parameter name from name 'file'
         {
+
             var fileName = Path.GetFileName(file.FileName);
             var rootPath = Server.MapPath("~/images/blog/");
             file.SaveAs(Path.Combine(rootPath, fileName));
+
             return Json(new { link = "images/blog/" + fileName }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult FroalaAutoSave(string body, int? postId) // Do not change the parameter name from 'body' // نام پارامتر بادي را تغيير ندهيد
-        {
-
-            //todo: save body ...
-            return new EmptyResult();
         }
 
         // GET: Blog/Delete/5
@@ -140,7 +143,6 @@ namespace GalleryBlog.Controllers
         /// <param name="category">Url slug</param>
         /// <param name="p">Pagination number</param>
         /// <returns></returns>
-        [AllowAnonymous]
         public ViewResult Category(string category, int p = 1)
         {
             var viewModel = new ListViewModel(db, category, "Category", p);
@@ -168,27 +170,6 @@ namespace GalleryBlog.Controllers
 
             ViewBag.Title = String.Format(@"Latest posts tagged on ""{0}""", viewModel.Tag.Name);
             return View("List", viewModel);
-        }
-
-        /// <summary>
-        /// Return a particular post based on the puslished year, month and url slug.
-        /// </summary>
-        /// <param name="year">Published year</param>
-        /// <param name="month">Published month</param>
-        /// <param name="title">Url slug</param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        public ViewResult Post(int year, int month, string title)
-        {
-            var post = db.GetPost(year, month, title);
-
-            if (post == null)
-                throw new HttpException(404, "Post not found");
-
-            if (!post.Published.HasValue && !User.Identity.IsAuthenticated)
-                throw new HttpException(401, "The post is not published");
-
-            return View(post);
         }
 
 

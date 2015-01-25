@@ -12,6 +12,7 @@ using System.Web.Helpers;
 
 namespace GalleryBlog.Controllers
 {
+    [Authorize(Roles="Administrator")]
     public class ArtworksController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -110,57 +111,68 @@ namespace GalleryBlog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var WatermarkPath = Path.Combine(Server.MapPath("~/Content/Images/art"), "mjglogo.png");
-                var physicalPath = Path.Combine(Server.MapPath("~/Content/Images/art"), artwork.ImageName);
-                var elementPath = Path.Combine(Server.MapPath("~/Content/Images/elements"), artwork.ImageName);
-                var thumbPath = Path.Combine(Server.MapPath("~/Content/Images/thumb"), artwork.ImageName);
-
-                var wimg = new WebImage(physicalPath);
-
-                // first add watermark
-                wimg.AddImageWatermark(WatermarkPath, width: 300, height: 300, opacity: 11, padding: 100);
-
-                // Write image with watermark
-                wimg.Save(physicalPath);
-
-                // element design
-                var iHeight = wimg.Height;
-                var iWidth = wimg.Width;
-                double endW, endH;
-                var startH = iHeight * .2;
-                if ((startH + 300) > iHeight)
+                try
                 {
-                    endH = iHeight;
-                }
-                else
-                {
-                    endH = iHeight - (startH + 300);
-                }
 
-                var startW = iWidth * .2;
-                if ((startW + 300) > iWidth)
-                {
-                    endW = iWidth;
-                }
-                else
-                {
-                    endW = iWidth - (startW + 300);
-                }
-                // Wrtie element image
-                wimg.Crop(int.Parse(startH.ToString("F0")), int.Parse(startW.ToString("F0")), int.Parse(endH.ToString("F0")), int.Parse(endW.ToString("F0")));
-                wimg.Save(elementPath);
+                    var WatermarkPath = Path.Combine(Server.MapPath("~/Content/Images/app"), "mjglogo.png");
+                    var physicalPath = Path.Combine(Server.MapPath("~/Content/Images/art"), artwork.ImageName);
+                    var elementPath = Path.Combine(Server.MapPath("~/Content/Images/elements"), artwork.ImageName);
+                    var thumbPath = Path.Combine(Server.MapPath("~/Content/Images/thumb"), artwork.ImageName);
 
-                // Design thumb
-                wimg = new WebImage(physicalPath);
-                // first add watermark
-                wimg.AddImageWatermark(WatermarkPath, width: 300, height: 300, opacity: 11, padding: 100);
-                wimg.Resize(200, 200, true, true);
-                // Write thumb out
-                wimg.Save(thumbPath);
-                             
+                    var wimg = new WebImage(physicalPath);
 
-                db.Entry(artwork).State = EntityState.Modified;
-                db.SaveChanges();
+                    // first add watermark
+                    wimg.AddImageWatermark(WatermarkPath, width: 300, height: 300, opacity: 11, padding: 100);
+
+                    // Write image with watermark
+                    wimg.Save(physicalPath);
+
+                    // element design
+                    var iHeight = wimg.Height;
+                    var iWidth = wimg.Width;
+                    double endW, endH;
+                    var startH = iHeight * .2;
+                    if ((startH + 300) > iHeight)
+                    {
+                        endH = iHeight;
+                    }
+                    else
+                    {
+                        endH = iHeight - (startH + 300);
+                    }
+
+                    var startW = iWidth * .2;
+                    if ((startW + 300) > iWidth)
+                    {
+                        endW = iWidth;
+                    }
+                    else
+                    {
+                        endW = iWidth - (startW + 300);
+                    }
+                    // Wrtie element image
+                    wimg.Crop(int.Parse(startH.ToString("F0")), int.Parse(startW.ToString("F0")), int.Parse(endH.ToString("F0")), int.Parse(endW.ToString("F0")));
+                    wimg.Save(elementPath);
+
+                    // Design thumb
+                    wimg = new WebImage(physicalPath);
+                    // first add watermark
+                    wimg.AddImageWatermark(WatermarkPath, width: 300, height: 300, opacity: 11, padding: 100);
+                    wimg.Resize(200, 200, true, true);
+                    // Write thumb out
+                    wimg.Save(thumbPath);
+
+
+                    db.Entry(artwork).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                }
+                catch(Exception ex)
+                {
+                    var fileName = string.Format("error-{0}.txt", DateTime.Now.ToLongDateString());
+                    var ePath =Path.Combine( Server.MapPath(@"./"), fileName);
+                    System.IO.File.WriteAllText(ePath, ex.ToString());
+                }
                 return RedirectToAction("Edit", "Artists", new { id = artwork.ArtistId });
             }
             return View(artwork);

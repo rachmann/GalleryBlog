@@ -23,7 +23,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control", style="width: 100%;" })
                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", style = "width: 100%;" })
                     @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -39,7 +39,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <div id="editBody"></div>
+                    <div style="margin: 5px 20px 5px 0;" id="editBody"></div>
                     @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -111,27 +111,28 @@
         var modelId = $('#hiddenId').val();
         $('#editBody').editable({
             inlineMode: false,
+            autosave: true,
+            autosaveInterval: 2500,
             height: 300,
+            spellcheck: true,
+            plainPaste: true,
+            enableScript: false,
             // Set the save URL.
-            saveURL: '@Url.Action("EditorSave","Blog")',
+            saveURL: '@Url.Action("FroalaAutoSave", "Blog")',
 
             imageUploadURL: '@Url.Action("FroalaUploadImage", "Home")',
             // HTTP request type.
             saveRequestType: 'POST',
+            allowedImageTypes: ["jpeg", "jpg", "png"],
 
             // Additional save params.
-            saveParams: {
-                id: modelId,
-            },
+            saveParams: { postId: modelId  },
+            imageUploadURL: '@Url.Action("FroalaUploadImage", "Home")',
+            imageParams: { postId: "123" }
 
-            // Enable autosave.
-            autosave: true,
-
-            // Change autosave interval (time in miliseconds).
-            autosaveInterval: 2500
         });
         $('#editBody').editable("setHTML", body, false);
-
+        $("#editBody").editable("sync");
     });
 </script>
 

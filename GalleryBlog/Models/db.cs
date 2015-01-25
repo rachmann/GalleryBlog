@@ -77,6 +77,13 @@ namespace GalleryBlog.Models
                             .Skip(pageNo * pageSize)
                             .Take(pageSize)
                             .ToList();
+
+            //var x = _db.Database.Connection.Query<Post>()
+            //.Where(p => postIds.Contains(p.Id))
+            //.OrderByDescending(p => p.PostedOn)
+            //.FetchMany(p => p.Tags)
+            //.ToList();
+
             return posts;
         }
 

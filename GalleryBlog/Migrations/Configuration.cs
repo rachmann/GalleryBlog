@@ -49,55 +49,56 @@ namespace GalleryBlog.Migrations
             //}
         }
 
-        private List<Models.Artwork> GetArtFromDirList(int idx = 0)
-        {
-            var gvm = new List<Models.Artwork>();
-            var sDir = @"C:\dev\GalleryBlog\GalleryBlog\Content\Images\art";
-            var files = Directory.GetFiles(sDir);
-            if (idx > 0 && idx > files.Count())
-            {
-                return gvm;
-            }
+        //private List<Models.Artwork> GetArtFromDirList(int idx = 0)
+        //{
+        //    var gvm = new List<Models.Artwork>();
+        //    var sDir = Server.MapPath("~/Content/Images/art");
+                
+        //    var files = Directory.GetFiles(sDir);
+        //    if (idx > 0 && idx > files.Count())
+        //    {
+        //        return gvm;
+        //    }
 
-            try
-            {
-                var id = 1;
-                foreach (var f in files)
-                {
+        //    try
+        //    {
+        //        var id = 1;
+        //        foreach (var f in files)
+        //        {
 
-                    var fn = f.Substring(f.LastIndexOf('\\') + 1);
-                    var parts = fn.Split('_');
-                    var artist = "By " + parts[0] + ".";
-                    var name = parts[1];
-                    var desc = parts[2];
-                    var artistName = parts[0];
-                    if (idx == 0 || (idx > 0 && id == idx))
-                    {
-                        gvm.Add(new Models.Artwork
-                        {
-                            ImageAlt = name,
-                            ImageName = fn,
-                            ImageDescription = artist + " " + desc,
-                            Id = id,
-                            ImageTitle = name,
-                            Size = parts[3],
-                            Name = artistName
-                        });
-                    }
-                    if (id == idx)
-                    {
-                        break;
-                    }
-                    id++;
-                }
+        //            var fn = f.Substring(f.LastIndexOf('\\') + 1);
+        //            var parts = fn.Split('_');
+        //            var artist = "By " + parts[0] + ".";
+        //            var name = parts[1];
+        //            var desc = parts[2];
+        //            var artistName = parts[0];
+        //            if (idx == 0 || (idx > 0 && id == idx))
+        //            {
+        //                gvm.Add(new Models.Artwork
+        //                {
+        //                    ImageAlt = name,
+        //                    ImageName = fn,
+        //                    ImageDescription = artist + " " + desc,
+        //                    Id = id,
+        //                    ImageTitle = name,
+        //                    Size = parts[3],
+        //                    Name = artistName
+        //                });
+        //            }
+        //            if (id == idx)
+        //            {
+        //                break;
+        //            }
+        //            id++;
+        //        }
 
-            }
-            catch (System.Exception excpt)
-            {
-                Console.WriteLine(excpt.Message);
-            }
-            return gvm;
-        }
+        //    }
+        //    catch (System.Exception excpt)
+        //    {
+        //        Console.WriteLine(excpt.Message);
+        //    }
+        //    return gvm;
+        //}
 
     }
 }

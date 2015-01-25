@@ -8,8 +8,13 @@ namespace GalleryBlog
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            BundleTable.EnableOptimizations = false;
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                        "~/Scripts/jquery-ui-1.11.2.min.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -55,6 +60,13 @@ namespace GalleryBlog
                 "~/Scripts/froala/plugins/video.min.js"
             ));
 
+            bundles.Add(new ScriptBundle("~/bundles/slider").Include(
+                      "~/Scripts/slider/jquery.easing.1.2.js",
+                      "~/Scripts/slider/jquery.anythingslider.min.js",
+                      "~/Scripts/slider/jquery.anythingslider.fx.min.js",
+                      "~/Scripts/slider/swfobject.js"
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/kendo/kendo.common-bootstrap.min.css",
@@ -70,6 +82,10 @@ namespace GalleryBlog
 
             bundles.Add(new StyleBundle("~/Content/css_froala").Include(
                       "~/Content/froala/froala_editor.min.css"
+                      ));
+            bundles.Add(new StyleBundle("~/Content/css_slider").Include(
+                       "~/Content/slider/anythingslider.css",
+                       "~/Content/slider/slider-custom.css"
                       ));
 
         }

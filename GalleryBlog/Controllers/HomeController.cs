@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Web;
 using System.Web.Mvc;
 using GalleryBlog.Models;
@@ -12,7 +13,7 @@ namespace GalleryBlog.Controllers
 {
     public class HomeController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        private DataAccess db = new DataAccess();
 
         public ActionResult Index()
         {
@@ -90,7 +91,7 @@ namespace GalleryBlog.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "The gallery contact page.";
 
             return View();
         }
@@ -100,7 +101,10 @@ namespace GalleryBlog.Controllers
         {
             var sender = new SendMailerController();
 
-            sender.SendAdminContactPageEmail(messageName, messageEmail, messageBody, ConfigurationManager.AppSettings["AdminEmailCC"], Request.Url.Scheme, Request.Url.Authority);
+            if(sender.SendAdminContactPageEmail(messageName, messageEmail, messageBody, ConfigurationManager.AppSettings["AdminEmailCC"], Request.Url.Scheme, Request.Url.Authority))
+            {
+                return View("Thanks");
+            }
 
             return RedirectToActionPermanent("Index", "Home");
         }
@@ -230,131 +234,127 @@ namespace GalleryBlog.Controllers
                 }).ToList();
 
             return items;
-            //var list = new List<ArtistListItem>
-            //{
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Mark Gleberson",
-            //        Symbol = "Mg",
-            //        ContainterClasses = "photo mixedmedia",
-            //        ContainerDataCategory = "photo",
-            //        ImageName = "Mark Gleberson_The Delivery_Oil__.jpeg",
-            //        Number = "6",
-            //        ImageSize = "30x40"
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Robert Shuttleworth",
-            //        Symbol = "Rs",
-            //        ContainterClasses = "sculpture",
-            //        ContainerDataCategory = "sculpture",
-            //        ImageName = "Robert Shuttleworth_Pee Wee_Mixed media sculpture_48x90_.jpg",
-            //        Number = "57",
-            //        ImageSize = "48x90"
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Eryn O'Neill",
-            //        Symbol = "EoN",
-            //        ContainterClasses = "photo",
-            //        ContainerDataCategory = "photo",
-            //        ImageName = "Eryn ONeill_Window Shopping_Oil on canvas_16x32_.JPG",
-            //        Number = "92",
-            //        ImageSize = "16x32"
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Chris Albert",
-            //        Symbol = "Ca",
-            //        ContainterClasses = "photo",
-            //        ContainerDataCategory = "photo",
-            //        ImageName = "Chris Albert_St Lawrence Market_Photograph on panel with resin overlay_30x48_.jpg",
-            //        Number = "208",
-            //        ImageSize = "30x48"
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Laura Culic",
-            //        Symbol = "Lc",
-            //        ContainterClasses = "photo",
-            //        ContainerDataCategory = "photo",
-            //        ImageName = "Ivano Stocco_Crossroads_Mixed media painting on panel_48x60_.JPG",
-            //        Number = "42",
-            //        ImageSize = "48x60"
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Carol Westcott",
-            //        Symbol = "Cw",
-            //        ContainterClasses = "painting",
-            //        ContainerDataCategory = "painting",
-            //        ImageName = "Eryn ONeill_On The Highline_Oil on canvas_16x32_.JPG",
-            //        Number = "113",
-            //        ImageSize = "16x32"
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Ian Busher",
-            //        Symbol = "Ib",
-            //        ContainterClasses = "mixedmedia",
-            //        ContainerDataCategory = "mixedmedia",
-            //        ImageName = "Ian Busher_Ive Seen It Happen_mixed media on gate_30x73_.JPG",
-            //        Number = "12",
-            //        ImageSize = "30x73"
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Andrea Rinaldo",
-            //        Symbol = "Ar",
-            //        ContainterClasses = "painting",
-            //        ContainerDataCategory = "painting",
-            //        ImageName = "Andrea Rinaldo_White Neon Blush_mixed media on canvas_48x60_.jpg",
-            //        Number = "79",
-            //        ImageSize = "48x60"
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Marjolyn van der Hart",
-            //        Symbol = "MvdH",
-            //        ContainterClasses = "painting",
-            //        ContainerDataCategory = "painting",
-            //        ImageName = "Marjolyn van der Hart_She Wants To Know_Mixed media painting on panel_40x40_.JPG",
-            //        Number = "19",
-            //        ImageSize = "40x40"
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Beverly Jenkins",
-            //        Symbol = "Bj",
-            //        ContainterClasses = "painting",
-            //        ContainerDataCategory = "painting",
-            //        ImageName = "Ivano Stocco_Gridiron_Mixed media painting on panel_36x30_.JPG",
-            //        Number = "4",
-            //        ImageSize = ""
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Ivano Stocco",
-            //        Symbol = "Is",
-            //        ContainterClasses = "sculpture mixedmedia",
-            //        ContainerDataCategory = "sculpture",
-            //        ImageName = "Ivano Stocco_Nightlife_Mixed media painting on panel_36x48_.JPG",
-            //        Number = "81",
-            //        ImageSize = "36x48"
-            //    },
-            //    new ArtistListItem
-            //    {
-            //        ArtistName = "Tommy Vohs",
-            //        Symbol = "Tv",
-            //        ContainterClasses = "mixedmedia",
-            //        ContainerDataCategory = "mixedmedia",
-            //        ImageName = "Tommy Vohs_Rocket Launch_iPhone-graphic image on aluminum dibond_40x40_.JPG",
-            //        Number = "48",
-            //        ImageSize = "40x40"
-            //    }
-            //};
-            //
-            // return list;
+        }
+
+        /// <summary>
+        /// Return a particular post based on the puslished year, month and url slug.
+        /// </summary>
+        /// <param name="year">Published year</param>
+        /// <param name="month">Published month</param>
+        /// <param name="title">Url slug</param>
+        /// <returns></returns>
+        public ViewResult Post(int year, int month, string title)
+        {
+            var post = db.GetPost(year, month, title);
+
+            if (post == null)
+                throw new HttpException(404, "Post not found");
+
+            if (!post.Published.HasValue && !User.Identity.IsAuthenticated)
+                throw new HttpException(401, "The post is not published");
+
+            return View(post);
+        }
+
+        /// <summary>
+        /// Return the list page with latest posts.
+        /// </summary>
+        /// <param name="p">pagination number</param>
+        /// <returns></returns>
+        public ViewResult Posts(int p = 1)
+        {
+            var viewModel = new ListViewModel(db, p);
+            ViewBag.Title = "Latest Posts";
+            return View("List", viewModel);
+        }
+
+        /// <summary>
+        /// Return the posts belongs to a category.
+        /// </summary>
+        /// <param name="category">Url slug</param>
+        /// <param name="p">Pagination number</param>
+        /// <returns></returns>
+        /// 
+        public ViewResult Category(string category, int p = 1)
+        {
+            var viewModel = new ListViewModel(db, category, "Category", p);
+
+            if (viewModel.Category == null)
+                throw new HttpException(404, "Category not found");
+
+            ViewBag.Title = String.Format(@"Latest posts on category ""{0}""", viewModel.Category.Name);
+            return View("List", viewModel);
+        }
+
+        /// <summary>
+        /// Return the posts belongs to a tag.
+        /// </summary>
+        /// <param name="tag">Url slug</param>
+        /// <param name="p">Pagination number</param>
+        /// <returns></returns>
+        public ViewResult Tag(string tag, int p = 1)
+        {
+            var viewModel = new ListViewModel(db, tag, "Tag", p);
+
+            if (viewModel.Tag == null)
+                throw new HttpException(404, "Tag not found");
+
+            ViewBag.Title = String.Format(@"Latest posts tagged on ""{0}""", viewModel.Tag.Name);
+            return View("List", viewModel);
+        }
+
+        /// <summary>
+        /// Return the posts that matches the search text.
+        /// </summary>
+        /// <param name="s">search text</param>
+        /// <param name="p">Pagination number</param>
+        /// <returns></returns>
+        public ViewResult Search(string s, int p = 1)
+        {
+            ViewBag.Title = String.Format(@"Lists of posts found for search text ""{0}""", s);
+
+            var viewModel = new ListViewModel(db, s, "Search", p);
+            return View("List", viewModel);
+        }
+
+        /// <summary>
+        /// Child action that returns the sidebar partial view.
+        /// </summary>
+        /// <returns></returns>
+        [ChildActionOnly]
+        public PartialViewResult Sidebars()
+        {
+            var widgetViewModel = new WidgetViewModel(db);
+            return PartialView("_Sidebars", widgetViewModel);
+        }
+
+        /// <summary>
+        /// Generate and return RSS feed.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Feed()
+        {
+            var blogTitle = ConfigurationManager.AppSettings["BlogTitle"];
+            var blogDescription = ConfigurationManager.AppSettings["BlogDescription"];
+            var blogUrl = ConfigurationManager.AppSettings["BlogUrl"];
+
+            var posts = db.GetPosts(0, 25).Select
+            (
+                p => new SyndicationItem
+                    (
+                        p.Title,
+                        p.Subject,
+                        new Uri(string.Concat(blogUrl, p.Href(Url)))
+                    )
+            );
+
+            var feed = new SyndicationFeed(blogTitle, blogDescription, new Uri(blogUrl), posts)
+            {
+                Copyright = new TextSyndicationContent(String.Format("Copyright © {0}", blogTitle)),
+                Language = "en-US"
+            };
+
+            return new FeedResult(new Rss20FeedFormatter(feed));
         }
 
     }
