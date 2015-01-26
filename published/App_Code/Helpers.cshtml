@@ -1,7 +1,10 @@
-﻿@helper Tags(System.Web.Mvc.HtmlHelper htmlHelper, IList<GalleryBlog.Models.PostTag> tags)
+﻿@helper Tags(System.Web.Mvc.HtmlHelper htmlHelper, ICollection<GalleryBlog.Models.PostTag> tags)
 {
-  foreach (var tag in tags)
-  {
-    <div class="tags-div">@GalleryBlog.ActionLinkExtensions.TagLink(htmlHelper, tag)</div>     
-  }
+    if (tags != null)
+    {
+        foreach (var tag in tags)
+        {
+            <div class="tags-div">@GalleryBlog.ActionLinkExtensions.TagLink(htmlHelper, tag)</div>
+        }
+    }
 }

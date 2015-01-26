@@ -185,6 +185,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\DateTimeExtension.cs" />
     <Compile Include="Logic\FeedResult.cs" />
     <Compile Include="Logic\SyndicationExtension.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -214,6 +215,7 @@
     <Content Include="Content\artists\artists.css" />
     <Content Include="Content\artists\artists.js" />
     <Content Include="Content\artists\isotope.pkg.min.js" />
+    <Content Include="Content\blog\blog.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -502,7 +504,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Artist.cshtml" />
     <Content Include="Views\Home\Artists.cshtml" />
-    <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Gallery.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
     <Content Include="Views\Home\Work.cshtml" />
@@ -546,13 +547,6 @@
     <Content Include="Views\Blog\Delete.cshtml" />
     <Content Include="Views\Blog\Edit.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
-    <Content Include="Views\Blog\Post.cshtml" />
-    <Content Include="Views\Blog\_Categories.cshtml" />
-    <Content Include="Views\Blog\_LatestPosts.cshtml" />
-    <Content Include="Views\Blog\_Search.cshtml" />
-    <Content Include="Views\Blog\_Sidebars.cshtml" />
-    <Content Include="Views\Blog\_Tags.cshtml" />
-    <Content Include="Views\Blog\List.cshtml" />
     <Content Include="Scripts\kendo\kendo.all.min.js.map" />
     <Content Include="Scripts\kendo\kendo.aspnetmvc.min.js.map" />
     <Content Include="Scripts\kendo\kendo.web.min.js.map" />
@@ -568,6 +562,7 @@
     <Content Include="Views\Shared\_Sidebars.cshtml" />
     <Content Include="Views\Shared\_Tags.cshtml" />
     <Content Include="Views\Home\Thanks.cshtml" />
+    <Content Include="Views\Home\Blog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

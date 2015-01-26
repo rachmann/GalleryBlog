@@ -54,8 +54,7 @@ namespace GalleryBlog.Models
         /// <returns></returns>
         public List<Post> GetPosts(int pageNo, int pageSize)
         {
-
-            var posts = _db.Posts.Where(p => p.Published.HasValue)
+            var posts = Posts.Where(p => p.Published.HasValue)
                                   .OrderByDescending(p => p.PostedOn)
                                   .Skip(pageNo * pageSize)
                                   .Take(pageSize).ToList();
@@ -180,7 +179,6 @@ namespace GalleryBlog.Models
         public List<Post> GetPosts(int pageNo, int pageSize, string sortColumn, bool sortByAscending)
         {
             List<Post> posts;
-            List<int> postIds;
 
             switch (sortColumn)
             {

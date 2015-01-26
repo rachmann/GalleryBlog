@@ -20,7 +20,7 @@
 
 </head>
 <body>
-    <div class="container body-content">
+    <div class="container body-content" style="clear: both;">
         <div class="row">
             <div class="col-sm-2">
                 <div class="sidebar-nav">
@@ -44,7 +44,7 @@
                         <div class="navbar-collapse collapse sidebar-navbar-collapse">
                             <div style="width: 100%">
                                 <a href="@Url.Action("Index","Home")">
-                                    <img alt="MJG Gallery" src="~/Content/Images/app/mjglogo.png" style="width: 100%" />
+                                    <img alt="MJG Gallery" src="~/Content/Images/app/mjglogo.png" style="width: 100%; max-width: 260px;" />
                                 </a>
                             </div>
                             <ul class="nav navbar-nav">
@@ -52,9 +52,9 @@
                                 <li class="@Html.IsSelected(action: "About")">@Html.ActionLink("About", "About", "Home")</li>
                                 <li class="@Html.IsSelected(action: "Artists")">@Html.ActionLink("Artists", "Artists", "Home")</li>
                                 <li class="@Html.IsSelected(action: "Gallery")">@Html.ActionLink("Gallery", "Gallery", "Home")</li>
-                                <li class="@Html.IsSelected(action: "Blog")">@Html.ActionLink("Blog", "Blog", "Home")</li>
+                                <li class="@Html.IsSelected(action: "Posts")">@Html.ActionLink("Blog", "Posts", "Home")</li>
                                 <li class="@Html.IsSelected(action: "Contact")">@Html.ActionLink("Contact", "Contact", "Home")</li>
-                                <li class="@Html.IsSelected(action: "Maintenance")">@Html.ActionLink("Maintenance", "Index", "Maintenance").If(User.IsInRole("Administrators"))</li>
+                                <li class="@Html.IsSelected(action: "Maintenance")">@Html.ActionLink("Maintenance", "Index", "Maintenance").If(User.IsInRole("Administrator"))</li>
                                 <li class="@Html.IsSelected(action: "Login")">@Html.Partial("_LoginPartialNoList")</li>
                             </ul>
                         </div><!--/.nav-collapse -->
@@ -72,6 +72,9 @@
             @RenderBody()
 
         </div>
+
+    </div>
+    <div class="container clear" style="clear: both;">
         <div class="row">
             <hr />
             <footer>

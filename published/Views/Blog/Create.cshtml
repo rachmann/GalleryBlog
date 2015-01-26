@@ -6,7 +6,6 @@
 
     Html.RegisterStyles("~/Content/froala/froala_editor.min.css");
 
-
 }
 <div class="col-sm-10">
     <h2>Create</h2>
@@ -23,7 +22,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control", style="width: 100%;" })
                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -31,7 +30,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", style = "width: 100%;" })
                     @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -128,11 +127,11 @@
             // Additional save params.
             saveParams: { postId: modelId  },
             imageUploadURL: '@Url.Action("FroalaUploadImage", "Home")',
-            imageParams: { postId: "123" }
+            imageParams: { postId: modelId }
 
         });
         $('#editBody').editable("setHTML", body, false);
-
+        $("#editBody").editable("sync");
     });
 </script>
 

@@ -13,24 +13,27 @@
 
 }
 
-<div class="col-sm-10">
+<div class="col-sm-10" style="display: block;">
     
     <div style="width: 100% !important; display: block !important; padding-bottom: 20px;">
 
         <div style="width: 20%; float: left;">
             <h2>The Artist</h2>
+            <hr />
             @Html.DisplayFor(model => model.Name)<br/>
-           
+            <hr />
+            @Html.DisplayFor(model => model.ShortDescription)
         </div>
-        <div style="width: 80%; float: left; ">
+        <div style="width: 80%; float: left; padding: 0 30px 10px 10px;">
             <h2>Biography</h2>
+            <hr />
             @Html.DisplayFor(model => model.Bio)
         </div>
         
     </div>
     <hr />
-    <div style="width: 100% !important; display: block !important;margin-Top: 20px;">
-        <div style="float: left; width: 75%; height: 500px; margin: 20px 0 0 0; border: none;">
+    <div style="width: 100% !important; display: block !important;margin-Top: 20px; clear: both;">
+        <div style="float: left; width: 75%; height: 500px; margin: 20px 0 0 0; border: none; clear: both !important; overflow: auto !important; height: auto !important;">
             <ul id="slider">
                 @foreach (var item in Model.ArtWorks)
                 {

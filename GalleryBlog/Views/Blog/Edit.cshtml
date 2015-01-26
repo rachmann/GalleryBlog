@@ -1,4 +1,5 @@
-﻿@model GalleryBlog.Models.Post
+﻿@using GalleryBlog.Extensions
+@model GalleryBlog.Models.Post
 
 @{
     ViewBag.Title = "Edit";
@@ -22,7 +23,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -30,7 +31,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextAreaFor(model => model.Subject, new { @class = "form-control", style="width: 80%; min-height: 60px;" })
                     @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -38,7 +39,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                    <div style="margin: 5px 20px 5px 0;" id="editBody"></div>
                     @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -98,6 +99,12 @@
                 </div>
             </div>
         </div>
+        <div class="hidden">
+            @Html.HiddenFor(model => model.Body, new { id = "hiddenBody" })
+            @Html.HiddenFor(model => model.Id, new { id = "hiddenId" })
+        </div>
+
+
     }
 
     <div>
@@ -108,9 +115,7 @@
     $(function () {
 
         var body = $('#hiddenBody').val();
-
         var modelId = $('#hiddenId').val();
-
         $('#editBody').editable({
             inlineMode: false,
             autosave: true,
@@ -119,16 +124,22 @@
             spellcheck: true,
             plainPaste: true,
             enableScript: false,
+            // Set the save URL.
             saveURL: '@Url.Action("FroalaAutoSave", "Blog")',
+
             imageUploadURL: '@Url.Action("FroalaUploadImage", "Home")',
+            // HTTP request type.
             saveRequestType: 'POST',
             allowedImageTypes: ["jpeg", "jpg", "png"],
-            saveParams: { postId: modelId  },
+
+            // Additional save params.
+            saveParams: { postId: modelId },
             imageUploadURL: '@Url.Action("FroalaUploadImage", "Home")',
             imageParams: { postId: "123" }
 
         });
         $('#editBody').editable("setHTML", body, false);
+        $("#editBody").editable("sync");
 
     });
 </script>

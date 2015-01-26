@@ -22,12 +22,6 @@
                 @Html.DisplayNameFor(model => model.UrlSlug)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Approved)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Published)
             </th>
             <th></th>
@@ -46,15 +40,9 @@
                     @Html.DisplayFor(modelItem => item.UrlSlug)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PostedOn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Approved)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Published)
                 </td>
-                <td>
+                <td style="min-width: 120px;">
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-default btn-sm" })
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
                 </td>

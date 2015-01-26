@@ -66,20 +66,6 @@ namespace GalleryBlog.Controllers
             return View(model);
         }
 
-        public ActionResult Blog()
-        {
-            ViewBag.Message = "Your blog page.";
-
-            return View();
-        }
-
-        public ActionResult Post()
-        {
-            ViewBag.Message = "Your blog post page.";
-
-            return View();
-        }
-
         public ActionResult About()
         {
 
@@ -265,7 +251,7 @@ namespace GalleryBlog.Controllers
         {
             var viewModel = new ListViewModel(db, p);
             ViewBag.Title = "Latest Posts";
-            return View("List", viewModel);
+            return View("Blog", viewModel);
         }
 
         /// <summary>
@@ -283,7 +269,7 @@ namespace GalleryBlog.Controllers
                 throw new HttpException(404, "Category not found");
 
             ViewBag.Title = String.Format(@"Latest posts on category ""{0}""", viewModel.Category.Name);
-            return View("List", viewModel);
+            return View("Blog", viewModel);
         }
 
         /// <summary>
@@ -300,7 +286,7 @@ namespace GalleryBlog.Controllers
                 throw new HttpException(404, "Tag not found");
 
             ViewBag.Title = String.Format(@"Latest posts tagged on ""{0}""", viewModel.Tag.Name);
-            return View("List", viewModel);
+            return View("Blog", viewModel);
         }
 
         /// <summary>
@@ -314,7 +300,7 @@ namespace GalleryBlog.Controllers
             ViewBag.Title = String.Format(@"Lists of posts found for search text ""{0}""", s);
 
             var viewModel = new ListViewModel(db, s, "Search", p);
-            return View("List", viewModel);
+            return View("Blog", viewModel);
         }
 
         /// <summary>
