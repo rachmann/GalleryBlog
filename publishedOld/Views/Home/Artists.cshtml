@@ -1,0 +1,55 @@
+﻿@using GalleryBlog.Extensions
+@model List<GalleryBlog.Models.ArtistListItem>
+@{
+    Html.RegisterStyles("~/Content/artists/artists.css");
+    Html.Register("~/bundles/artists");
+
+    ViewBag.Title = "Artists";
+}
+
+
+<div class="col-sm-9">
+
+    <h2>Artists</h2>
+    <div id="filters" class="button-group">
+        <button class="button is-checked " data-filter="*">show all</button>
+        <button class="button" data-filter=".photo">photos</button>
+        <button class="button" data-filter=".painting">paintings</button>
+        <button class="button" data-filter=".photo, .painting">photos and paintings</button>
+        <button class="button" data-filter=":not(.photo)">not photos</button>
+        <button class="button" data-filter=":not(.painting)">not paintings</button>
+        <button class="button" data-filter=".mixedmedia">mixed media</button>
+        <button class="button" data-filter=".sculpture">sculpture</button>
+
+    </div>
+    <h2>Sort</h2>
+    <div id="sorts" class="button-group">
+        <button class="button is-checked" data-sort-by="original-order">original order</button>
+        <button class="button" data-sort-by="name">name</button>
+        <button class="button" data-sort-by="symbol">symbol</button>
+        <button class="button" data-sort-by="size">size</button>
+        <button class="button" data-sort-by="category">category</button>
+    </div>
+    <hr/>
+    <div class="isotope">
+        @foreach (var item in Model)
+        {
+            var divClass = "element-item " + @item.ContainterClasses;
+            var imgName = (@item.Art == null) ? "mjglogo.png" : @item.Art.ImageName;
+            var imgSize = (@item.Art == null) ? " " : @item.Art.Size;
+            var pathImage = @Url.Content("~/Content/Images/elements/" + imgName);    
+            
+            <div class="@divClass" data-category="@item.ContainerDataCategory">
+                <a href="@Url.Action("Artist", "Home", new {id = @item.Number})">
+                    <h3 class="name">@item.ArtistName</h3>
+                    <p class="symbol">@item.Symbol</p>
+                    <img alt="" src="@pathImage" />
+                    <p class="number">@item.Number</p>
+                    <p class="size">@imgSize</p>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+<div class="col-sm-1">
+</div>

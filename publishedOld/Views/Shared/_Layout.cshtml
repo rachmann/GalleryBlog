@@ -1,0 +1,87 @@
+﻿@using GalleryBlog.Extensions
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MJG Gallery</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css_fontawesome")
+
+    @Html.RenderStyles()
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Html.RenderScripts()
+
+    @RenderSection("scripts", required: false)
+
+</head>
+<body>
+    <div class="container body-content" style="clear: both;">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="sidebar-nav">
+                    <div class="navbar navbar-default" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <span class="visible-xs navbar-brand">Menu</span>
+                            <div class="social-sm" style="margin-top: 17px;">
+                                <a href="https://www.facebook.com/pages/MJG-Gallery-by-Mark-Jeremy-Gleberzon/238062092892271"><i class="fa fa-facebook"></i></a>
+                                <a href="https://twitter.com/mjggallery"><i class="fa fa-twitter"></i></a>
+                                <a href="http://instagram.com/mjggallery/"><i class="fa fa-instagram"></i></a>
+                                <a href="https://www.pinterest.com/markaloo/"><i class="fa fa-pinterest"></i></a>
+                            </div>
+
+                        </div>
+                        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                            <div style="width: 100%">
+                                <a href="@Url.Action("Index","Home")">
+                                    <img alt="MJG Gallery" src="~/Content/Images/app/mjglogo.png" style="width: 100%; max-width: 260px;" />
+                                </a>
+                            </div>
+                            <ul class="nav navbar-nav">
+                                <li class="@Html.IsSelected(action: "Index")">@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li class="@Html.IsSelected(action: "About")">@Html.ActionLink("About", "About", "Home")</li>
+                                <li class="@Html.IsSelected(action: "Artists")">@Html.ActionLink("Artists", "Artists", "Home")</li>
+                                <li class="@Html.IsSelected(action: "Gallery")">@Html.ActionLink("Gallery", "Gallery", "Home")</li>
+                                <li class="@Html.IsSelected(action: "Posts")">@Html.ActionLink("Blog", "Posts", "Home")</li>
+                                <li class="@Html.IsSelected(action: "Contact")">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                <li class="@Html.IsSelected(action: "Maintenance")">@Html.ActionLink("Maintenance", "Index", "Maintenance").If(User.IsInRole("Administrator"))</li>
+                                <li class="@Html.IsSelected(action: "Login")">@Html.Partial("_LoginPartialNoList")</li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                        <div class="social">
+                            <a href="https://www.facebook.com/pages/MJG-Gallery-by-Mark-Jeremy-Gleberzon/238062092892271" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="https://twitter.com/mjggallery" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <a href="http://instagram.com/mjggallery/" target="_blank"><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.pinterest.com/markaloo/" target="_blank"><i class="fa fa-pinterest"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            @RenderBody()
+
+        </div>
+
+    </div>
+    <div class="container clear" style="clear: both;">
+        <div class="row">
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - MJG Gallery</p>
+            </footer>
+        </div>
+    </div>
+    @RenderSection("ascripts", required: false)
+</body>
+</html>

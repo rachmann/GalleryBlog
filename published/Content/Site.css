@@ -56,10 +56,17 @@ select {
     max-width: 350px;
 }
 
+@media only screen and (max-width: 767px) {
+  .videoHeader{
+      display: none;
+  }
+}
+
 @media (max-width: 767px) {
     .social {
         display: none;
     }
+   
 
     .ConfirmReminder {
         left: 150px;

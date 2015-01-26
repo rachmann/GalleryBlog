@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="Content/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="Content/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .qtip-wiki {
+            max-width: 385px;
+        }
+
+            .qtip-wiki p {
+                margin: 0 0 6px;
+            }
+
+            .qtip-wiki h1 {
+                font-size: 20px;
+                line-height: 1.1;
+                margin: 0 0 5px;
+            }
+
+            .qtip-wiki img {
+                float: left;
+                margin: 10px 10px 10px 0;
+            }
+    </style>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/jquery.qtip.min.css"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/jquery.qtip.min.js"></script>
+</head>
+<body>
+    <div>
+        <a href="http://qtip2.com/demos/data/owl" data-tooltip="Hit me!" class="btn btn-default">Send</a>
+    </div>
+    <div class="ttOne">
+        <div style=""></div>
+        <div style=""></div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            // MAKE SURE YOUR SELECTOR MATCHES SOMETHING IN YOUR HTML!!!
+            $('a').each(function () {
+                $(this).qtip({
+                    content: {
+                        text: function (event, api) {
+                            $.ajax({
+                                url: api.elements.target.attr('href') // Use href attribute as URL
+                            })
+                            .then(function (content) {
+                                // Set the tooltip content upon successful retrieval
+                                api.set('content.text', content);
+                            }, function (xhr, status, error) {
+                                // Upon failure... set the tooltip content to error
+                                api.set('content.text', status + ': ' + error);
+                            });
+
+                            return 'Loading...'; // Set some initial text
+                        }
+                    },
+                    position: {
+                        viewport: $(window)
+                    },
+                    style: 'qtip-wiki'
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

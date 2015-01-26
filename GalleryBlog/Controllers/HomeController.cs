@@ -22,6 +22,7 @@ namespace GalleryBlog.Controllers
                 TempData.Remove("ConfirmReminder");
                 ViewBag.ConfirmReminder = 1;
             }
+            ViewBag.Posts = db.GetPosts(0, 3);
             return View();
         }
 

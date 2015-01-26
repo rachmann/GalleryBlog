@@ -1,20 +1,24 @@
-﻿@{
+﻿@using GalleryBlog.Extensions
+@{
     ViewBag.Title = "Home Page";
+    Html.RegisterStyles("~/Content/blog/blog.css");
 }
 
 <div class="col-sm-10">
-    
-        <video autoplay="autoplay" style="width:100%; height: auto; z-index: 22;" onerror="javasciprt: $('#errorVidDiv').show();"  id="bgVideo" poster="@Url.Content("~/Content/Video/placeholder.png")" loop="loop" >
+
+    <div class="videoHeader">
+        <video autoplay="autoplay" id="vidBox" style="width:100%; height: auto; z-index: 22;" onerror="javasciprt: $('#errorVidDiv').show();" id="bgVideo" poster="@Url.Content("~/Content/Video/placeholder.png")" loop="loop">
 
             <source class="myMediaElement" type="video/mp4" src='@Url.Content("~/Content/Video/mjg.mp4")'>
             <source class="myMediaElement" type="video/webm" src='@Url.Content("~/Content/Video/mjg.webm")'>
             <span data-sfref="[images|OpenAccessDataProvider]9555a2ae-822d-4802-9db4-76ee82104faa" class="sfImageWrapper">
                 <img style="width:100%; height:auto" src='@Url.Content("~/Content/Video/placeholder.png")?sfvrsn=2' displaymode="Original" alt="" />
             </span>
-           
+
         </video>
-    <div id="errorVidDiv" style="display: none">
-        <div class="alert-danger">Video will not play here. This site is best seen with Chrome, Firefox, Safari, or Opera.</div>
+        <div id="errorVidDiv" style="display: none">
+            <div class="alert-danger">Video will not play here. This site is best seen with Chrome, Firefox, Safari, or Opera.</div>
+        </div>
     </div>
     @{
         var ConfirmClass = "ConfirmReminderOff";
@@ -29,18 +33,67 @@
         <input id="ConfirmReminderClose" class="btn btn-xs" type="button" value="OK" />
     </div>
 
-    <div id="fadedTextBg">
+    <div>
 
-        </div>
-        <div id="TextBg" style="position: absolute; display: inline-block; z-index: 42; top: 45px; left: 5%; color: white; width: 90%; height: 120px;">
-            <h1>MJG Gallery</h1>
-            <p class="lead">A Cabagetown gallery. A site to showcase our events and related news, and a way to catch my thoughts through my blog.</p>
-        </div>
-        <hr />
-        <h4>MJG Gallery focuses on original work including oil, acrylic, encaustic painting, photography and sculpture as well as mixed-media. Mark has personally known many of the gallery artists over the years and prides himself on "carrying artwork he honestly likes by people he honestly likes."</h4>
-        <h4>Explore the site through the menu at the left.</h4>
-        <h5>Find the gallery on the various social media sites as well.</h5>
+    </div>
+    <div id="TextBg" style="position: absolute; display: inline-block; z-index: 42; top: 45px; left: 5%; color: white; width: 90%; height: 120px;">
+        <h1>MJG Gallery</h1>
+        <p class="lead">A Cabagetown gallery. A site to showcase our events and related news, and a way to catch my thoughts through my blog.</p>
+    </div>
+    <hr />
+    <h4>MJG Gallery focuses on original work including oil, acrylic, encaustic painting, photography and sculpture as well as mixed-media. Mark has personally known many of the gallery artists over the years and prides himself on "carrying artwork he honestly likes by people he honestly likes."</h4>
+    <h4>Explore the site through the menu. Much is still to come!</h4>
+    <h5>Find the gallery on the various social media sites as well.</h5>
+    <div style="width: 100%;">
+        @{
+            List<GalleryBlog.Models.Post> posts = new List<GalleryBlog.Models.Post>();
+            List<GalleryBlog.Models.PostCategory> cats = new List<GalleryBlog.Models.PostCategory>();
+            List<GalleryBlog.Models.PostTag> tags = new List<GalleryBlog.Models.PostTag>();
 
+            if (ViewBag.Posts != null)
+            {
+                posts = (List<GalleryBlog.Models.Post>)ViewBag.Posts;
+            }
+            if (posts.Count() == 0)
+            {
+                posts.AddRange(
+                    new List<GalleryBlog.Models.Post>
+                    {
+                        new GalleryBlog.Models.Post{ Subject="Soon there will be more...", Title="New posts comming...", PostedOn = DateTime.Now, Categories = cats, Tags = tags},
+                        new GalleryBlog.Models.Post{ Subject="Soon there will be more...", Title="New posts comming...", PostedOn = DateTime.Now, Categories = cats, Tags = tags},
+                        new GalleryBlog.Models.Post{ Subject="Soon there will be more...", Title="New posts comming...", PostedOn = DateTime.Now, Categories = cats, Tags = tags}
+                    });
+            }
+            else if (posts.Count() == 1)
+            {
+                posts.AddRange(
+                    new List<GalleryBlog.Models.Post>
+                    {
+                        new GalleryBlog.Models.Post{ Subject="Soon there will be more...", Title="New posts comming...", PostedOn = DateTime.Now, Categories = cats, Tags = tags},
+                        new GalleryBlog.Models.Post{ Subject="Soon there will be more...", Title="New posts comming...", PostedOn = DateTime.Now, Categories = cats, Tags = tags}
+                    });
+            }
+            else if (posts.Count() == 2)
+            {
+                posts.AddRange(
+                    new List<GalleryBlog.Models.Post>
+                    {
+                        new GalleryBlog.Models.Post{ Subject="Soon there will be more...", Title="New posts comming...", PostedOn = DateTime.Now, Categories = cats, Tags = tags}
+                    });
+            }
+        }
+            <div style="width: 30%; display: inline-block;">
+                @Html.Partial("_PostTemplate", posts[0])
+            </div>
+            <div style="width: 30%; display: inline-block;">
+                @Html.Partial("_PostTemplate", posts[1])
+            </div>
+            <div style="width: 30%; display: inline-block;">
+                @Html.Partial("_PostTemplate", posts[2])
+            </div>
+
+      
+    </div>
 
 
 </div>
@@ -49,7 +102,15 @@
     <script type="text/javascript">
         $(function () {
 
-            $('#ConfirmReminderClose').on('click', function() {
+            if ($('#some-element').css('display') == 'none') {
+                $("#vidBox")[0].pause();
+                for (var i = 0; i < 20; i++) {
+                    document.getElementsByTagName("video")[i].src = "";
+                }
+            }
+
+
+            $('#ConfirmReminderClose').on('click', function () {
                 $('#ConfirmReminder').hide();
             });
             $("#TextBg").mouseover(function () {

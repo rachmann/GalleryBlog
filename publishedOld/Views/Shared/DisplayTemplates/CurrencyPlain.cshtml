@@ -1,0 +1,11 @@
+@model decimal?
+
+@{decimal val = 0;
+if(Model != null)
+{
+    val = (decimal)Model;
+}
+}
+<label style="font-weight: normal; width: 100%; text-align: right;" class="control-label" >@val.ToString("C")</label>
+
+
