@@ -18,6 +18,7 @@
     padding-top: 15px;
     padding-left: 15px;
     text-align: left;
+    margin-top: 15px;
 }
 
 .isLessFaded {
@@ -57,16 +58,16 @@ select {
 }
 
 @media only screen and (max-width: 767px) {
-  .videoHeader{
-      display: none;
-  }
+    .videoHeader {
+        display: none;
+    }
 }
 
 @media (max-width: 767px) {
     .social {
         display: none;
     }
-   
+
 
     .ConfirmReminder {
         left: 150px;
@@ -105,6 +106,7 @@ select {
     .sidebar-nav .navbar li {
         float: none;
         display: block;
+        height: 26px;
     }
 
         .sidebar-nav .navbar li a {
@@ -171,3 +173,16 @@ select {
         float: right;
         margin: 0 10px 30px 0;
     }
+
+.post-home-frame {
+    width: 100%;
+    padding: 12px 12px 12px 12px;
+    background-image: linear-gradient(to bottom, transparent, rgba(11, 11, 140, 0.2));
+}
+
+.post-home-item {
+    width: 30%;
+    display: inline-block;
+    margin: 15px;
+    padding: 0 30px 0 30px;
+}

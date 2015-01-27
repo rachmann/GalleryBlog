@@ -56,8 +56,7 @@ namespace GalleryBlog
                 "~/Scripts/froala/plugins/font_family.min.js",
                 "~/Scripts/froala/plugins/font_size.min.js",
                 "~/Scripts/froala/plugins/file_upload.min.js",
-                "~/Scripts/froala/plugins/block_styles.min.js",
-                "~/Scripts/froala/plugins/video.min.js"
+                "~/Scripts/froala/plugins/block_styles.min.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/slider").Include(
