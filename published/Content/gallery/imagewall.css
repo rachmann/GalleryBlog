@@ -144,7 +144,7 @@ ul.iw_thumbs li:nth-child(7n) img{
 	border:7px solid #fff;
 }
 .iw_loading{
-	background: #fff url(loader.gif) no-repeat center center;
+	background: #fff url( ../Images/app/loader.gif) no-repeat center center;
 	width:28px;
 	height:28px;
 	position: absolute;

@@ -230,15 +230,14 @@ namespace GalleryBlog.Controllers
         /// <param name="month">Published month</param>
         /// <param name="title">Url slug</param>
         /// <returns></returns>
-        public ViewResult Post(int year, int month, string title)
+        public ActionResult Post(int year, int month, string title)
         {
             var post = db.GetPost(year, month, title);
 
-            if (post == null)
-                throw new HttpException(404, "Post not found");
-
-            if (!post.Published.HasValue && !User.Identity.IsAuthenticated)
-                throw new HttpException(401, "The post is not published");
+            if (post == null || (!post.Published.HasValue && !User.Identity.IsAuthenticated))
+            {
+                return RedirectToActionPermanent("Posts", "Home");
+            }
 
             return View(post);
         }
