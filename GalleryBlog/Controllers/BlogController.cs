@@ -14,8 +14,8 @@ namespace GalleryBlog.Controllers
     [Authorize(Roles="Administrator")]
     public class BlogController : Controller
     {
-        private DateTime EmptyDate = new DateTime(1800, 1, 1);
-        private DataAccess db = new DataAccess();
+        private readonly DateTime EmptyDate = new DateTime(1800, 1, 1);
+        private readonly DataAccess db = new DataAccess();
 
         // GET: Blog
         public ActionResult Index()
@@ -79,6 +79,7 @@ namespace GalleryBlog.Controllers
         // POST: Blog/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // [ValidateInput(false)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Subject,Body,Meta,UrlSlug,PostedOn,Approved,Modified,Published")] Post post)
@@ -106,10 +107,10 @@ namespace GalleryBlog.Controllers
         {
 
             var fileName = Path.GetFileName(file.FileName);
-            var rootPath = Server.MapPath("~/images/blog/");
+            var rootPath = Server.MapPath("~/Content/Images/blog/");
             file.SaveAs(Path.Combine(rootPath, fileName));
 
-            return Json(new { link = "images/blog/" + fileName }, JsonRequestBehavior.AllowGet);
+            return Json(new { link = "~/content/images/blog/" + fileName }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Blog/Delete/5

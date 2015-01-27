@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace GalleryBlog.Models
 {
@@ -12,6 +13,7 @@ namespace GalleryBlog.Models
             public  string Title { get; set; }
             [Display(Name = "Listing Subject or Description")]
             public  string Subject { get; set; }
+            [AllowHtml]
             public  string Body { get; set; }
             public  string Meta { get; set; }
             public  string UrlSlug { get; set; }

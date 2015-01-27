@@ -12,8 +12,8 @@ namespace GalleryBlog
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery.unobtrusive-ajax.min.js",
-                        "~/Scripts/jquery-ui-1.11.2.min.js"
+                        "~/Scripts/jquery-ui-1.11.2.min.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.min.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -40,23 +40,29 @@ namespace GalleryBlog
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                         "~/Scripts/kendo/kendo.all.min.js",
                         "~/Scripts/kendo/endo.aspnetmvc.min.js",
-                        "~/Scripts/kendo/kendo.web.min.js",
-                        "~/Scripts/bootstrap.js",
-                        "~/Scripts/respond.js"));
+                        "~/Scripts/kendo/kendo.web.min.js"
+                        ));
+
+            bundles.Add(new ScriptBundle("~/bundles/respond").Include(
+                        "~/Scripts/respond.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/Scripts/modernizr-2.8.3.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/froala").Include(
                 "~/Scripts/froala/froala_editor.min.js",
-                "~/Scripts/froala/plugins/tables.min.js",
                 "~/Scripts/froala/plugins/lists.min.js",
                 "~/Scripts/froala/plugins/colors.min.js",
-                "~/Scripts/froala/plugins/media_manager.min.js",
                 "~/Scripts/froala/plugins/font_family.min.js",
                 "~/Scripts/froala/plugins/font_size.min.js",
+                "~/Scripts/froala/plugins/media_manager.min.js",
                 "~/Scripts/froala/plugins/file_upload.min.js",
-                "~/Scripts/froala/plugins/block_styles.min.js"
+                "~/Scripts/froala/plugins/tables.min.js",
+                "~/Scripts/froala/plugins/block_styles.min.js",
+                "~/Scripts/froala/langs/en_ca.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/slider").Include(
@@ -67,13 +73,18 @@ namespace GalleryBlog
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/Site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css_kendo").Include(
                       "~/Content/kendo/kendo.common-bootstrap.min.css",
-                      "~/Content/kendo/kendo.bootstrap.min.css",
+                      "~/Content/kendo/kendo.bootstrap.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css_bootstrap").Include(
+                      "~/Content/bootstrap.min.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/css_fontawesome").Include(
-                      "~/Content/font-awesome.css"));
+                      "~/Content/font-awesome.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/css_artists").Include(
                       "~/Content/artists/artists.css"

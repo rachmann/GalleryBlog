@@ -9,6 +9,7 @@
     <h2>Post</h2>
     <p>@Model.Title</p>
     
-    Still under design...
+    @*@Html.Raw(@System.Web.HttpUtility.HtmlDecode(@Model.Body))*@
+    @Html.Raw(@Model.Body)
 </div>
 

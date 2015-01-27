@@ -251,6 +251,7 @@
     <Content Include="Content\Images\app\bullet.png" />
     <Content Include="Content\Images\app\cream_dust.png" />
     <Content Include="Content\Images\app\link.png" />
+    <Content Include="Content\Images\app\loader.gif" />
     <Content Include="Content\Images\app\search.png" />
     <Content Include="Content\Images\app\sliderdefault.png" />
     <Content Include="Content\Images\app\facebook.jpg" />

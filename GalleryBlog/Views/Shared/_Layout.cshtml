@@ -5,14 +5,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - MJG Gallery</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css_bootstrap")
     @Styles.Render("~/Content/css_fontawesome")
+    @Styles.Render("~/Content/css_froala")
+    @Styles.Render("~/Content/css_kendo")
+    @Styles.Render("~/Content/css")
+
 
     @Html.RenderStyles()
 
-    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/respond")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/kendo")
+
 
     @Html.RenderScripts()
 
