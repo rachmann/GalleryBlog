@@ -72,3 +72,4 @@
 /// <reference path="froala/plugins/fullscreen.min.js" />
 /// <reference path="froala/plugins/inline_styles.min.js" />
 /// <reference path="froala/plugins/urls.min.js" />
+/// <reference path="froala/langs/uk.js" />

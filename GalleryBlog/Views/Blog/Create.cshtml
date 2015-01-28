@@ -4,8 +4,6 @@
 @{
     ViewBag.Title = "Create";
 
-    Html.RegisterStyles("~/Content/froala/froala_editor.min.css");
-
 }
 <div class="col-sm-10">
     <h2>Create</h2>
@@ -38,8 +36,8 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <div style="margin: 5px 20px 5px 0;" id="editBody"></div>
-                    @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.Body)
+                    @*@Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })*@
                 </div>
             </div>
 
@@ -99,39 +97,57 @@
             </div>
         </div>
         <div class="hidden">
-            @Html.HiddenFor(model => model.Body, new { id="hiddenBody" })
             @Html.HiddenFor(model => model.Id, new { id = "hiddenId" })
         </div>
     }
 </div>
 <script type="text/javascript">
     $(function () {
-        var body = $('#hiddenBody').val();
         var modelId = $('#hiddenId').val();
-        $('#editBody').editable({
+
+        $('#Body').editable({
+            buttons: ["bold", "italic", "underline", "strikeThrough", "fontFamily",
+                "fontSize", "color", "formatBlock", "align", "insertOrderedList",
+                "insertUnorderedList", "outdent", "indent", "selectAll", "createLink",
+                "insertImage", "insertVideo", "undo", "redo", "html", "save", "inserthorizontalrule"],
+            imageButtons: ["display", "align", "linkImage", "replaceImage", "info", "removeImage"],
+            customImageButtons: {
+                info: {
+                    title: 'Image source',
+                    icon: {
+                        type: 'font',
+                        value: 'fa fa-info'
+                    },
+                    callback: function ($img) {
+                        alert($img.attr('src'));
+                    },
+                    refresh: function ($img) {
+                        console.log('Refresh image button');
+                        console.log($img);
+                    }
+                }
+            },
             inlineMode: false,
+            inverseSkin: true,
+            preloaderSrc: '@Url.Content("~/Content/Images/app/loader.gif")',
+            allowedImageTypes: ["jpeg", "jpg", "png"],
+            height: 300,
+            language: "en_ca",
+            direction: "ltr",
+            fontList: ["Tahoma, Geneva", "Arial, Helvetica", "Impact, Charcoal"],
             autosave: true,
             autosaveInterval: 2500,
-            height: 300,
+            imageUploadURL: '@Url.Action("FroalaUploadImage", "Blog")',
+            imagesLoadURL: '@Url.Action("FroalaMmImages", "Blog")',
+            saveURL: '@Url.Action("FroalaAutoSave", "Blog")',
+            saveParams: { postId: modelId },
             spellcheck: true,
             plainPaste: true,
-            enableScript: false,
-            // Set the save URL.
-            saveURL: '@Url.Action("FroalaAutoSave", "Blog")',
-
-            imageUploadURL: '@Url.Action("FroalaUploadImage", "Home")',
-            // HTTP request type.
-            saveRequestType: 'POST',
-            allowedImageTypes: ["jpeg", "jpg", "png"],
-
-            // Additional save params.
-            saveParams: { postId: modelId  },
-            imageUploadURL: '@Url.Action("FroalaUploadImage", "Home")',
-            imageParams: { postId: modelId }
-
+            borderColor: '#00008b',
+            imageParams: { postId: modelId },
+            enableScript: false
         });
-        $('#editBody').editable("setHTML", body, false);
-        $("#editBody").editable("sync");
+
     });
 </script>
 

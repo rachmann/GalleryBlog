@@ -1,6 +1,7 @@
 /*!
- * froala_editor v1.2.2 (http://editor.froala.com)
- * Copyright 2014-2014 Froala
+ * froala_editor v1.2.5 (http://editor.froala.com)
+ * License http://editor.froala.com/license
+ * Copyright 2014-2015 Froala Labs
  */
 
 /**
@@ -15,8 +16,8 @@ $.Editable.LANGS['da'] = {
     "Strikethrough": "Gennemstreg",
     "Font Size": "Skriftst\u00f8rrelse",
     "Color": "Farve",
-    "Background Color": "Baggrunds farve",
-    "Text Color": "Tekst farve",
+    "Background": "Baggrunds",
+    "Text": "Tekst",
     "Format Block": "Formater",
     "Normal": "Normal",
     "Paragraph": "S\u00e6tning",
@@ -51,7 +52,6 @@ $.Editable.LANGS['da'] = {
     "Replace Image": "Udskift billedet",
     "Remove Image": "Fjern billede",
     "Title": "Titel",
-    "Insert image": "Inds\u00e6t billede",
     "Drop image": "Dr\u00e5be billede",
     "or click": "eller klik p\u00e5",
     "or": "eller",
@@ -84,7 +84,11 @@ $.Editable.LANGS['da'] = {
     "Delete row": "Slet r\u00e6kke",
     "Insert column before": "Inds\u00e6t kolonne f\u00f8r",
     "Insert column after": "Inds\u00e6t kolonne efter",
-    "Delete column": "Slet kolonne"
+    "Delete column": "Slet kolonne",
+    "Uploading image": "Uploader billede",
+    "Upload File": "Upload fil",
+    "Drop File": "Drop fil",
+    "Clear formatting": "Fjern formatering"
   },
   direction: "ltr"
 };

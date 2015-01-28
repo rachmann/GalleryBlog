@@ -113,6 +113,36 @@ namespace GalleryBlog.Controllers
             return Json(new { link = "~/content/images/blog/" + fileName }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult FroalaMmImages() // Do not change the parameter name from name 'file'
+        {
+            var model = GetBlogArtFromDirList();
+            return Json(model.ToArray(), JsonRequestBehavior.AllowGet);
+        }
+
+
+        private List<string> GetBlogArtFromDirList()
+        {
+            var gvm = new List<string>();
+            var sDir = Server.MapPath("~/Content/Images/blog");
+            
+            
+            var files = Directory.GetFiles(sDir);
+            try
+            {
+                foreach (var f in files)
+                {
+                    var fn = f.Substring(f.LastIndexOf('\\') + 1);
+                    gvm.Add(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~/Content/Images/blog/" + fn)));
+                }
+
+            }
+            catch (System.Exception excpt)
+            {
+                Console.WriteLine(excpt.Message);
+            }
+            return gvm;
+        }
+
         // GET: Blog/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -120,7 +150,7 @@ namespace GalleryBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.GetPost(id);
+            var post = db.GetPost(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -172,6 +202,7 @@ namespace GalleryBlog.Controllers
             ViewBag.Title = String.Format(@"Latest posts tagged on ""{0}""", viewModel.Tag.Name);
             return View("List", viewModel);
         }
+
 
 
         protected override void Dispose(bool disposing)

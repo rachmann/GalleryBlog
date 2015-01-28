@@ -4,8 +4,7 @@
 @{
     ViewBag.Title = "Edit";
 
-    //Html.RegisterStyles("~/Content/froala/froala_editor.min.css");
-}
+ }
 <div class="col-sm-10">
     <h2>Edit</h2>
 
@@ -100,10 +99,8 @@
             </div>
         </div>
         <div class="hidden">
-            @*@Html.HiddenFor(model => model.Body, new { id = "hiddenBody" })*@
             @Html.HiddenFor(model => model.Id, new { id = "hiddenId" })
         </div>
-
 
     }
 
@@ -114,7 +111,6 @@
 <script type="text/javascript">
     $(function () {
 
- //       var body = $('#hiddenBody').val();
         var modelId = $('#hiddenId').val();
 
         $('#Body').editable({
@@ -122,31 +118,45 @@
                 "fontSize", "color", "formatBlock", "align", "insertOrderedList",
                 "insertUnorderedList", "outdent", "indent", "selectAll", "createLink",
                 "insertImage", "insertVideo", "undo", "redo", "html", "save", "inserthorizontalrule"],
+            imageButtons: ["display", "align", "linkImage", "replaceImage", "info", "removeImage"],
+            customImageButtons: {
+                info: {
+                    title: 'Image source',
+                    icon: {
+                        type: 'font',
+                        value: 'fa fa-info'
+                    },
+                    callback: function ($img) {
+                        alert($img.attr('src'));
+                    },
+                    refresh: function ($img) {
+                        console.log('Refresh image button');
+                        console.log($img);
+                    }
+                }
+            },
             inlineMode: false,
             inverseSkin: true,
             preloaderSrc: '@Url.Content("~/Content/Images/app/loader.gif")',
             allowedImageTypes: ["jpeg", "jpg", "png"],
             height: 300,
-            language: "en",
+            language: "en_ca",
             direction: "ltr",
             fontList: ["Tahoma, Geneva", "Arial, Helvetica", "Impact, Charcoal"],
             autosave: true,
             autosaveInterval: 2500,
+            imageUploadURL: '@Url.Action("FroalaUploadImage", "Blog")',
+            imagesLoadURL: '@Url.Action("FroalaMmImages", "Blog")',
             saveURL: '@Url.Action("FroalaAutoSave", "Blog")',
             saveParams: { postId: modelId },
             spellcheck: true,
             plainPaste: true,
-            imageButtons: ["removeImage", "replaceImage", "linkImage"],
             borderColor: '#00008b',
-            imageUploadURL: '@Url.Action("FroalaUploadImage", "Blog")',
             imageParams: { postId: modelId },
             enableScript: false
-    });
-
-//        $('#Editor1').editable("setHTML", body, false);
-//        $("#Editor1").editable("sync");
-
         });
+
+    });
 </script>
 
 @section Scripts {

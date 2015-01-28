@@ -237,6 +237,7 @@
     <Content Include="Content\froala\themes\red.css" />
     <Content Include="Content\froala\themes\red.min.css" />
     <Content Include="Content\froala\themes\royal.css" />
+    <Content Include="Content\froala\themes\royal.min.css" />
     <Content Include="Content\gallery\close20.png" />
     <Content Include="Content\gallery\close50.png" />
     <Content Include="Content\gallery\gray_jean.png" />
@@ -441,6 +442,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Scripts\froala\langs\uk.js" />
     <Content Include="Scripts\froala\plugins\fullscreen.min.js" />
     <Content Include="Scripts\froala\plugins\inline_styles.min.js" />
     <Content Include="Scripts\froala\plugins\urls.min.js" />

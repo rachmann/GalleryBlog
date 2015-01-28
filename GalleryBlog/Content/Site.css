@@ -25,6 +25,22 @@
     opacity: 0.9;
 }
 
+#TextBg {
+    position: absolute;
+    display: inline-block;
+    z-index: 42;
+    top: 45px;
+    left: 5%;
+    color: white;
+    width: 90%;
+    height: 120px;
+}
+
+.underTextBg {
+    height: inherit;
+    overflow: inherit;
+}
+
 #fadedTextBg {
     position: absolute;
     display: inline-block;
@@ -61,6 +77,23 @@ select {
     .videoHeader {
         display: none;
     }
+
+
+    #TextBg {
+        position: relative;
+        display: block;
+        z-index: 1;
+        left: 3%;
+        color: black;
+        width: 90%;
+        height: auto;
+        overflow: visible;
+    }
+
+  .underTextBg {
+    padding-top: 15px;
+}
+
 }
 
 @media (max-width: 767px) {

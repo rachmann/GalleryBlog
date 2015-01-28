@@ -9,6 +9,8 @@ namespace GalleryBlog.Models
 {
     public class DataAccess
     {
+        private readonly DateTime oldDate = new DateTime(1867, 7, 1);
+
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         public DbSet<Artist> Artists
@@ -54,7 +56,8 @@ namespace GalleryBlog.Models
         /// <returns></returns>
         public List<Post> GetPosts(int pageNo, int pageSize)
         {
-            var posts = Posts.Where(p => p.Published.HasValue)
+            
+            var posts = Posts.Where(p => p.Published.HasValue && p.Published.Value > oldDate)
                                   .OrderByDescending(p => p.PostedOn)
                                   .Skip(pageNo * pageSize)
                                   .Take(pageSize).ToList();
@@ -71,7 +74,7 @@ namespace GalleryBlog.Models
         public List<Post> GetPostsForTag(string tagSlug, int pageNo, int pageSize)
         {
             var posts = _db.Posts
-                            .Where(p => p.Published.HasValue && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
+                            .Where(p => p.Published.HasValue && p.Published.Value > oldDate && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
                             .OrderByDescending(p => p.PostedOn)
                             .Skip(pageNo * pageSize)
                             .Take(pageSize)
@@ -96,7 +99,7 @@ namespace GalleryBlog.Models
         public List<Post> GetPostsForCategory(string categorySlug, int pageNo, int pageSize)
         {
             var posts = _db.Posts
-                            .Where(p => p.Published.HasValue && p.Categories.Select(c => c.UrlSlug).Contains(categorySlug))
+                            .Where(p => p.Published.HasValue && p.Published.Value > oldDate && p.Categories.Select(c => c.UrlSlug).Contains(categorySlug))
                             .OrderByDescending(p => p.PostedOn)
                             .Skip(pageNo * pageSize)
                             .Take(pageSize)
@@ -115,7 +118,7 @@ namespace GalleryBlog.Models
         public List<Post> GetPostsForSearch(string search, int pageNo, int pageSize)
         {
             var posts = _db.Posts
-                .Where(p => p.Published.HasValue && (p.Title.Contains(search) || p.Categories.Select(c => c.Name).Contains(search) || p.Tags.Select(c => c.Name).Contains(search)))
+                .Where(p => p.Published.HasValue && p.Published.Value > oldDate && (p.Title.Contains(search) || p.Categories.Select(c => c.Name).Contains(search) || p.Tags.Select(c => c.Name).Contains(search)))
                 .OrderByDescending(p => p.PostedOn)
                 .Skip(pageNo * pageSize)
                 .Take(pageSize)
@@ -131,7 +134,7 @@ namespace GalleryBlog.Models
         /// <returns></returns>
         public int TotalPosts(bool checkIsPublished = true)
         {
-            return _db.Posts.Count(p => checkIsPublished || p.Published.HasValue == true);
+            return _db.Posts.Count(p => checkIsPublished || p.Published.HasValue == true && p.Published.Value > oldDate);
         }
 
         /// <summary>
@@ -141,7 +144,7 @@ namespace GalleryBlog.Models
         /// <returns></returns>
         public int TotalPostsForCategory(string categorySlug)
         {
-            return _db.Posts.Count(p => p.Categories.Select(c => c.UrlSlug).Contains(categorySlug) && p.Published.HasValue == true);
+            return _db.Posts.Count(p => p.Categories.Select(c => c.UrlSlug).Contains(categorySlug) && p.Published.HasValue == true && p.Published.Value > oldDate);
         }
 
         /// <summary>
@@ -152,7 +155,7 @@ namespace GalleryBlog.Models
         public int TotalPostsForTag(string tagSlug)
         {
             return _db.Posts
-                      .Where(p => p.Published.HasValue && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
+                      .Where(p => p.Published.HasValue && p.Published.Value > oldDate && p.Tags.Any(t => t.UrlSlug.Equals(tagSlug)))
                       .Count();
         }
 
@@ -164,7 +167,7 @@ namespace GalleryBlog.Models
         public int TotalPostsForSearch(string search)
         {
             return _db.Posts
-                    .Where(p => p.Published.HasValue && (p.Title.Contains(search) || p.Categories.Any(c => c.Name.Equals(search)) || p.Tags.Any(t => t.Name.Equals(search))))
+                    .Where(p => p.Published.HasValue && p.Published.Value > oldDate && (p.Title.Contains(search) || p.Categories.Any(c => c.Name.Equals(search)) || p.Tags.Any(t => t.Name.Equals(search))))
                     .Count();
         }
 
@@ -352,7 +355,7 @@ namespace GalleryBlog.Models
         /// <param name="post"></param>
         public void UpdatePost(Post post)
         {
-            Post item = _db.Posts.Find(post.Id);
+            var item = _db.Posts.Find(post.Id);
             item.Approved = post.Approved;
             item.Body = post.Body;
             item.Categories = post.Categories;
@@ -376,7 +379,7 @@ namespace GalleryBlog.Models
         /// <param name="id"></param>
         public void DeletePost(int id)
         {
-            Post item = _db.Posts.Find(id);
+            var item = _db.Posts.Find(id);
             _db.Posts.Remove(item);
             _db.SaveChanges();
         }
@@ -437,7 +440,7 @@ namespace GalleryBlog.Models
         /// <param name="category"></param>
         public void UpdateCategory(PostCategory category)
         {
-            PostCategory item = _db.PostCategories.Find(category.Id);
+            var item = _db.PostCategories.Find(category.Id);
             item.Description = category.Description;
             item.Name = category.Name;
             item.Posts = category.Posts;
@@ -453,7 +456,7 @@ namespace GalleryBlog.Models
         /// <param name="id"></param>
         public void DeleteCategory(int id)
         {
-            PostCategory item = _db.PostCategories.Find(id);
+            var item = _db.PostCategories.Find(id);
             _db.PostCategories.Remove(item);
             _db.SaveChanges();
         }
@@ -514,7 +517,7 @@ namespace GalleryBlog.Models
         /// <param name="tag"></param>
         public void UpdateTag(PostTag tag)
         {
-            PostTag item = _db.PostTags.Find(tag.Id);
+            var item = _db.PostTags.Find(tag.Id);
             item.Description = tag.Description;
             item.Name = tag.Name;
             item.Posts = tag.Posts;
@@ -530,7 +533,7 @@ namespace GalleryBlog.Models
         /// <param name="id"></param>
         public void DeleteTag(int id)
         {
-            PostTag item = _db.PostTags.Find(id);
+            var item = _db.PostTags.Find(id);
             _db.PostTags.Remove(item);
             _db.SaveChanges();
         }
