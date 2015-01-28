@@ -56,12 +56,16 @@ namespace GalleryBlog
                 "~/Scripts/froala/froala_editor.min.js",
                 "~/Scripts/froala/plugins/lists.min.js",
                 "~/Scripts/froala/plugins/colors.min.js",
+                "~/Scripts/froala/plugins/char_counter.min.js",
                 "~/Scripts/froala/plugins/font_family.min.js",
                 "~/Scripts/froala/plugins/font_size.min.js",
+                "~/Scripts/froala/plugins/fullscreen.min.js",
                 "~/Scripts/froala/plugins/media_manager.min.js",
                 "~/Scripts/froala/plugins/file_upload.min.js",
                 "~/Scripts/froala/plugins/tables.min.js",
                 "~/Scripts/froala/plugins/block_styles.min.js",
+                "~/Scripts/froala/plugins/inline_styles.min.js",
+                "~/Scripts/froala/plugins/video.min.js",
                 "~/Scripts/froala/langs/en_ca.js"
             ));
 
@@ -91,7 +95,9 @@ namespace GalleryBlog
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css_froala").Include(
-                      "~/Content/froala/froala_editor.min.css"
+                      "~/Content/froala/froala_editor.min.css",
+                      "~/Content/froala/froala_content.min.css",
+                      "~/Content/froala/froala_style.min.css"
                       ));
             bundles.Add(new StyleBundle("~/Content/css_slider").Include(
                        "~/Content/slider/anythingslider.css",

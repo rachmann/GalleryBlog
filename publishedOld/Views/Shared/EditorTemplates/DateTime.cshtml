@@ -1,9 +1,0 @@
-@model DateTime?
-
-@(Html.Kendo().DateTimePickerFor(m => m)
-.Culture("en-US")
-.ParseFormats(new string[] {
-           "yyyy-mm-dd hh:mm tt",
-           "yyyy-mm-dd HH:mm",
-      }))
-)

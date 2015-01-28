@@ -224,10 +224,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\froala\froala_content.css" />
+    <Content Include="Content\froala\froala_content.min.css" />
     <Content Include="Content\froala\froala_editor.css" />
     <Content Include="Content\froala\froala_editor.min.css" />
-    <Content Include="Content\froala\froala_page.css" />
-    <Content Include="Content\froala\froala_page.min.css" />
+    <Content Include="Content\froala\froala_style.css" />
+    <Content Include="Content\froala\froala_style.min.css" />
     <Content Include="Content\froala\themes\dark.css" />
     <Content Include="Content\froala\themes\dark.min.css" />
     <Content Include="Content\froala\themes\gray.css" />
@@ -439,6 +441,9 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Scripts\froala\plugins\fullscreen.min.js" />
+    <Content Include="Scripts\froala\plugins\inline_styles.min.js" />
+    <Content Include="Scripts\froala\plugins\urls.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.js" />
     <Content Include="Scripts\jquery-ui-1.11.2.min.js" />
     <Content Include="Scripts\slider\jquery.anythingslider.fx.js" />
